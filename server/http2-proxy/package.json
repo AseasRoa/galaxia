@@ -1,0 +1,61 @@
+{
+  "_from": "http2-proxy",
+  "_id": "http2-proxy@4.2.15",
+  "_inBundle": false,
+  "_integrity": "sha512-L0KeRd2ONop46VUYu4wvn/UhdDawTkseF6F4332VHFaSyi+dquAps1OOyeOilanMWBitVaM9kyCWEs4g8D3aEg==",
+  "_location": "/http2-proxy",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "http2-proxy",
+    "name": "http2-proxy",
+    "escapedName": "http2-proxy",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/http2-proxy/-/http2-proxy-4.2.15.tgz",
+  "_shasum": "6016660fb2709a1a469f79c236397440406e77f4",
+  "_spec": "http2-proxy",
+  "_where": "S:\\ssl\\fxdreema.local",
+  "author": {
+    "name": "Robert Nagy",
+    "email": "ronagy@icloud.com"
+  },
+  "bugs": {
+    "url": "https://github.com/nxtedition/node-http2-proxy/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A simple http/2 & http/1.1 to http/1.1 spec compliant proxy helper for Node.",
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "nodemon": "^1.17.3",
+    "standard": "^11.0.1",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "homepage": "https://github.com/nxtedition/node-http2-proxy#readme",
+  "keywords": [
+    "http2",
+    "http",
+    "proxy"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "http2-proxy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nxtedition/node-http2-proxy.git"
+  },
+  "scripts": {
+    "commitmsg": "validate-commit-msg",
+    "dev": "nodemon --inspect=9308 src",
+    "precommit": "standard"
+  },
+  "version": "4.2.15"
+}
