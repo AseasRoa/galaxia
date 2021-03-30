@@ -1,5 +1,5 @@
 {
-	"apps-path" : "S:/www-node/Server/apps",
+	"appsPath" : "S:/www-node/Server/apps",
 	"appsConfigPath" : "/config",
 	"appsComponentsPath" : "/components"
 }

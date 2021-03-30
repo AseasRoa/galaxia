@@ -1,27 +1,30 @@
 {
-	"author" : "AseasRoa",
-	"name" : "galaxia",
-	"description" : "Server System by AseasRoa",
-	"version" : "0.0.1",
-	"private" : true,
-	"main" : "index.mjs",
-	"type" : "module",
-	"scripts" : {
-		"start" : "node server.js"
+	"author": "AseasRoa",
+	"name": "galaxia",
+	"description": "Galaxia - A Full Stack Framework by AseasRoa",
+	"version": "0.0.1",
+	"private": true,
+	"main": "index.mjs",
+	"type": "module",
+	"scripts": {
+		"start": "node server.js"
 	},
-	"license" : "MIT",
-	"dependencies" : {
-		"csso" : "^2.3.0",
-		"ejs" : "^2.5.2",
-		"mongodb" : "^3.5.8",
-		"pug" : "^2.0.0-beta6",
-		"redis" : "^2.6.3",
-		"stylus" : "^0.54.5",
-		"synchronator" : "^0.0.8",
-		"uglify-es" : "^3.1.3"
+	"license": "MIT",
+	"dependencies": {
+		"csso": "^2.3.2",
+		"ejs": "^2.7.4",
+		"mongodb": "^3.6.3",
+		"pug": "^2.0.4",
+		"redis": "^2.8.0",
+		"stylus": "^0.54.8",
+		"synchronator": "^0.0.8",
+		"uglify-es": "^3.3.9"
 	},
-	"devDependencies" : {},
-	"bin" : {
-		"galaxia" : "./bin/index.js"
+	"devDependencies": {
+		"eslint": "^7.19.0",
+		"eslint-plugin-jsdoc": "^31.6.0"
+	},
+	"bin": {
+		"galaxia": "./bin/index.js"
 	}
 }
