@@ -1,0 +1,22 @@
+{
+	"compilerOptions" : {
+		"module"                             : "CommonJS",
+		"target"                             : "ESNext",
+		"moduleResolution"                   : "Node",
+		"sourceMap"                          : true,
+		"baseUrl"                            : "./lib",
+		"outDir"                             : "dist",
+		"paths"                              : {"*" : ["./*", "node_modules/*"]},
+		"types"                              : ["node"],
+		"strict"                             : false,
+		"noFallthroughCasesInSwitch"         : true,
+		"noImplicitReturns"                  : true,
+		"noPropertyAccessFromIndexSignature" : true,
+		"noUncheckedIndexedAccess"           : true,
+		"noUnusedLocals"                     : false,
+		"noUnusedParameters"                 : false,
+		"noImplicitAny"                      : true,
+		"noImplicitThis"                     : true
+	},
+	"include"         : ["src/**/*"]
+}

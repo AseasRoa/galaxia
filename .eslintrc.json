@@ -1,49 +1,43 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "extends": "eslint:recommended",
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "jsdoc"
-  ],
-  "rules": {
-    "semi": "off",
-    "indent": ["error", "tab"],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "no-multi-spaces": [
-      "error",
-      {
-        "exceptions": {
-          "VariableDeclarator": true
-        },
-        "ignoreEOLComments": true
-      }
-    ],
-    "key-spacing": [
-      "error",
-      {
-        "singleLine": {
-          "beforeColon": false,
-          "afterColon": true
-        },
-        "multiLine": {
-          "beforeColon": true,
-          "afterColon": true,
-          "align": "colon"
-        }
-      }
-    ]
-  }
+	"extends"       : ["eslint:recommended"],
+	"globals"       : {
+		"Atomics"           : "readonly",
+		"SharedArrayBuffer" : "readonly"
+	},
+	"parserOptions" : {
+		"ecmaVersion" : 2020,
+		"sourceType"  : "module"
+	},
+	"plugins"       : [
+		"jsdoc"
+	],
+	"env"           : {"node" : true, "browser" : true, "es6" : true},
+	"rules"         : {
+		"semi"            : "off",
+		"indent"          : ["error", "tab"],
+		"quotes"          : ["error", "single"],
+		"no-multi-spaces" : [
+			"error",
+			{
+				"exceptions"        : {
+					"VariableDeclarator" : true
+				},
+				"ignoreEOLComments" : true
+			}
+		],
+		"key-spacing"     : [
+			"error",
+			{
+				"singleLine" : {
+					"beforeColon" : false,
+					"afterColon"  : true
+				},
+				"multiLine"  : {
+					"beforeColon" : true,
+					"afterColon"  : true,
+					"align"       : "colon"
+				}
+			}
+		]
+	}
 }
