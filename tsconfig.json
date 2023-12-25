@@ -1,22 +1,62 @@
+/**
+ * @see https://www.typescriptlang.org/tsconfig
+ */
 {
-	"compilerOptions" : {
-		"module"                             : "CommonJS",
-		"target"                             : "ESNext",
-		"moduleResolution"                   : "Node",
-		"sourceMap"                          : true,
-		"baseUrl"                            : "./lib",
-		"outDir"                             : "dist",
-		"paths"                              : {"*" : ["./*", "node_modules/*"]},
-		"types"                              : ["node"],
-		"strict"                             : false,
-		"noFallthroughCasesInSwitch"         : true,
-		"noImplicitReturns"                  : true,
-		"noPropertyAccessFromIndexSignature" : true,
-		"noUncheckedIndexedAccess"           : true,
-		"noUnusedLocals"                     : false,
-		"noUnusedParameters"                 : false,
-		"noImplicitAny"                      : true,
-		"noImplicitThis"                     : true
-	},
-	"include"         : ["src/**/*"]
+  "compilerOptions" : {
+    /**
+     * JavaScript Support
+     */
+    "allowJs": true,
+    "checkJs": true,
+    /**
+     * Emit
+     */
+    "noEmit": true,
+    /**
+     * Language and Environment
+     */
+    "target": "ESNext",
+    /**
+     * Modules
+     *
+     * https://www.typescriptlang.org/docs/handbook/modules/reference.html
+     */
+    "allowUmdGlobalAccess": true,
+    "baseUrl": "./",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node", "vitest/globals"],
+    /**
+     * Interop Constraints
+     */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    /**
+     * Completeness
+     */
+    "skipLibCheck": true,
+    /*
+     * Type Checking
+     */
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    /*
+     * Type Checking - strict
+     */
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny" : false,
+    "useUnknownInCatchVariables": false
+  },
+  "include" : [
+    "benchmarks/**/*",
+    "dev/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "tests/**/*",
+    "types/**/*"
+  ]
 }

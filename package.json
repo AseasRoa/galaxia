@@ -1,31 +1,76 @@
 {
-	"author": "AseasRoa",
-	"name": "galaxia",
-	"description": "Galaxia - A Full Stack Framework by AseasRoa",
-	"version": "0.0.1",
-	"private": true,
-	"main": "index.mjs",
-	"type": "module",
-	"scripts": {
-		"start": "node server.js"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"csso": "^2.3.2",
-		"ejs": "^2.7.4",
-		"mongodb": "^3.6.3",
-		"pug": "^2.0.4",
-		"redis": "^2.8.0",
-		"stylus": "^0.54.8",
-		"synchronator": "^0.0.8",
-		"uglify-es": "^3.3.9"
-	},
-	"devDependencies": {
-		"@types/node": "^14.14.37",
-		"eslint": "^7.19.0",
-		"eslint-plugin-jsdoc": "^31.6.0"
-	},
-	"bin": {
-		"galaxia": "bin/index.js"
-	}
+  "author": "AseasRoa",
+  "name": "galaxia",
+  "description": "Full-Stack Framework",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "types": "./lib/types/global.d.ts",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/types/global.d.ts",
+      "import": "./lib/index.js",
+      "default": "./lib/index.js"
+    },
+    "./fileSystem": "./lib/exports/fileSystem.js",
+    "./docSchema": "./lib/exports/docSchema.js",
+    "./paintor": "./lib/exports/paintor.js",
+    "./db/mongo": "./lib/exports/db/mongo.js"
+  },
+  "imports": {
+    "#galaxia": {
+      "default": "./lib/index.js"
+    },
+    "#galaxia/db/mongo": {
+      "default": "./lib/exports/db/mongo.js"
+    }
+  },
+  "scripts": {
+    "lint": "npm run lint:typescript & npm run lint:eslint",
+    "lint:eslint": "eslint --config .eslintrc --ext .js,.ts ./",
+    "lint:typescript": "tsc --build --clean && tsc",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "autocannon": "autocannon --connections 15 --duration 10 http://localhost:8080/test",
+    "clinic:doctor": "clinic doctor --dest .clinic --output-dir .clinic --autocannon [ / ] -- node lib/controlPanel/startWithoutCluster.js",
+    "clinic:bubbleprof": "clinic bubbleprof --dest .clinic --output-dir .clinic  --on-port 'autocannon -c 5 -a 500 localhost:$PORT' -- node lib/controlPanel/startWithoutCluster.js",
+    "clinic:flame": "clinic flame --dest .clinic --output-dir .clinic --autocannon [ / ] -- node lib/controlPanel/startWithoutCluster.js",
+    "clinic:heap": "clinic heapprofiler --autocannon [ / ] -- node lib/controlPanel/startWithoutCluster.js"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "docschema": "file:../DocSchema",
+    "esbuild": "^0.19.10",
+    "http2-proxy": "^5.0.53",
+    "json5": "^2.2.3",
+    "mongodb": "^6.3.0",
+    "paintor": "file:../paintor",
+    "sass": "^1.69.5",
+    "strip-comments": "^2.0.1",
+    "stylus": "^0.62.0",
+    "watcher": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/benchmark": "^2.1.5",
+    "@types/node": "^20.10.5",
+    "@types/pug": "^2.0.10",
+    "@types/stylus": "^0.48.42",
+    "@vitest/coverage-v8": "^1.1.0",
+    "autocannon": "^7.14.0",
+    "benchmark": "^2.1.4",
+    "clinic": "^13.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-jsdoc": "^46.9.1",
+    "eslint-plugin-vitest": "^0.3.18",
+    "eslint-plugin-vitest-globals": "^1.4.0",
+    "jsdom": "^23.0.1",
+    "mongodb-memory-server": "^9.1.3",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "bin": {
+    "galaxia": "./bin/galaxia.js"
+  }
 }

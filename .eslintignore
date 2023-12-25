@@ -6,10 +6,13 @@ dist/
 node_modules/
 
 # Files
+**/*.ts
 **/.DS_Store
 *.log
 .env*
 package-lock.json
+# To lint files and folders with names starting with a dot
+!.*
 
 # Project Specific Directories
-.clinic/
+docs/

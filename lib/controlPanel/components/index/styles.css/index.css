@@ -1,0 +1,13 @@
+body {
+  background-color: #002240;
+  color: #ddd;
+}
+
+.chartsContainer {
+  background-color: #fff;
+  display: flex;
+}
+
+.chartsContainer > div {
+  width: 33.33%;
+}

@@ -1,0 +1,13 @@
+# 1) Ignore all (except package.json, README, CHANGES and LICENSE)
+*
+
+# 2) Allow some
+!dist/**
+!lib/**
+!types/**
+
+# 3) Ignore after allowing
+**/.DS_Store
+*.log
+**/*.spec.js
+**/*.test.js
