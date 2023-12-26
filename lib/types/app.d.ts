@@ -12,7 +12,7 @@ declare namespace app {
 
   type Paths = {
     root: string,
-    components: string,
+    modules: string,
     output: string
   }
 
@@ -71,7 +71,7 @@ declare namespace app {
     queryGet: QueryParameters
   }
 
-  export type ComponentsAssets = {
+  export type ModulesAssets = {
     styles: Map<string, { tag: string, url: string }>,
     scripts: Map<string, { tag: string, url: string }>
   }
@@ -81,7 +81,7 @@ declare namespace app {
     isXHR: boolean,
     isHTML: boolean,
     queryParams: QueryParams,
-    componentsAssets: ComponentsAssets
+    modulesAssets: ModulesAssets
   }
 
   export type ImportsCacheItem = {
