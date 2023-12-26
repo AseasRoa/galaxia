@@ -185,8 +185,6 @@
         "padded-blocks": ["error", "never"],
         "padding-line-between-statements": [
           "error",
-          { "blankLine": "always", "prev": "*", "next": "break" },
-          { "blankLine": "always", "prev": "*", "next": "continue" },
           { "blankLine": "always", "prev": "*", "next": "class" },
           { "blankLine": "always", "prev": "*", "next": "do" },
           { "blankLine": "always", "prev": "*", "next": "for" },
