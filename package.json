@@ -7,11 +7,11 @@
   "description": "Full-Stack Framework",
   "license": "MIT",
   "type": "module",
-  "types": "./types/global.d.ts",
+  "types": "./types/index.d.ts",
   "main": "./lib/index.js",
   "exports": {
     ".": {
-      "types": "./types/global.d.ts",
+      "types": "./types/index.d.ts",
       "import": "./lib/index.js",
       "default": "./lib/index.js"
     },
