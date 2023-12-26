@@ -1,16 +1,16 @@
 // Server Types
-type HttpRequest = import('./server').HttpRequest
-type HttpResponse = import('./server').HttpResponse
-type HttpExchange = import('./server').HttpExchange
+type HttpRequest = import('../lib/types/server').HttpRequest
+type HttpResponse = import('../lib/types/server').HttpResponse
+type HttpExchange = import('../lib/types/server').HttpExchange
 // Server Types (Aliases)
-type Request = import('./server').HttpRequest
-type Response = import('./server').HttpResponse
-type Exchange = import('./server').HttpExchange
+type Request = import('../lib/types/server').HttpRequest
+type Response = import('../lib/types/server').HttpResponse
+type Exchange = import('../lib/types/server').HttpExchange
 
 declare module 'galaxia' {
   export function start(options: Galaxia.Options) : Promise<void>
   export function restart() : Promise<void>
-  export { HttpExchange, HttpRequest, HttpResponse, Router } from './server'
+  export { HttpExchange, HttpRequest, HttpResponse, Router } from '../lib/types/server'
 }
 
 declare namespace Galaxia {
@@ -31,9 +31,9 @@ declare namespace Galaxia {
   // eslint-disable-next-line no-undef
   type Config = Partial<app.Config>
 
-  type Request = import('./server').HttpRequest
-  type Response = import('./server').HttpResponse
-  type Exchange = import('./server').HttpExchange
+  type Request = import('../lib/types/server').HttpRequest
+  type Response = import('../lib/types/server').HttpResponse
+  type Exchange = import('../lib/types/server').HttpExchange
 }
 
 declare module 'galaxia/fileSystem' {
@@ -116,31 +116,9 @@ declare module 'galaxia/docSchema' {
 }
 
 declare module 'galaxia/paintor' {
-  type Elements = import('paintor').Elements
-  type Statements = import('paintor/types/Statements').Statements
-
-  type State = Record<any, any> | Array<any> | Set<any> | Map<any, any>
-  type States = Record<string, State>
-  type TemplateTree = Elements & Statements
-  type Template = (tree : TemplateTree) => (
-    void
-    | string
-    | HTMLElement | HTMLElement[]
-    | Component | Component[]
-    | Template | Template[]
-    )
-  type Translation = Record<string, any>
-
-  export interface Component {
-    // component: (...from: (Template | Component)[]) => Component,
-    clear: () => void,
-    html: (options?: { indent?:string }) => string,
-    paint: (container: string | HTMLElement | HTMLElement[] | HTMLCollection) => void,
-    static: (on?: boolean) => Component,
-    staticHtml: (options?: { indent?:string }) => string,
-    template: Template,
-    useTranslations : (...translations: Translation[]) => Component,
-  }
+  type Component = import('paintor').Component
+  type Template = import('paintor').Template
+  type Translation = import('paintor').Translation
 
   export function component(...from: (Template | Component)[]): Component
   export function component(from: (Template | Component)[]): Component
@@ -176,7 +154,7 @@ declare module 'galaxia/paintor' {
 }
 
 declare module 'galaxia/db/mongo' {
-  import { DocSchema } from 'galaxia/docSchema'
+  import { DocSchema } from 'docschema'
   import { Condition, MongoServerError, ObjectId, RootFilterOperators } from 'mongodb'
 
   type MongoClient = import('mongodb').MongoClient

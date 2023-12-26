@@ -1,16 +1,17 @@
 {
-  "author": "AseasRoa",
   "name": "galaxia",
-  "description": "Full-Stack Framework",
   "version": "0.0.1",
-  "private": true,
+  "author": {
+    "name": "AseasRoa"
+  },
+  "description": "Full-Stack Framework",
   "license": "MIT",
   "type": "module",
-  "types": "./lib/types/global.d.ts",
+  "types": "./types/global.d.ts",
   "main": "./lib/index.js",
   "exports": {
     ".": {
-      "types": "./lib/types/global.d.ts",
+      "types": "./types/global.d.ts",
       "import": "./lib/index.js",
       "default": "./lib/index.js"
     },
@@ -70,6 +71,11 @@
     "typescript": "^5.3.3",
     "vitest": "^1.1.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AseasRoa/galaxia"
+  },
+  "homepage": "https://github.com/AseasRoa/galaxia",
   "bin": {
     "galaxia": "./bin/galaxia.js"
   }
