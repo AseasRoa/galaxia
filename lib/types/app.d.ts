@@ -56,6 +56,7 @@ declare namespace app {
     // Custom mime type for each file type
     mimeTypes?: Record<string, string>,
     server?: WebServerConfig,
+    nodeModules?: { whitelist: string[] },
     ajax?: { version: string, wrongVersionMessage: string },
     // URL rewrite rules
     urlRewrite?: Record<string, string>,
