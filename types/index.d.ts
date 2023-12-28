@@ -87,7 +87,7 @@ declare module 'galaxia/fileSystem' {
   } from 'dist/functions/fileSystem'
 }
 
-declare module 'galaxia/docSchema' {
+declare module 'galaxia/docschema' {
   export class DocSchema {
     approves(
       value: any
