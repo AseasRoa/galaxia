@@ -21,6 +21,7 @@ declare namespace app {
     client: string,
     routes: string,
     server: string,
+    styles: string,
     views: string,
     i18n: string
   }
