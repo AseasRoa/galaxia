@@ -16,13 +16,13 @@ declare namespace app {
     output: string
   }
 
-  type PathNames = {
-    layoutDirName: string,
-    clientDirName: string,
-    routesDirName: string,
-    serverFilesDirName: string,
-    viewsDirName: string,
-    i18nDirName: string
+  type DirNames = {
+    layout: string,
+    client: string,
+    routes: string,
+    server: string,
+    views: string,
+    i18n: string
   }
 
   type RequestsRateLimitsRule = {
@@ -60,7 +60,7 @@ declare namespace app {
     ajax?: { version: string, wrongVersionMessage: string },
     // URL rewrite rules
     urlRewrite?: Record<string, string>,
-    pathNames?: PathNames
+    dirNames?: DirNames
   }
 
   export type Config = DeepRequired<PartialConfig>
