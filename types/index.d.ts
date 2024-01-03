@@ -88,69 +88,20 @@ declare module 'galaxia/fileSystem' {
 }
 
 declare module 'galaxia/docschema' {
-  export class DocSchema {
-    approves(
-      value: any
-    ): boolean
-
-    check(
-      value: any
-    ): DocSchemaCheckResult
-
-    /**
-     * @template T
-     * @param {T} value Input value
-     * @returns {T} The input value, if it's valid
-     * @throws {ValidationError}
-     */
-    validate<T>(value: T): T
-  }
-
-  /**
-   * @returns {DocSchema}
-   * @throws {Error}
-   */
-  export function docSchema(): DocSchema
-
-  export default docSchema
+  export {
+    default,
+    docSchema,
+    DocSchema,
+    ValidationError
+  } from './docschema/index.d.ts'
 }
 
-declare module 'galaxia/paintor' {
-  type Component = import('paintor').Component
-  type Template = import('paintor').Template
-  type Translation = import('paintor').Translation
-
-  export function component(...from: (Template | Component)[]): Component
-  export function component(from: (Template | Component)[]): Component
-
-  /**
-   * @template T
-   * @param {T} object Your input object or array
-   * @returns {T} A proxy object/array that looks the same as the input object/array
-   */
-  export function state<T>(object : T) : T
-
-  export function isTemplate(func: Template) : boolean
-  export function template<T extends Template>(from: T) : T
-
-  /**
-   * @template T
-   * @param {T} defaultPaths
-   * One or more paths to files, exporting an object as default.
-   * The file name of each path will be replaced with the user's locale, so the actual file from
-   * which the translation is read could be different. But if a file for the user's locale doesn't
-   * exist, the provided file name will be used.
-   * @returns {Promise<Translation>}
-   */
-  export function fetchTranslations(...defaultPaths: string[]) : Promise<Translation[]>
-
-  export const paintor: {
-    component: typeof component,
-    fetchTranslations: typeof fetchTranslations,
-    state: typeof state,
-    template: typeof template,
-    Component: Component
-  }
+declare module "galaxia/paintor" {
+  export {
+    default,
+    fetchTranslations, isComponent, isTemplate, component, state, template,
+    paintor
+  } from './paintor/index.d.ts'
 }
 
 declare module 'galaxia/db/mongo' {
