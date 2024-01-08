@@ -1,6 +1,6 @@
-import './paintor/global.d.ts'
-
 declare module "galaxia/paintor" {
+  import './paintor/global.d.ts'
+
   export {
     default,
     fetchTranslations, isComponent, isTemplate, component, state, template,

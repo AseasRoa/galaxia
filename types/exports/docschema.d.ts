@@ -1,6 +1,6 @@
-import './docschema/global.d.ts'
-
 declare module 'galaxia/docschema' {
+  import './docschema/global.d.ts'
+
   export {
     default,
     docSchema,
