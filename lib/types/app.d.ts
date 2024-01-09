@@ -46,25 +46,9 @@ declare namespace app {
     earlyHints?: boolean
   }
 
-  export type PartialConfig = {
-    development?: boolean | -1,
-    // The name of the app
-    name?: string,
-    // Expiration time (for the browser's cache) for each file type, in seconds
-    maxAge?: Record<string, number>,
-    // Compression level for each file type, from -1 to 9
-    compressionLevels?: Record<string, number>,
-    // Custom mime type for each file type
-    mimeTypes?: Record<string, string>,
-    server?: WebServerConfig,
-    nodeModules?: { whitelist: string[] },
-    ajax?: { version: string, wrongVersionMessage: string },
-    // URL rewrite rules
-    urlRewrite?: Record<string, string>,
-    dirNames?: DirNames
-  }
+  export type Config = GalaxiaConfig
 
-  export type Config = DeepRequired<PartialConfig>
+  export type FullConfig = DeepRequired<Config>
 
   type QueryParameters = Record<string, any>
 
