@@ -41,7 +41,7 @@ export declare function state<STATE>(object : STATE) : STATE
 /**
  * Create a template function.
  */
-export declare function template<TEMPLATE extends Template>(from: TEMPLATE) : TEMPLATE
+export declare function template(from: Template) : Template
 
 export declare const paintor: {
   component: typeof component,
