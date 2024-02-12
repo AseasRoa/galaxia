@@ -47,7 +47,7 @@
     "http2-proxy": "^5.0.53",
     "json5": "^2.2.3",
     "mongodb": "^6.3.0",
-    "paintor": "file:../paintor",
+    "paintor": "^1.0.2",
     "sass": "^1.70.0",
     "strip-comments": "^2.0.1",
     "stylus": "^0.62.0",
