@@ -11,6 +11,8 @@ node_modules/
 *.log
 .env*
 package-lock.json
+bun.lockb
+
 # To lint files and folders with names starting with a dot
 !.*
 
