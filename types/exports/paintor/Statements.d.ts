@@ -5,7 +5,7 @@
 
 export interface Statements {
   if (
-    condition : boolean|{ (element?: HTMLElement):boolean },
+    condition: boolean | (() => boolean),
     handler: (() => void | Template) | Template,
     elseHandler?: (() => void | Template) | Template,
   ) : HTMLElement[]
@@ -19,7 +19,7 @@ export interface Statements {
     func : Input,
     handler : (
       value : ReturnType<Input>[number],
-      key : number
+      key : string
     ) => boolean | any,
     handlerOnEmpty?: () => void
   ) : HTMLElement[] | Error
@@ -75,7 +75,7 @@ export interface Statements {
     array : Input,
     handler : (
       value : Input[number],
-      key : number
+      key : string
     ) => boolean | any,
     handlerOnEmpty?: () => void
   ) : HTMLElement[] | Error
@@ -172,9 +172,8 @@ export interface Statements {
   ) : HTMLElement[] | Error
 
   for(
-    from : number,
-    to : number,
-    handler : (key:number) => boolean | any
+    from : number | (() => number),
+    to : number | (() => number),
+    handler : (key: number) => boolean | any
   ) : HTMLElement[] | Error
 }
-
