@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "AseasRoa"
+  },
+  "description": "Galaxia Docs",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "npm run v0:build",
+    "v0:dev": "vitepress dev docs/v0",
+    "v0:build": "vitepress build docs/v0",
+    "v0:preview": "vitepress preview docs/v0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.44"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AseasRoa/galaxia"
+  },
+  "homepage": "https://github.com/AseasRoa/galaxia",
+  "keywords": [
+    "galaxia",
+    "docs",
+    "documentation"
+  ]
+}
