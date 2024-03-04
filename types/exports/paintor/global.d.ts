@@ -11,3 +11,4 @@ type States = import('./types').States
 type Template = import('./types').Template
 type TemplateTree = import('./types').TemplateTree
 type Translation = import('./types').Translation
+type ObserverListener = import('./types').ObserverListener

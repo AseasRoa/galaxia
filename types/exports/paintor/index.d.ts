@@ -2,7 +2,7 @@
  * This file contains types, exported and used by other modules.
  */
 
-import { Component, Template, Translation } from './types.d.ts'
+import { Component, ObserverType, Template, Translation } from './types.d.ts'
 
 /**
  * Try to fetch one or more translations, depending on the user's locale.
@@ -43,9 +43,71 @@ export declare function state<STATE>(object : STATE) : STATE
  */
 export declare function template(from: Template) : Template
 
+export declare function on<
+  Input extends Array<any>
+>(from: Input) : {
+  create(
+    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+  ) : void,
+  delete(
+    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+  ) : void,
+  update(
+    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+  ) : void,
+}
+export declare function on<
+  Input extends Record<any, any>,
+  K extends keyof Input
+>(from: Input) : {
+  create(
+    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+  ) : void,
+  delete(
+    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+  ) : void,
+  update(
+    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+  ) : void,
+}
+export declare function on<
+  Input extends any
+>(from: Input) : {
+  create(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+  delete(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+  update(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+}
+export declare function on<
+  Input extends any
+>(from: Input) : {
+  set(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+  set(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+  set(
+    listener: (event: { input: Input, key: string, value: Input }) => void
+  ) : void,
+}
+
+export declare function off(
+  stateOrProp: State | any,
+  type: ObserverType,
+  listener: ObserverListener
+) : void
+
 export declare const paintor: {
   component: typeof component,
   fetchTranslations: typeof fetchTranslations,
+  on: typeof on,
+  off: typeof off,
   state: typeof state,
   template: typeof template,
 }

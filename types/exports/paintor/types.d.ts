@@ -12,6 +12,7 @@ export type Template = (tree : TemplateTree) => (
 
 export type Translation = Record<string, any>
 
+export type TargetObject = Object<any, any> | Array<any>
 export type State = Record<any, any> | Array<any> | Set<any> | Map<any, any>
 export type States = Record<string, State>
 
@@ -24,3 +25,14 @@ export interface Component {
   template: Template,
   useTranslations : (...translations: Translation[]) => Component,
 }
+
+export type ObserverType = 'create' | 'change' | 'delete' | 'set'
+export type ObserverListener = (
+  event: {
+    key: string | number | symbol
+    value: any,
+    oldValue: any,
+    target: TargetObject,
+    state: State
+  }
+) => void
