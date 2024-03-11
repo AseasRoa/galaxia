@@ -2,7 +2,14 @@
  * This file contains types, exported and used by other modules.
  */
 
-import { Component, ObserverType, Template, Translation } from './types.d.ts'
+import {
+  Component,
+  ObserverListener,
+  ObserverType,
+  State,
+  Template,
+  Translation
+} from './types'
 
 /**
  * Try to fetch one or more translations, depending on the user's locale.

@@ -3,6 +3,8 @@
  * @see https://www.typescriptlang.org/docs/handbook/utility-types.html
  */
 
+import { Template } from './types'
+
 export interface Statements {
   if (
     condition: boolean | (() => boolean),
