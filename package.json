@@ -67,6 +67,7 @@
     "eslint-plugin-vitest": "^0.3.26",
     "eslint-plugin-vitest-globals": "^1.5.0",
     "jsdom": "^24.0.0",
+    "lightningcss": "^1.24.1",
     "mongodb-memory-server": "^9.1.7",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
