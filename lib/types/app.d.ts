@@ -67,7 +67,8 @@ declare namespace app {
     isXHR: boolean,
     isHTML: boolean,
     queryParams: QueryParams,
-    modulesAssets: ModulesAssets
+    modulesAssets: ModulesAssets,
+    appModulesUsed: string[] // Contains the names of app modules, used for rendering the whole page
   }
 
   export type ImportsCacheItem = {
