@@ -54,7 +54,7 @@ declare namespace app {
 
   type QueryParams = {
     query: QueryParameters,
-    queryGet: QueryParameters
+    queryGet: URLSearchParams
   }
 
   export type ModulesAssets = {
