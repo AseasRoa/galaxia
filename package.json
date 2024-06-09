@@ -74,10 +74,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AseasRoa/galaxia"
+    "url": "git+https://github.com/AseasRoa/galaxia.git"
   },
   "homepage": "https://github.com/AseasRoa/galaxia",
   "bin": {
-    "galaxia": "./bin/galaxia.js"
+    "galaxia": "bin/galaxia.js"
   }
 }
