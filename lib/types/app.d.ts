@@ -19,11 +19,12 @@ declare namespace app {
   type DirNames = {
     layout: string,
     client: string,
+    hooks: string,
+    i18n: string,
     routes: string,
     server: string,
     styles: string,
-    views: string,
-    i18n: string
+    views: string
   }
 
   type RequestsRateLimitsRule = {
