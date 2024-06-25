@@ -39,12 +39,14 @@ declare namespace app {
     httpPort?: number,
     httpsPort?: number,
     requestTimeout?: number,
-    requestsRateLimits?: RequestsRateLimitsRule[],
     ssl?: Record<string, SecureContextOptions>,
     redirectHttpToHttps?: boolean,
     redirectHttpToHttpsExcludePaths?: string[],
     proxy?: Record<string, number>,
-    earlyHints?: boolean
+    earlyHints?: boolean,
+    protection?: {
+      rateLimits?: RequestsRateLimitsRule[]
+    }
   }
 
   export type Config = GalaxiaConfig
