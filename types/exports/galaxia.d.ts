@@ -75,7 +75,7 @@ class HttpExchange {
   response: HttpResponse
 }
 
-class Router {
+class Routes {
   exchange: HttpExchange
   request: HttpRequest
   response: HttpResponse
@@ -98,7 +98,7 @@ declare module 'galaxia' {
   export function start(options: GalaxiaOptions) : Promise<void>
   export function restart() : Promise<void>
 
-  export class Router {
+  export class Routes {
     exchange: HttpExchange
     request: HttpRequest
     response: HttpResponse
