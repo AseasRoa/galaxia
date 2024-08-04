@@ -3,7 +3,10 @@ declare module "galaxia/paintor" {
 
   export {
     default,
-    fetchTranslations, isComponent, isTemplate, component, state, template,
+    fetchTranslations,
+    isComponent, isTemplate,
+    component, state, template,
+    on, off,
     paintor
   } from './paintor/index.d.ts'
 }
