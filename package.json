@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "chart.js": "^4.4.3",
-    "docschema": "^1.2.1",
+    "docschema": "^1.2.2",
     "ejs": "^3.1.10",
     "esbuild": "^0.23.0",
     "handlebars": "^4.7.8",
