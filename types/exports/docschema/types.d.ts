@@ -35,27 +35,31 @@ export declare class DocSchemaValidator {
   validateFunctionArguments(
     ast: Ast,
     args: any,
-    throwOnError?: boolean
+    throwOnError?: boolean,
+    forceStrict?: boolean
   ): CheckResult
 
   validateParams(
     name: 'param' | 'property',
     ast: Ast,
     args: any,
-    throwOnError?: boolean
+    throwOnError?: boolean,
+    forceStrict?: boolean
   ): CheckResult
 
   validateTag(
     tagName: 'enum' | 'type' | 'returns' | 'yields',
     ast: Ast,
     value: any,
-    throwOnError?: boolean
+    throwOnError?: boolean,
+    forceStrict?: boolean
   ): CheckResult
 
   validateTypedef(
     ast: Ast,
     value: any,
-    throwOnError?: boolean
+    throwOnError?: boolean,
+    forceStrict?: boolean
   ) : CheckResult
 }
 
