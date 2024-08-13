@@ -36,27 +36,27 @@ export declare class DocSchemaValidator {
     ast: Ast,
     args: any,
     throwOnError?: boolean
-  ): boolean
+  ): CheckResult
 
   validateParams(
     name: 'param' | 'property',
     ast: Ast,
     args: any,
     throwOnError?: boolean
-  ): boolean
+  ): CheckResult
 
   validateTag(
     tagName: 'enum' | 'type' | 'returns' | 'yields',
     ast: Ast,
     value: any,
     throwOnError?: boolean
-  ): Promise<Ast[]>
+  ): CheckResult
 
   validateTypedef(
     ast: Ast,
     value: any,
     throwOnError?: boolean
-  ) : ValidationError | Error
+  ) : CheckResult
 }
 
 export declare class ValidationError extends Error {
