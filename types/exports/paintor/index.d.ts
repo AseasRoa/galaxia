@@ -93,13 +93,13 @@ export declare function on<
 export declare function on<
   Input extends any
 >(from: Input) : {
-  set(
+  create(
     listener: (event: { input: Input, key: string, value: Input }) => void
   ) : void,
-  set(
+  delete(
     listener: (event: { input: Input, key: string, value: Input }) => void
   ) : void,
-  set(
+  update(
     listener: (event: { input: Input, key: string, value: Input }) => void
   ) : void,
 }

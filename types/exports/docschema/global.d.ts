@@ -97,7 +97,8 @@ type AstElements = {
   callback: ParsedTat | null,
   typedef: ParsedTag | null,
   yields: ParsedTag | null,
-  property: ParsedTag[]
+  property: ParsedTag[],
+  strict: boolean
 }
 
 type Ast = {
@@ -106,13 +107,18 @@ type Ast = {
   startLine: number,
   endLine: number,
   lineAfterComment: string, // The contents of the first non-empty line after the comment
-  typedefs: Ast[] // Other parsed AST from the same file that are 'typedef'
+  localTypedefs: Ast[], // Other parsed AST from the same file that are 'typedef'
+  ambientTypedefs: Ast[] // Ambient typedefs from other files
+  strict: boolean
 }
 
 type CheckResult = {
   expectedType: string,
-  filter?: { name: '' | keyof Filters, value: boolean | number | string | RegExp },
-  kind: 'type' | 'filter' | ''
+  filter?: {
+    name: '' | keyof Filters,
+    value: boolean | number | string | RegExp
+  },
+  kind: 'type' | 'filter' | 'strict' | ''
   message: string,
   pass: boolean,
   tag: string,

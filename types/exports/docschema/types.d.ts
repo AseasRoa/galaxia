@@ -61,8 +61,11 @@ export declare class DocSchemaValidator {
 
 export declare class ValidationError extends Error {
   expectedType: string
-  filter: undefined | { name: '' | keyof Filters, value: boolean | number | string | RegExp }
-  kind: 'type' | 'filter' | ''
+  filter: undefined | {
+    name: '' | keyof Filters,
+    value: boolean | number | string | RegExp
+  }
+  kind: 'type' | 'filter' | 'strict' | ''
   message: string
   pass: boolean
   tag: string
