@@ -1,4 +1,6 @@
 export declare class DocSchema {
+  ast: Ast
+
   approves(
     value: any
   ): boolean
@@ -32,35 +34,41 @@ export declare class DocSchemaParser {
 }
 
 export declare class DocSchemaValidator {
+  check(
+    ast: Ast,
+    value: any,
+    forceStrict?: boolean
+  ): CheckResult
+
+  validate(
+    ast: Ast,
+    value: any,
+    forceStrict?: boolean
+  ): CheckResult
+
+  checkFunctionArguments(
+    ast: Ast,
+    args: any[],
+    forceStrict?: boolean
+  ): CheckResult
+
   validateFunctionArguments(
     ast: Ast,
-    args: any,
-    throwOnError?: boolean,
+    args: any[],
     forceStrict?: boolean
   ): CheckResult
 
-  validateParams(
-    name: 'param' | 'property',
-    ast: Ast,
-    args: any,
-    throwOnError?: boolean,
-    forceStrict?: boolean
-  ): CheckResult
-
-  validateTag(
-    tagName: 'enum' | 'type' | 'returns' | 'yields',
+  checkReturns(
     ast: Ast,
     value: any,
-    throwOnError?: boolean,
     forceStrict?: boolean
   ): CheckResult
 
-  validateTypedef(
+  validateReturns(
     ast: Ast,
     value: any,
-    throwOnError?: boolean,
     forceStrict?: boolean
-  ) : CheckResult
+  ): CheckResult
 }
 
 export declare class ValidationError extends Error {
