@@ -54,13 +54,48 @@ export declare function on<
   Input extends Array<any>
 >(from: Input) : {
   create(
-    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input[number],
+        oldValue: Input[number] | undefined,
+      }
+    ) => void
+  ) : void,
+  change(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input[number],
+        oldValue: Input[number] | undefined,
+      }
+    ) => void
   ) : void,
   delete(
-    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input[number],
+        oldValue: Input[number] | undefined,
+      }
+    ) => void
   ) : void,
-  update(
-    listener: (event: { target: Input, key: string, value: Input[number] }) => void
+  set(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input[number],
+        oldValue: Input[number] | undefined,
+      }
+    ) => void
   ) : void,
 }
 export declare function on<
@@ -68,39 +103,144 @@ export declare function on<
   K extends keyof Input
 >(from: Input) : {
   create(
-    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: K,
+        value: Input[K],
+        oldValue: Input[number] | undefined
+      }
+    ) => void
+  ) : void,
+  change(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: K,
+        value: Input[K],
+        oldValue: Input[number] | undefined
+      }
+    ) => void
   ) : void,
   delete(
-    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: K,
+        value: Input[K],
+        oldValue: Input[number] | undefined
+      }
+    ) => void
   ) : void,
-  update(
-    listener: (event: { target: Input, key: K, value: Input[K] }) => void
+  set(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: K,
+        value: Input[K],
+        oldValue: Input[number] | undefined
+      }
+    ) => void
   ) : void,
 }
 export declare function on<
   Input extends any
 >(from: Input) : {
   create(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
+  ) : void,
+  change(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
   delete(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
-  update(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+  set(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
 }
 export declare function on<
   Input extends any
 >(from: Input) : {
   create(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
+  ) : void,
+  change(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
   delete(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
-  update(
-    listener: (event: { input: Input, key: string, value: Input }) => void
+  set(
+    listener: (
+      event: {
+        target: Input,
+        state: Input,
+        key: string,
+        value: Input,
+        oldValue: Input | undefined
+      }
+    ) => void
   ) : void,
 }
 
