@@ -7,6 +7,7 @@ import {
   ObserverListener,
   ObserverType,
   State,
+  StyleRules,
   Template,
   Translation
 } from './types'
@@ -44,6 +45,13 @@ export declare function component(from: (Template | Component)[]): Component
  * Create a state, which is a proxy of the input object or array.
  */
 export declare function state<STATE>(object : STATE) : STATE
+
+/**
+ * Create a style object, containing CSS rules.
+ */
+export declare function style<
+  RULES extends Partial<StyleRules>
+>(rules : RULES) : RULES
 
 /**
  * Create a template function.
