@@ -70,28 +70,23 @@ class HttpResponse {
   writeContinue: () => void
 }
 
-class HttpExchange {
+class HttpContext {
   request: HttpRequest
   response: HttpResponse
 }
 
 class Routes {
-  exchange: HttpExchange
+  httpContext: HttpContext
   request: HttpRequest
   response: HttpResponse
 }
 
-type Request = HttpRequest
-type Response = HttpResponse
-type Exchange = HttpExchange
-
 declare namespace Galaxia {
   type Options = GalaxiaOptions
   type Config = GalaxiaConfig
-
-  type Request = HttpRequest
-  type Response = HttpResponse
-  type Exchange = HttpExchange
+  type HttpRequest = HttpRequest
+  type HttpResponse = HttpResponse
+  type HttpContext = HttpContext
 }
 
 declare module 'galaxia' {
@@ -99,7 +94,7 @@ declare module 'galaxia' {
   export function restart() : Promise<void>
 
   export class Routes {
-    exchange: HttpExchange
+    httpContext: HttpContext
     request: HttpRequest
     response: HttpResponse
   }

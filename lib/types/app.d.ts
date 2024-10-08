@@ -73,7 +73,7 @@ declare namespace app {
   }
 
   export type ChunkParams = {
-    exchange: import('../server/HttpExchange').HttpExchange
+    httpContext: import('../server/HttpContext').HttpContext
     isXHR: boolean,
     isHTML: boolean,
     queryParams: QueryParams,
