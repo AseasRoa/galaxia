@@ -78,7 +78,8 @@ declare namespace app {
     isHTML: boolean,
     queryParams: QueryParams,
     modulesAssets: ModulesAssets,
-    appModulesUsed: string[] // Contains the names of app modules, used for rendering the whole page
+    appModulesUsed: string[], // Contains the names of app modules, used for rendering the whole page
+    words?: import('../app/Words').Words,
   }
 
   export type ImportsCacheItem = {
