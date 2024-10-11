@@ -17,6 +17,8 @@ declare namespace app {
   }
 
   type DirNames = {
+    app: string,
+    modules: string,
     layout: string,
     client: string,
     hooks: string,
