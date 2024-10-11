@@ -7,11 +7,11 @@ export default [
   {
     ignores: [
       // Directories
-      '.idea/*',
-      '.vscode/*',
+      '**/.idea/*',
+      '**/.vscode/*',
+      '**/dist/*',
+      '**/node_modules/*',
       'coverage/*',
-      'dist/*',
-      'node_modules/*',
       // Files
       '**/*.ts',
       '**/.DS_Store',
