@@ -24,7 +24,8 @@ declare namespace app {
     routes: string,
     server: string,
     styles: string,
-    views: string
+    views: string,
+    dist: string
   }
 
   type RequestsRateLimitsRule = {
