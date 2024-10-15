@@ -45,6 +45,7 @@ class HttpRequest {
   headers: import('http').IncomingHttpHeaders
   httpVersion: string
   method: string
+  original: import('http').IncomingMessage | import('http2').Http2ServerRequest
   get complete(): boolean {}
   get cookies(): Record<string, string> {}
   get remoteAddress(): string {}
@@ -58,6 +59,7 @@ class HttpResponse {
   get headersSent(): boolean {}
   get statusCode(): number {}
   set statusCode(): number {}
+  original: import('http').ServerResponse | import('http2').Http2ServerResponse
   end: (data?: string, encoding?: BufferEncoding, callback?: () => void) => HttpResponse
   getHeader: (name: string) => number | string | string[] | undefined
   getHeaderNames: () => string[]
