@@ -47,7 +47,7 @@ declare namespace app {
     hostNames?: string[],
     httpPort?: number,
     httpsPort?: number,
-    requestTimeout?: number,
+    responseTimeout?: number,
     ssl?: Record<string, SecureContextOptions>,
     redirectHttpToHttps?: boolean,
     redirectHttpToHttpsExcludePaths?: string[],
