@@ -39,8 +39,8 @@ declare namespace app {
 
   type RequestsUserAgentFilterRule = {
     path?: string | RegExp,
-    allow?: RegExp,
-    deny?: RegExp
+    allow?: (string | RegExp)[],
+    deny?: (string | RegExp)[]
   }
 
   type WebServerConfig = {
@@ -53,9 +53,15 @@ declare namespace app {
     redirectHttpToHttpsExcludePaths?: string[],
     proxy?: Record<string, number>,
     earlyHints?: boolean,
-    protection?: {
-      rateLimits?: RequestsRateLimitsRule[],
-      userAgentFilters?: RequestsUserAgentFilterRule[]
+    middleware?: {
+      rateLimiter?: {
+        enabled?: boolean,
+        rules?: RequestsRateLimitsRule[]
+      },
+      userAgentFilter?: {
+        enabled?: boolean,
+        rules?: RequestsUserAgentFilterRule[]
+      }
     }
   }
 
