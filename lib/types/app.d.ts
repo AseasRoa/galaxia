@@ -30,14 +30,14 @@ declare namespace app {
     dist: string
   }
 
-  type RequestsRateLimitsRule = {
+  type RateLimiterRule = {
     path: string | RegExp,
     maxRequests: number,
     secondsPeriod: number,
     methods?: string[]
   }
 
-  type RequestsUserAgentFilterRule = {
+  type UserAgentFilterRule = {
     path?: string | RegExp,
     allow?: (string | RegExp)[],
     deny?: (string | RegExp)[]
@@ -66,11 +66,11 @@ declare namespace app {
       },
       rateLimiter?: {
         enabled?: boolean,
-        rules?: RequestsRateLimitsRule[]
+        rules?: RateLimiterRule[]
       },
       userAgentFilter?: {
         enabled?: boolean,
-        rules?: RequestsUserAgentFilterRule[]
+        rules?: UserAgentFilterRule[]
       },
     }
   }
