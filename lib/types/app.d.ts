@@ -43,6 +43,12 @@ declare namespace app {
     deny?: (string | RegExp)[]
   }
 
+  type HttpToHttpsRule = {
+    hostname?: string | RegExp,
+    excludePaths?: (string | RegExp)[],
+    httpsPort?: number
+  }
+
   type WebServerConfig = {
     hostNames?: string[],
     httpPort?: number,
@@ -54,6 +60,10 @@ declare namespace app {
     proxy?: Record<string, number>,
     earlyHints?: boolean,
     middleware?: {
+      httpToHttps?: {
+        enabled?: boolean,
+        rules?: HttpToHttpsRule[]
+      },
       rateLimiter?: {
         enabled?: boolean,
         rules?: RequestsRateLimitsRule[]
@@ -61,7 +71,7 @@ declare namespace app {
       userAgentFilter?: {
         enabled?: boolean,
         rules?: RequestsUserAgentFilterRule[]
-      }
+      },
     }
   }
 
