@@ -67,6 +67,7 @@
     "benchmark": "^2.1.4",
     "clinic": "^13.0.0",
     "eslint": "^9.14.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^50.4.3",
     "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vitest-globals": "^1.5.0",

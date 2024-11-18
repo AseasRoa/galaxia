@@ -1,4 +1,5 @@
 import eslintJs from '@eslint/js'
+import eslintPluginImport from 'eslint-plugin-import'
 import jsdoc from 'eslint-plugin-jsdoc'
 import vitest from 'eslint-plugin-vitest'
 import globals from 'globals'
@@ -23,6 +24,7 @@ export default [
       '!.*'
     ]
   },
+  eslintPluginImport.flatConfigs.recommended,
   {
     languageOptions: {
       ecmaVersion: 'latest',
@@ -236,6 +238,30 @@ export default [
       'wrap-iife': ['error', 'outside'],
       'wrap-regex': 'off',
       'yield-star-spacing': ['error', 'both'],
+    }
+  },
+  // ESLint Plugin Import
+  {
+    files: ['**/*.?(c|m)[jt]s?(x)'],
+    plugins: {},
+    rules: {
+      'import/extensions': 'off',
+      'import/no-unresolved': 'off',
+      'import/consistent-type-specifier-style': [
+        'error', 'prefer-top-level',
+      ],
+      'import/imports-first': 'error',
+      'import/newline-after-import': 'error',
+      'import/order': [
+        'error',
+        {
+          named: true,
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          }
+        },
+      ]
     }
   },
   // JsDoc

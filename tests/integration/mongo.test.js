@@ -1,3 +1,5 @@
+import { MongoServerError } from 'mongodb'
+import { MongoMemoryServer } from 'mongodb-memory-server'
 import {
   collection,
   connect,
@@ -6,8 +8,6 @@ import {
   model,
   ObjectId
 } from '#galaxia/db/mongo'
-import { MongoServerError } from 'mongodb'
-import { MongoMemoryServer } from 'mongodb-memory-server'
 
 describe('mongodb', () => {
   let mongoServer = null
@@ -59,14 +59,14 @@ describe('mongodb', () => {
     })
 
     test('count', async() => {
-      await expect(await PersonModel.count()).toBe(0)
+      await await expect(PersonModel.count()).resolves.toBe(0)
     })
 
     describe('insertOne', () => {
       test('valid', async() => {
-        await expect(
-          await PersonModel.insertOne({ name: 'John', age: 31 })
-        ).toBeInstanceOf(ObjectId)
+        await await expect(
+          PersonModel.insertOne({ name: 'John', age: 31 })
+        ).resolves.toBeInstanceOf(ObjectId)
       })
 
       test('invalid', async() => {
