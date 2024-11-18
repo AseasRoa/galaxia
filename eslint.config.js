@@ -69,7 +69,7 @@ export default [
       'init-declarations': ['error', 'always'],
       'max-classes-per-file': ['error', 1],
       'multiline-comment-style': 'off',
-      'new-cap': 'error',
+      'new-cap': 'off',
       'no-array-constructor': 'error',
       'no-else-return': 'error',
       'no-extend-native': 'error',
