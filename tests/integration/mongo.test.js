@@ -35,7 +35,7 @@ describe('mongodb', () => {
   describe('model()', () => {
     let PersonModel = null
 
-    beforeAll(async() => {
+    beforeAll(() => {
       /** @enum {{ name: string, age: number, sex?: string }} */
       const personSchema = new DocSchema()
 
@@ -45,7 +45,7 @@ describe('mongodb', () => {
       PersonModel = model('db', 'person', personTypeSchema)
     })
 
-    test('wrong database and collection', async() => {
+    test('wrong database and collection', () => {
       // @ts-ignore
       expect(() => model(123, 'test')).toThrow()
       // @ts-ignore
@@ -59,12 +59,12 @@ describe('mongodb', () => {
     })
 
     test('count', async() => {
-      await await expect(PersonModel.count()).resolves.toBe(0)
+      await expect(PersonModel.count()).resolves.toBe(0)
     })
 
     describe('insertOne', () => {
       test('valid', async() => {
-        await await expect(
+        await expect(
           PersonModel.insertOne({ name: 'John', age: 31 })
         ).resolves.toBeInstanceOf(ObjectId)
       })
