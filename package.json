@@ -29,9 +29,9 @@
     }
   },
   "scripts": {
-    "lint": "npm run lint:typescript & npm run lint:eslint",
-    "lint:eslint": "eslint --config eslint.config.js ./",
-    "lint:typescript": "tsc --build --clean && tsc",
+    "check": "npm run check:tsc & npm run check:eslint",
+    "check:eslint": "eslint --config eslint.config.js ./",
+    "check:tsc": "tsc --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "bench": "vitest bench",
