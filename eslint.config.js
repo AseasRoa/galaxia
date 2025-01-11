@@ -1,7 +1,7 @@
 import eslintJs from '@eslint/js'
+import vitest from '@vitest/eslint-plugin'
 import eslintPluginImport from 'eslint-plugin-import'
 import jsdoc from 'eslint-plugin-jsdoc'
-import vitest from 'eslint-plugin-vitest'
 import globals from 'globals'
 
 export default [
@@ -290,23 +290,32 @@ export default [
   {
     files: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     plugins: { vitest },
-    languageOptions: {
-      globals: {
-        ...vitest.configs.env.languageOptions.globals
+    settings: {
+      vitest: {
+        typecheck: true
       }
+    },
+    languageOptions: {
+      globals: { ...vitest.environments.env.globals }
     },
     rules: {
       ...vitest.configs.recommended.rules,
       'vitest/consistent-test-it': ['error', { fn: 'test' }],
+      'vitest/max-expects': 'off',
+      'vitest/max-nested-describe': 'off',
       'vitest/no-alias-methods': 'error',
       'vitest/no-conditional-expect': 'error',
+      'vitest/no-conditional-in-test': 'off',
       'vitest/no-conditional-tests': 'error',
       'vitest/no-disabled-tests': 'warn',
       'vitest/no-done-callback': 'error',
       'vitest/no-duplicate-hooks': 'error',
       'vitest/no-focused-tests': 'error',
+      'vitest/no-hooks': 'off',
       'vitest/no-interpolation-in-snapshots': 'error',
+      'vitest/no-large-snapshots': 'off',
       'vitest/no-mocks-import': 'error',
+      'vitest/no-restricted-matchers': 'off',
       'vitest/no-restricted-vi-methods': 'error',
       'vitest/no-standalone-expect': 'error',
       'vitest/no-test-prefixes': 'error',
@@ -323,7 +332,9 @@ export default [
       'vitest/prefer-to-contain': 'error',
       'vitest/prefer-todo': 'error',
       'vitest/require-hook': 'error',
-      'vitest/require-top-level-describe': 'error'
+      'vitest/require-top-level-describe': 'error',
+      'vitest/valid-expect-in-promise': 'error',
+      'vitest/valid-title': 'off',
     }
   }
 ]
