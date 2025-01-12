@@ -66,7 +66,6 @@
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/eslint-plugin": "^1.1.24",
     "autocannon": "^8.0.0",
-    "benchmark": "^2.1.4",
     "clinic": "^13.0.0",
     "eslint": "^9.18.0",
     "eslint-plugin-import": "^2.31.0",
