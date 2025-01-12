@@ -59,7 +59,6 @@
     "watcher": "^2.3.1"
   },
   "devDependencies": {
-    "@types/benchmark": "^2.1.5",
     "@types/node": "^22.10.5",
     "@types/pug": "^2.0.10",
     "@types/stylus": "^0.48.43",
