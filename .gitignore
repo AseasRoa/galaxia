@@ -13,5 +13,4 @@ package-lock.json
 bun.lockb
 
 # Project Specific Directories
-.clinic/
 **/dist/

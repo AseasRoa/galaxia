@@ -35,7 +35,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "bench": "vitest bench",
-    "autocannon": "autocannon --connections 15 --duration 10 http://localhost:8000/helloWorld",
+    "autocannon": "autocannon --connections 15 --duration 10 http://localhost:8000/helloWorld"
   },
   "dependencies": {
     "chart.js": "^4.4.7",
