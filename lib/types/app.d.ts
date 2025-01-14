@@ -98,7 +98,7 @@ declare namespace app {
     queryParams: QueryParams,
     modulesAssets: ModulesAssets,
     appModulesUsed: Set<string>, // Contains the names of app modules, used for rendering the whole page
-    words?: import('../app/Words').Words,
+    words?: import('../app/routes/Words').Words,
   }
 
   export type ImportsCacheItem = {
