@@ -20,8 +20,8 @@ type EnvironmentVariables = {
 }
 
 type CssFilesManagerConfig = {
-  indexFileName : string,
-  inputDirName : string,
+  inputPathName : string,
+  inputFileName : string,
   outputFileName : string
 }
 
