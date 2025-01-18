@@ -32,6 +32,8 @@
     "check": "npm run check:tsc & npm run check:eslint",
     "check:eslint": "eslint --config eslint.config.js ./",
     "check:tsc": "tsc --noEmit",
+    "check:dpdm": "dpdm --exit-code circular:1 ./lib/index.js",
+    "depencency-cruiser": "npx depcruise lib --output-type archi | dot -T svg > dependency-graph.svg",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "bench": "vitest bench",
@@ -61,6 +63,8 @@
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/eslint-plugin": "^1.1.24",
     "autocannon": "^8.0.0",
+    "dependency-cruiser": "^16.9.0",
+    "dpdm": "^3.14.0",
     "eslint": "^9.18.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^50.6.1",
@@ -78,7 +82,7 @@
   "bin": {
     "galaxia": "bin/galaxia.js"
   },
-  "engines" : {
-    "node" : ">=18.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
