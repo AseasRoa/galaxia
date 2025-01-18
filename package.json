@@ -29,7 +29,7 @@
     }
   },
   "scripts": {
-    "check": "npm run check:tsc & npm run check:eslint",
+    "check": "npm run check:tsc & npm run check:eslint & npm run check:dpdm -- --no-warning --no-tree",
     "check:eslint": "eslint --config eslint.config.js ./",
     "check:tsc": "tsc --noEmit",
     "check:dpdm": "dpdm --exit-code circular:1 ./lib/index.js",
