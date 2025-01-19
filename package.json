@@ -33,7 +33,7 @@
     "check:eslint": "eslint --config eslint.config.js ./",
     "check:tsc": "tsc --noEmit",
     "check:dpdm": "dpdm --exit-code circular:1 ./lib/index.js",
-    "depencency-cruiser": "npx depcruise lib --output-type archi | dot -T svg > dependency-graph.svg",
+    "depencency-graph": "npx depcruise lib --output-type archi | dot -T svg > dependency-graph.svg",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "bench": "vitest bench",
