@@ -295,9 +295,6 @@ export default [
         typecheck: true
       }
     },
-    languageOptions: {
-      globals: { ...vitest.environments.env.globals }
-    },
     rules: {
       ...vitest.configs.recommended.rules,
       'vitest/consistent-test-it': ['error', { fn: 'test' }],

@@ -25,7 +25,7 @@
     "baseUrl": "./",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node", "vitest/globals"],
+    "types": ["node"],
     /**
      * Interop Constraints
      */
@@ -52,6 +52,7 @@
     "useUnknownInCatchVariables": false
   },
   "include" : [
+    "app/**/*",
     "benchmarks/**/*",
     "dev/**/*",
     "lib/**/*",
