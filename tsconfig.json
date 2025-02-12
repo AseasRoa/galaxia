@@ -34,7 +34,7 @@
     /**
      * Completeness
      */
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     /*
      * Type Checking
      */
