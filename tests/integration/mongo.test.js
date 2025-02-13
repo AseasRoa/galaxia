@@ -47,14 +47,14 @@ describe('mongodb', () => {
     })
 
     test('wrong database and collection', () => {
-      // @ts-ignore
+      // @ts-expect-error
       expect(() => model(123, 'test')).toThrow()
-      // @ts-ignore
+      // @ts-expect-error
       expect(() => model('db', 123)).toThrow()
     })
 
     test('wrong schema', () => {
-      // @ts-ignore
+      // @ts-expect-error
       expect(() => model('db', 'test')).toThrow()
       expect(() => model('db', 'test', {})).toThrow()
     })

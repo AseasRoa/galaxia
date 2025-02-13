@@ -45,6 +45,5 @@ declare module 'galaxia/fileSystem' {
     writeJson5Sync,
     writeFile,
     writeFileSync
-    // @ts-ignore Prevents an error when types are generated
-  } from '../../lib/functions/fileSystem.js'
+  } from 'lib/functions/fileSystem.js'
 }
