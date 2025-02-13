@@ -1,6 +1,6 @@
-type ChannelCallback = function(Cluster.Worker):any
+type ChannelCallback = (worker: Cluster.Worker) => void
 
-type MessageCallback = function(any):any
+type MessageCallback = (response: unknown) => void
 
 type ChannelRequest = {
   type: 'channelRequest',
