@@ -2,7 +2,7 @@
  * This file contains types, exported and used by other modules.
  */
 
-import { docSchema } from './types.d.ts'
+import { docSchema } from './types'
 
 export default docSchema
 export {
@@ -11,4 +11,4 @@ export {
   DocSchemaParser,
   DocSchemaValidator,
   ValidationError
-} from './types.d.ts'
+} from './types'

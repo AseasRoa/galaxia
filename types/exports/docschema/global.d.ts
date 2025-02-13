@@ -94,11 +94,12 @@ type AstElements = {
   param: ParsedTag[],
   enum: ParsedTag | null,
   type: ParsedTag | null,
-  callback: ParsedTat | null,
+  callback: ParsedTag | null,
   typedef: ParsedTag | null,
   yields: ParsedTag | null,
   property: ParsedTag[],
-  strict: boolean
+  strict: boolean,
+  import: ParsedTag[],
 }
 
 type Ast = {
@@ -106,10 +107,15 @@ type Ast = {
   file: string,
   startLine: number,
   endLine: number,
-  lineAfterComment: string, // The contents of the first non-empty line after the comment
-  localTypedefs: Ast[], // Other parsed AST from the same file that are 'typedef'
-  ambientTypedefs: Ast[] // Ambient typedefs from other files
-  strict: boolean
+  // The contents of the first non-empty line after the comment
+  lineAfterComment: string,
+  // Other parsed AST from the same file that are 'typedef'
+  localTypedefs: Ast[],
+  // Ambient typedefs from other files
+  ambientTypedefs: Ast[],
+  // Typedefs, imported from ambient typedefs and @import
+  importedTypedefs: Ast[],
+  strict: boolean,
 }
 
 type CheckResult = {

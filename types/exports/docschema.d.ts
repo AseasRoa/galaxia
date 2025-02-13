@@ -1,10 +1,10 @@
 declare module 'galaxia/docschema' {
-  import './docschema/global.d.ts'
+  import 'types/exports/docschema/global'
 
   export {
     default,
     docSchema,
     DocSchema,
     ValidationError
-  } from './docschema/index.d.ts'
+  } from 'types/exports/docschema/index'
 }

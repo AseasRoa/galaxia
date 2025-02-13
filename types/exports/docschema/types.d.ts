@@ -1,4 +1,4 @@
-export declare class DocSchema {
+export class DocSchema {
   ast: Ast
 
   approves(
@@ -18,7 +18,7 @@ export declare class DocSchema {
   validate<T>(value: T): T
 }
 
-export declare class DocSchemaParser {
+export class DocSchemaParser {
   parseComments(
     code: string,
     file?: string
@@ -33,7 +33,7 @@ export declare class DocSchemaParser {
   ): void
 }
 
-export declare class DocSchemaValidator {
+export class DocSchemaValidator {
   check(
     ast: Ast,
     value: any,
@@ -71,7 +71,7 @@ export declare class DocSchemaValidator {
   ): CheckResult
 }
 
-export declare class ValidationError extends Error {
+export class ValidationError extends Error {
   expectedType: string
   filter: undefined | {
     name: '' | keyof Filters,
@@ -89,4 +89,4 @@ export declare class ValidationError extends Error {
  * @returns {DocSchema}
  * @throws {Error}
  */
-export declare function docSchema(): DocSchema
+export function docSchema(): DocSchema
