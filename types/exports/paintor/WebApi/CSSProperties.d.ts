@@ -1,940 +1,5430 @@
-import { Combo } from './common'
+import { Bindable } from './common'
 import { CSSColors } from './CSSColors'
 
-export type Positions = string
-|'left top'|'left center'|'left bottom'
-|'right top'|'right center'|'right bottom'
-|'center top'|'center center'|'center bottom'
-|'x% y%'|'0px 0px'
+export type Positions =
+  |'top'
+  |'bottom'
+  |'left'
+  |'right'
+  |'center'
+  |'left top'
+  |'left center'
+  |'left bottom'
+  |'right top'
+  |'right center'
+  |'right bottom'
+  |'center top'
+  |'center center'
+  |'center bottom'
+  |'x% y%'
+  |'10px 10px'
+  |'1cm 2cm'
 
-type CSSGeneral = 'initial'|'inherit'|'revert'|'unset'
+type GlobalValues = 'initial'|'inherit'|'revert'|'unset'|'revert-layer'
 
 type CSSPropertiesJsStyle = {
-  /** @see https://www.w3schools.com/cssref/css3_pr_align-content.asp */
-  alignContent? : Combo<'stretch'|'center'|'flex-start'|'flex-end'|'space-between'|'space-around'
-  |'space-evenly'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_align-items.asp */
-  alignItems? : Combo<'stretch'|'center'|'flex-start'|'flex-end'|'baseline'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_align-self.asp */
-  alignSelf? : Combo<'auto'|'stretch'|'center'|'flex-start'|'flex-end'|'baseline'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_all.asp */
-  all? : Combo<CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation.asp */
-  animation? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-delay.asp */
-  animationDelay? : Combo<'time'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-direction.asp */
-  animationDirection? : Combo<'normal'|'reverse'|'alternate'|'alternate-reverse'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-duration.asp */
-  animationDuration? : Combo<'time'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp */
-  animationFillMode? : Combo<'none'|'forwards'|'backwards'|'both'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-iteration-count.asp */
-  animationIterationCount? : Combo<number>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-name.asp */
-  animationName? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-play-state.asp */
-  animationPlayState? : Combo<'paused'|'running'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp */
-  animationTimingFunction? : Combo<string|'linear'|'ease'|'ease-in'|'ease-out'|'ease-in-out'
-  |'step-start'|'step-end'|CSSGeneral|'steps(int,start|end)'|'cubic-bezier(n,n,n,n)'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_backface-visibility.asp */
-  backfaceVisibility? : Combo<'visible'|'hidden'|CSSGeneral|boolean>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_background.asp */
-  background? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-attachment.asp */
-  backgroundAttachment? : Combo<'scroll'|'fixed'|'local'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-blend-mode.asp */
-  backgroundBlendMode? : Combo<'normal'|'multiply'|'screen'|'overlay'|'darken'|'lighten'|'color-dodge'
-  |'saturation'|'color'|'luminosity'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_background-clip.asp */
-  backgroundClip? : Combo<'border-box'|'padding-box'|'content-box'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-color.asp */
-  backgroundColor? : Combo<'transparent'|CSSColors|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-image.asp */
-  backgroundImage? : Combo<string|'none'|CSSGeneral|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_background-origin.asp */
-  backgroundOrigin? : Combo<string|'padding-box'|'border-box'|'content-box'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-position.asp */
-  backgroundPosition? : Combo<string|Positions|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_background-repeat.asp */
-  backgroundRepeat? : Combo<'repeat'|'repeat-x'|'repeat-y'|'no-repeat'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_background-size.asp */
-  backgroundSize? : Combo<string|'auto'|'cover'|'contain'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border.asp */
-  border? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-bottom.asp */
-  borderBottom? : Combo<string|CSSGeneral|'5px solid red'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-bottom_color.asp */
-  borderBottomColor? : Combo<CSSColors|'transparent'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-bottom-left-radius.asp */
-  borderBottomLeftRadius? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-bottom-right-radius.asp */
-  borderBottomRightRadius? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-bottom_style.asp */
-  borderBottomStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-bottom_width.asp */
-  borderBottomWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-collapse.asp */
-  borderCollapse? : Combo<'separate'|'collapse'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-color.asp */
-  borderColor? : Combo<CSSColors|'transparent'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image.asp */
-  borderImage? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image-outset.asp */
-  borderImageOutset? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image-repeat.asp */
-  borderImageRepeat? : Combo<'stretch'|'repeat'|'round'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image-slice.asp */
-  borderImageSlice? : Combo<string|number|'fill'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image-source.asp */
-  borderImageSource? : Combo<string|'none'|CSSGeneral|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-image-width.asp */
-  borderImageWidth? : Combo<string|number|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-left.asp */
-  borderLeft? : Combo<string|CSSGeneral|'5px solid red'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-left_color.asp */
-  borderLeftColor? : Combo<CSSColors|'transparent'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-left_style.asp */
-  borderLeftStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-left_width.asp */
-  borderLeftWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-radius.asp */
-  borderRadius? : Combo<string|CSSGeneral|'25px'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-right.asp */
-  borderRight? : Combo<string|CSSGeneral|'5px solid red'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-right_color.asp */
-  borderRightColor? : Combo<CSSColors|'transparent'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-right_style.asp */
-  borderRightStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-right_width.asp */
-  borderRightWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-spacing.asp */
-  borderSpacing? : Combo<string|CSSGeneral|'15px'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-style.asp */
-  borderStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-top.asp */
-  borderTop? : Combo<string|CSSGeneral|'5px solid red'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-top_color.asp */
-  borderTopColor? : Combo<CSSColors|'transparent'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-top-left-radius.asp */
-  borderTopLeftRadius? : Combo<string|CSSGeneral|'25px'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_border-top-right-radius.asp */
-  borderTopRightRadius? : Combo<string|CSSGeneral|'25px'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-top_style.asp */
-  borderTopStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-top_width.asp */
-  borderTopWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_border-width.asp */
-  borderWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_bottom.asp */
-  bottom? : Combo<string|'auto'|CSSGeneral|'10px'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_box-decoration-break.asp */
-  'box-decoration-break'? : Combo<'slice'|'clone'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_box-shadow.asp */
-  boxShadow? : Combo<string|'inset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_box-sizing.asp */
-  boxSizing? : Combo<'content-box'|'border-box'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_break-after.asp */
-  breakAfter? : Combo<'auto'|'all'|'always'|'avoid'|'avoid-column'|'avoid-page'|'avoid-region'|'column'
-  |'left'|'page'|'recto'|'region'|'right'|'verso'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_break-before.asp */
-  breakBefore? : Combo<'auto'|'all'|'always'|'avoid'|'avoid-column'|'avoid-page'|'avoid-region'|'column'
-  |'left'|'page'|'recto'|'region'|'right'|'verso'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_break-inside.asp */
-  breakInside? : Combo<'auto'|'all'|'always'|'avoid'|'avoid-column'|'avoid-page'|'avoid-region'|'column'
-  |'left'|'page'|'recto'|'region'|'right'|'verso'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_tab_caption-side.asp */
-  captionSide? : Combo<'top'|'bottom'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_caret-color.asp */
-  caretColor? : Combo<CSSColors|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_class_clear.asp */
-  clear? : Combo<'none'|'left'|'right'|'both'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_clip.asp */
-  clip? : Combo<string|'auto'|CSSGeneral|'rect(0px,25px,25px,0px)'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_clip-path.asp */
-  clipPath? : Combo<string|'margin-box'|'border-box'|'padding-box'|'content-box'|'fill-box'
-  |'stroke-box'|'view-box'|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_color.asp */
-  color? : Combo<CSSColors|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-count.asp */
-  columnCount? : Combo<number|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-fill.asp */
-  columnFill? : Combo<'balance'|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-gap.asp */
-  columnGap? : Combo<string|'normal'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-rule.asp */
-  columnRule? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-rule-color.asp */
-  columnRuleColor? : Combo<CSSColors|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-rule-style.asp */
-  columnRuleStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-rule-width.asp */
-  columnRuleWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-span.asp */
-  columnSpan? : Combo<'none'|'all'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_column-width.asp */
-  columnWidth? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_columns.asp */
-  columns? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_gen_content.asp */
-  content? : Combo<'normal'|'none'|'counter'|string|'open-quote'|'close-quote'
-  |'no-open-quote'|'no-close-quote'|CSSGeneral|'attr()'|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_gen_counter-increment.asp */
-  counterIncrement? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_gen_counter-reset.asp */
-  counterReset? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_class_cursor.asp */
-  cursor? : Combo<string|'alias'|'all-scroll'|'auto'|'cell'|'context-menu'|'col-resize'|'copy'|'crosshair'
-  |'default'|'e-resize'|'ew-resize'|'grab'|'grabbing'|'help'|'move'|'n-resize'|'ne-resize'|'nesw-resize'|'ns-resize'
-  |'nw-resize'|'nwse-resize'|'no-drop'|'none'|'not-allowed'|'pointer'|'progress'|'row-resize'|'s-resize'|'se-resize'
-  |'sw-resize'|'text'|'vertical-text'|'w-resize'|'wait'|'zoom-in'|'zoom-out'|CSSGeneral|'url(myCursor.cur),auto'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_direction.asp */
-  direction? : Combo<'ltr'|'rtl'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_class_display.asp */
-  display? : Combo<'inline'|'block'|'contents'|'flex'|'grid'|'inline-block'|'inline-flex'|'inline-grid'
-  |'inline-table'|'list-item'|'run-in'|'table'|'table-caption'|'table-column-group'|'table-header-group'
-  |'table-footer-group'|'table-row-group'|'table-cell'|'table-column'|'table-row'|'none'|CSSGeneral|boolean>,
-
-  /** @see https://www.w3schools.com/cssref/pr_tab_empty-cells.asp */
-  emptyCells? : Combo<'show'|'hide'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_filter.asp */
-  filter? : Combo<string|'none'|CSSGeneral|'blur(px)'|'brightness(%)'|'contrast(%)'
-  |'drop-shadow(h-shadow v-shadow blur spread color)'|'grayscale(%)'|'hue-rotate(deg)'|'invert(%)'|'opacity(%)'
-  |'saturate(%)'|'sepia(%)'|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex.asp */
-  flex? : Combo<0|1|'auto'|CSSGeneral|boolean>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-basis.asp */
-  flexBasis? : Combo<string|number|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-direction.asp */
-  flexDirection? : Combo<'row'|'row-reverse'|'column'|'column-reverse'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-flow.asp */
-  flexFlow? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-grow.asp */
-  flexGrow? : Combo<number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-shrink.asp */
-  flexShrink? : Combo<number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_flex-wrap.asp */
-  flexWrap? : Combo<'nowrap'|'wrap'|'wrap-reverse'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_class_float.asp */
-  float? : Combo<'none'|'left'|'right'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_font.asp */
-  font? : Combo<string|'caption'|'icon'|'menu'|'message-box'|'small-caption'|'status-bar'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_font-family.asp */
-  fontFamily? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_font-feature-settings.asp */
-  fontFeatureSettings? : Combo<string|'normal'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_font-kerning.asp */
-  fontKerning? : Combo<'auto'|'normal'|'none'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_font-size.asp */
-  fontSize? : Combo<string|'medium'|'xx-small'|'x-small'|'small'|'large'|'x-large'|'xx-large'
-  |'smaller'|'larger'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_font-size-adjust.asp */
-  fontSizeAdjust? : Combo<number|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_font-stretch.asp */
-  fontStretch? : Combo<'ultra-condensed'|'extra-condensed'|'condensed'|'semi-condensed'|'normal'
-  |'semi-expanded'|'expanded'|'extra-expanded'|'ultra-expanded'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_font-style.asp */
-  fontStyle? : Combo<'normal'|'italic'|'oblique'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis */
-  fontSynthesis? : Combo<'none'|'weight'|'style'|'weight style'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_font-variant.asp */
-  fontVariant? : Combo<'normal'|'small-caps'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_font-variant-caps.asp */
-  fontVariantCaps? : Combo<'normal'|'small-caps'|'all-small-caps'|'petite-caps'|'all-petite-caps'|'unicase'
-  |'titling-caps'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian */
-  fontVariantEastAsian? : Combo<string|'normal'|'ruby'|'jis78'|'jis83'|'jis90'|'jis04'|'simplified'
-  |'traditional'|'full-width'|'proportional-width'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-ligatures */
-  fontVariantLigatures? : Combo<'normal'|'none'|'common-ligatures'|'no-common-ligatures'
-  |'discretionary-ligatures'|'no-discretionary-ligatures'|'historical-ligatures'|'no-historical-ligatures'
-  |'contextual'|'no-contextual'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric */
-  fontVariantNumeric? : Combo<'normal'|'ordinal'|'slashed-zero'|'lining-nums'|'oldstyle-nums'
-  |'proportional-nums'|'tabular-nums'|'diagonal-fractions'|'stacked-fractions'|'oldstyle-nums stacked-fractions'
-  |CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position */
-  fontVariantPosition? : Combo<'normal'|'sub'|'super'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_font_weight.asp */
-  fontWeight? : Combo<'normal'|'bold'|'bolder'|'lighter'|number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_gap.asp */
-  gap? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid.asp */
-  grid? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-area.asp */
-  gridArea? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-auto-columns.asp */
-  gridAutoColumns? : Combo<string|'auto'|'max-content'|'min-content'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-auto-flow.asp */
-  gridAutoFlow? : Combo<'row'|'column'|'dense'|'row dense'|'column dense'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-auto-rows.asp */
-  gridAutoRows? : Combo<string|'auto'|'max-content'|'min-content'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-column.asp */
-  gridColumn? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-column-end.asp */
-  gridColumnEnd? : Combo<string|number|'auto'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-column-gap.asp */
-  gridColumnGap? : Combo<string|number>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-column-start.asp */
-  gridColumnStart? : Combo<string|number|'auto'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-gap.asp */
-  gridGap? : Combo<string|number>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-row.asp */
-  gridRow? : Combo<string>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-row-end.asp */
-  gridRowEnd? : Combo<string|number|'auto'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-row-gap.asp */
-  gridRowGap? : Combo<string|number>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-row-start.asp */
-  gridRowStart? : Combo<number|'auto'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-template.asp */
-  gridTemplate? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-template-areas.asp */
-  gridTemplateAreas? : Combo<string|'none'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-template-columns.asp */
-  gridTemplateColumns? : Combo<string|'none'|'auto'|'max-content'|'min-content'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_grid-template-rows.asp */
-  gridTemplateRows? : Combo<string|'none'|'auto'|'max-content'|'min-content'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_hanging-punctuation.asp */
-  hangingPunctuation? : Combo<'none'|'first'|'last'|'allow-end'|'force-end'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_height.asp */
-  height? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_hyphens.asp */
-  hyphens? : Combo<'none'|'manual'|'auto'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering */
-  imageRendering? : Combo<'auto'|'crisp-edges'|'pixelated'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_isolation.asp */
-  isolation? : Combo<'auto'|'isolate'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_justify-content.asp */
-  justifyContent? : Combo<'flex-start'|'flex-end'|'center'|'space-between'|'space-around'|'space-evenly'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_left.asp */
-  left? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_letter-spacing.asp */
-  letterSpacing? : Combo<string|'normal'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/line-break */
-  lineBreak? : Combo<'auto'|'loose'|'normal'|'strict'|'anywhere'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_line-height.asp */
-  lineHeight? : Combo<string|'normal'|number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_list-style.asp */
-  listStyle? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_list-style-image.asp */
-  listStyleImage? : Combo<string|'none'|CSSGeneral|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/pr_list-style-position.asp */
-  listStylePosition? : Combo<'inside'|'outside'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_list-style-type.asp */
-  listStyleType? : Combo<'disc'|'armenian'|'circle'|'cjk-ideographic'|'decimal'|'decimal-leading-zero'
-  |'georgian'|'hebrew'|'hiragana'|'hiragana-iroha'|'katakana'|'katakana-iroha'|'lower-alpha'|'lower-greek'
-  |'lower-latin'|'lower-roman'|'none'|'square'|'upper-alpha'|'upper-greek'|'upper-latin'|'upper-roman'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_margin.asp */
-  margin? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_margin-bottom.asp */
-  marginBottom? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_margin-left.asp */
-  marginLeft? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_margin-right.asp */
-  marginRight? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_margin-top.asp */
-  marginTop? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/mask */
-  mask? : Combo<string|'none'|CSSGeneral|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-image.asp */
-  maskImage? : Combo<string|'none'|CSSGeneral|'url()'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-mode.asp */
-  maskMode? : Combo<string|'match-source'|'luminance'|'alpha'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-origin.asp */
-  maskOrigin? : Combo<string
-  |'border-box'|'content-box'|'padding-box'|'margin-box'|'fill-box'|'stroke-box'|'view-box'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-position.asp */
-  maskPosition? : Combo<string|Positions|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-repeat.asp */
-  maskRepeat? : Combo<string|'repeat'|'repeat-x'|'repeat-y'|'space'|'round'|'no-repeat'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_mask-size.asp */
-  maskSize? : Combo<string|'auto'|'contain'|'cover'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type */
-  maskType? : Combo<'luminance'|'alpha'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_max-height.asp */
-  maxHeight? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_max-width.asp */
-  maxWidth? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_min-height.asp */
-  minHeight? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_dim_min-width.asp */
-  minWidth? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_mix-blend-mode.asp */
-  mixBlendMode? : Combo<'normal'|'multiply'|'screen'|'overlay'|'darken'|'lighten'|'color-dodge'|'color-burn'
-  |'difference'|'exclusion'|'hue'|'saturation'|'color'|'luminosity'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_object-fit.asp */
-  objectFit? : Combo<'fill'|'contain'|'cover'|'scale-down'|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_object-position.asp */
-  objectPosition? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_opacity.asp */
-  opacity? : Combo<number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_order.asp */
-  order? : Combo<number|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/orphans */
-  orphans? : Combo<number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_outline.asp */
-  outline? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_outline-color.asp */
-  outlineColor? : Combo<CSSColors|'invert'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_outline-offset.asp */
-  outlineOffset? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_outline-style.asp */
-  outlineStyle? : Combo<'none'|'hidden'|'dotted'|'dashed'|'solid'|'double'|'groove'|'ridge'
-  |'inset'|'outset'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_outline-width.asp */
-  outlineWidth? : Combo<string|'medium'|'thin'|'thick'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_overflow.asp */
-  overflow? : Combo<'visible'|'hidden'|'scroll'|'auto'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap */
-  overflowWrap? : Combo<'normal'|'break-word'|'anywhere'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_overflow-x.asp */
-  overflowX? : Combo<'visible'|'hidden'|'scroll'|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_overflow-y.asp */
-  overflowY? : Combo<'visible'|'hidden'|'scroll'|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_padding.asp */
-  padding? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_padding-bottom.asp */
-  paddingBottom? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_padding-left.asp */
-  paddingLeft? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_padding-right.asp */
-  paddingRight? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_padding-top.asp */
-  paddingTop? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_print_pageba.asp */
-  pageBreakAfter? : Combo<'auto'|'always'|'avoid'|'left'|'right'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_print_pagebb.asp */
-  pageBreakBefore? : Combo<'auto'|'always'|'avoid'|'left'|'right'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_print_pagebi.asp */
-  pageBreakInside? : Combo<'auto'|'avoid'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_perspective.asp */
-  perspective? : Combo<string|'none'>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_perspective-origin.asp */
-  perspectiveOrigin? : Combo<string
-  |'top left'|'top'|'top right'
-  |'left'|'center'|'right'
-  |'bottom left'|'bottom'|'bottom right'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_pointer-events.asp */
-  pointerEvents? : Combo<'auto'|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_class_position.asp */
-  position? : Combo<'static'|'absolute'|'fixed'|'relative'|'sticky'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_gen_quotes.asp */
-  quotes? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_resize.asp */
-  resize? : Combo<'none'|'both'|'horizontal'|'vertical'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_right.asp */
-  right? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_row-gap.asp */
-  rowGap? : Combo<string|'normal'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_scroll-behavior.asp */
-  scrollBehavior? : Combo<'auto'|'smooth'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_tab-size.asp */
-  tabSize? : Combo<number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_tab_table-layout.asp */
-  tableLayout? : Combo<'auto'|'fixed'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_text-align.asp */
-  textAlign? : Combo<'left'|'right'|'center'|'justify'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-align-last.asp */
-  textAlignLast? : Combo<'auto'|'left'|'right'|'center'|'justify'|'start'|'end'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-combine-upright */
-  textCombineUpright? : Combo<string|'none'|'all'|'digits'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_text-decoration.asp */
-  textDecoration? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-decoration-color.asp */
-  textDecorationColor? : Combo<CSSColors|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-decoration-line.asp */
-  textDecorationLine? : Combo<'none'|'underline'|'overline'|'line-through'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-decoration-style.asp */
-  textDecorationStyle? : Combo<'solid'|'double'|'dotted'|'dashed'|'wavy'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_text-indent.asp */
-  textIndent? : Combo<string|number|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-justify.asp */
-  textJustify? : Combo<'auto'|'inter-word'|'inter-character'|'none'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation */
-  textOrientation? : Combo<'mixed'|'upright'|'sideways-right'|'sideways'|'use-glyph-orientation'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-overflow.asp */
-  textOverflow? : Combo<string|'clip'|'ellipsis'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_text-shadow.asp */
-  textShadow? : Combo<string|CSSColors|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_text_text-transform.asp */
-  textTransform? : Combo<'none'|'capitalize'|'uppercase'|'lowercase'|CSSGeneral>,
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position */
-  textUnderlinePosition? : Combo<'auto'|'from-font'|'under'|'left'|'right'|'under left'|'right under'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/pr_pos_top.asp */
-  top? : Combo<string|'auto'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transform.asp */
-  transform? : Combo<string|'none'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transform-origin.asp */
-  transformOrigin? : Combo<string
-  |'top left'|'top'|'top right'
-  |'left'|'center'|'right'
-  |'bottom left'|'bottom'|'bottom right'
-  |CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transform-style.asp */
-  transformStyle? : Combo<'flat'|'preserve-3d'|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transition.asp */
-  transition? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transition-delay.asp */
-  transitionDelay? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transition-duration.asp */
-  transitionDuration? : Combo<string|CSSGeneral>,
-
-  /** @see https://www.w3schools.com/cssref/css3_pr_transition-property.asp */
-  transitionProperty? : Combo<string|'none'|'all'|CSSGeneral>,
+  /**
+   * Sets the accent color for user-interface controls generated by
+   * some elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation)
+   */
+  accentColor?: Bindable<string>,
+
+  /**
+   * This property sets the distribution of space between and around content
+   * items along a flexbox's cross axis, or a grid or block-level element's
+   * block axis.
+   *
+   * - `normal`: The items are packed in their default position as if no
+   * `align-content` value was set.
+   *
+   * - `start`: The items are packed flush to each other against the start
+   * edge of the alignment container in the cross axis.
+   *
+   * - `center`: The items are packed flush to each other in the center
+   * of the alignment container along the cross axis.
+   *
+   * - `end`: The items are packed flush to each other against the end
+   * edge of the alignment container in the cross axis.
+   *
+   * - `flex-start`: The items are packed flush to each other against
+   * the edge of the alignment container depending on the flex
+   * container's cross-start side. This only applies to flex
+   * layout items. For items that are not children of a flex
+   * container, this value is treated like `start`.
+   *
+   * - `flex-end`: The items are packed flush to each other against
+   * the edge of the alignment container depending on the flex
+   * container's cross-end side. This only applies to flex
+   * layout items. For items that are not children of a flex
+   * container, this value is treated like `end`.
+   *
+   * - `baseline`, `first baseline`, `last baseline`: Specifies participation
+   * in first- or last-baseline alignment: aligns the alignment baseline of
+   * the box's first or last baseline set with the corresponding baseline
+   * in the shared first or last baseline set of all the boxes in its
+   * baseline-sharing group.
+   * The fallback alignment for `first baseline` is `start`, the one for
+   * `last baseline` is `end`.
+   *
+   * - `space-between`: The items are evenly distributed within the alignment
+   * container along the cross axis. The spacing between each pair of adjacent
+   * items is the same. The first item is flush with the start edge of
+   * the alignment container in the cross axis, and the last item is
+   * flush with the end edge of the alignment container in the cross axis.
+   *
+   * - `space-around`: The items are evenly distributed within the alignment
+   * container along the cross axis. The spacing between each pair of adjacent
+   * items is the same. The empty space before the first and after the last
+   * item equals half of the space between each pair of adjacent items.
+   *
+   * - `space-evenly`: The items are evenly distributed within the alignment
+   * container along the cross axis. The spacing between each pair of adjacent
+   * items, the start edge and the first item, and the end edge and the last
+   * item, are all exactly the same.
+   *
+   * - `stretch`: If the combined size of the items along the cross axis is
+   * less than the size of the alignment container, any `auto`-sized items have
+   * their size increased equally (not proportionally), while still respecting
+   * the constraints imposed by `max-height`/`max-width` (or equivalent
+   * functionality), so that the combined size exactly fills
+   * the alignment container along the cross axis.
+   *
+   * - `safe`: Used alongside an alignment keyword. If the chosen keyword
+   * means that the item overflows the alignment container causing data
+   * loss, the item is instead aligned as if the alignment mode were `start`.
+   *
+   * - `unsafe`: Used alongside an alignment keyword. Regardless of
+   * the relative sizes of the item and alignment container and
+   * whether overflow which causes data loss might happen,
+   * the given alignment value is honored.
+   *
+   * > **_NOTE:_**
+   * The `<content-distribution>` values (`space-between`, `space-around`,
+   * `space-evenly`, and `stretch`) have no effect in block layout as all
+   * the content in that block is treated as a single alignment-subject
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-content)
+   */
+  alignContent?: Bindable<
+    'normal'
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'baseline'
+    | 'first baseline'
+    | 'last baseline'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+    | 'stretch'
+    | 'safe'
+    | 'unsafe'
+    | GlobalValues
+  >,
+
+  /**
+   * The CSS `align-items` property sets the `align-self` value on all direct
+   * children as a group. In flexbox, it controls the alignment of items on
+   * the cross axis. In grid layout, it controls the alignment of items on
+   * the block axis within their grid areas.
+   *
+   * - `normal`: The effect of this keyword is dependent of the layout mode
+   * we are in:
+   *
+   *   - In absolutely-positioned layouts, the keyword behaves like `start`
+   *   on replaced absolutely-positioned boxes, and as `stretch` on all
+   *   other absolutely-positioned boxes.
+   *
+   *   - In static position of absolutely-positioned layouts, the keyword
+   *   behaves as `stretch`.
+   *
+   *   - For flex items, the keyword behaves as `stretch`.
+   *
+   *   - For grid items, this keyword leads to a behavior similar to the
+   *   one of `stretch`, except for boxes with an aspect ratio or an intrinsic
+   *   size where it behaves like `start`.
+   *
+   *   - The property doesn't apply to block-level boxes, and to table cells.
+   *
+   * - `center`: The flex items' margin boxes are centered within the line
+   * on the cross-axis. If the cross-size of an item is larger than the
+   * flex container, it will overflow equally in both directions.
+   *
+   * - `start`: The items are packed flush to each other toward the start
+   * edge of the alignment container in the appropriate axis.
+   *
+   * - `end`: The items are packed flush to each other toward the end
+   * edge of the alignment container in the appropriate axis.
+   *
+   * - `self-start`: The items are packed flush to the edge of the alignment
+   * container's start side of the item, in the appropriate axis.
+   *
+   * - `self-end`: The items are packed flush to the edge of the alignment
+   * container's end side of the item, in the appropriate axis.
+   *
+   * - `baseline`, `first baseline`, `last baseline`: All flex items are
+   * aligned such that their flex container baselines align. The item
+   * with the largest distance between its cross-start margin edge
+   * and its baseline is flushed with the cross-start edge of the line.
+   *
+   * - `stretch`: If the items are smaller than the alignment container,
+   * auto-sized items will be equally enlarged to fill the container,
+   * respecting the items' width and height limits.
+   *
+   * - `anchor-center`: In the case of anchor-positioned elements,
+   * aligns the items to the center of the associated anchor
+   * element in the block direction. See Centering on
+   * the anchor using anchor-center.
+   *
+   * - `safe`: Used alongside an alignment keyword. If the chosen
+   * keyword means that the item overflows the alignment container
+   * causing data loss, the item is instead aligned as if
+   * the alignment mode were start.
+   *
+   * - `unsafe`: Used alongside an alignment keyword. Regardless of
+   * the relative sizes of the item and alignment container and
+   * whether overflow which causes data loss might happen,
+   * the given alignment value is honored.
+   *
+   * There are also two values that were defined for flexbox,
+   * as they are base on flex model axes concepts, that work
+   * in grid layouts as well:
+   *
+   * - `flex-start`: Used in flex layout only, aligns the flex items
+   * flush against the flex container's main-start or cross-start side.
+   * When used outside of a flex formatting context, this value behaves
+   * as `start`.
+   *
+   * - `flex-end`: Used in flex layout only, aligns the flex items flush
+   * against the flex container's main-end or cross-end side. When used
+   * outside of a flex formatting context, this value behaves as `end`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-items)
+   */
+  alignItems?: Bindable<
+    'normal'
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'self-start'
+    | 'self-end'
+    | 'baseline'
+    | 'first baseline'
+    | 'last baseline'
+    | 'stretch'
+    | 'anchor-center'
+    | 'safe'
+    | 'unsafe'
+    | 'flex-start'
+    | 'flex-end'
+    | GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-self)
+   */
+  alignSelf?: Bindable<
+    'auto'
+    | 'normal'
+    | 'center'
+    | 'self-start'
+    | 'self-end'
+    | 'baseline'
+    | 'first baseline'
+    | 'last baseline'
+    | 'stretch'
+    | 'anchor-center'
+    | 'safe'
+    | 'unsafe'
+    | 'flex-start'
+    | 'flex-end'
+    | GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/alignment-baseline)
+   */
+  alignmentBaseline?: Bindable<
+    'baseline'
+    | 'alphabetic'
+    | 'central'
+    | 'ideographic'
+    | 'mathematical'
+    | 'middle'
+    | 'text-bottom'
+    | 'text-top'
+    | GlobalValues
+  >
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/all)
+   */
+  all?: Bindable<GlobalValues>,
+
+  /**
+   * The `animation` shorthand CSS property applies an animation between styles.
+   * It is a shorthand for `animation-name`, `animation-duration`,
+   * `animation-timing-function`, `animation-delay`,
+   * `animation-iteration-count`, `animation-direction`,
+   * `animation-fill-mode`, `animation-play-state`, and `animation-timeline`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation)
+   */
+  animation?: Bindable<string>,
+
+  /**
+   * Specifies the composite operation to use when multiple animations affect
+   * the same property simultaneously.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-composition)
+   */
+  animationComposition?: Bindable<
+    'replace'
+    | 'add'
+    | 'accumulate'
+    | GlobalValues
+  >,
+
+  /**
+   * Specifies the amount of time to wait from applying the animation to
+   * an element before beginning to perform the animation. The animation
+   * can start later, immediately from its beginning, or immediately and
+   * partway through the animation.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-delay)
+   */
+  animationDelay?: Bindable<'time'|GlobalValues>,
+
+  /**
+   * Sets whether an animation should play forward, backward, or alternate back
+   * and forth between playing the sequence forward and backward.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-direction)
+   */
+  animationDirection?: Bindable<
+    'normal'
+    | 'reverse'
+    | 'alternate'
+    | 'alternate-reverse'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets the length of time that an animation takes to complete one cycle.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-duration)
+   */
+  animationDuration?: Bindable<'auto'|'time'|GlobalValues>,
+
+  /**
+   * Sets how a CSS animation applies styles to its target before
+   * and after its execution.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode)
+   */
+  animationFillMode?: Bindable<
+    'none'
+    | 'forwards'
+    | 'backwards'
+    | 'both'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets the number of times an animation sequence should be played
+   * before stopping.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count)
+   */
+  animationIterationCount?: Bindable<number|'infinite'|GlobalValues>,
+
+  /**
+   * Specifies the names of one or more `@keyframes` at-rules that describe
+   * the animation to apply to an element. Multiple `@keyframe` at-rules are
+   * specified as a comma-separated list of names. If the specified name does
+   * not match any `@keyframe` at-rule, no properties are animated.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-name)
+   */
+  animationName?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets whether an animation is running or paused.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-play-state)
+   */
+  animationPlayState?: Bindable<'running'|'paused'|GlobalValues>,
+
+  /**
+   * Used to set the start and end of an animation's attachment range along
+   * its timeline, i.e. where along the timeline an animation will start
+   * and end.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-range)
+   */
+  animationRange?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * Used to set the end of an animation's attachment range along its
+   * timeline, i.e. where along the timeline an animation will end.
+   *
+   * The `animation-range-end` and `animation-range-start` properties
+   * can also be set using the animation-range shorthand property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-range-end)
+   */
+  animationRangeEnd?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * Used to set the start of an animation's attachment range along its
+   * timeline, i.e. where along the timeline an animation will start.
+   *
+   * The `animation-range-start` and `animation-range-end` properties
+   * can also be set using the animation-range shorthand property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-range-start)
+   */
+  animationRangeStart?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * Specifies the timeline that is used to control the progress
+   * of a CSS animation.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-timeline)
+   */
+  animationTimeline?: Bindable<
+    string
+    | 'none'
+    | 'auto'
+    | 'scroll()'
+    | 'view()'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets how an animation progresses through the duration of each cycle.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-timing-function)
+   */
+  animationTimingFunction?: Bindable<
+    string
+    | 'linear'
+    | 'ease'
+    | 'ease-in'
+    | 'ease-out'
+    | 'ease-in-out'
+    | 'step-start'
+    | 'step-end'
+    | 'cubic-bezier()'
+    | 'linear()'
+    | 'steps()'
+    | GlobalValues
+  >,
+
+  /**
+   * Used to display UI elements with platform-specific styling,
+   * based on the operating system's theme.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/appearance)
+   */
+  appearance?: Bindable<
+    'none'
+    | 'auto'
+    | 'menulist-button'
+    | 'textfield'
+    | 'button'
+    | 'checkbox'
+    | 'listbox'
+    | 'menulist'
+    | 'meter'
+    | 'progress-bar'
+    | 'push-button'
+    | 'radio'
+    | 'searchfield'
+    | 'slider-horizontal'
+    | 'square-button'
+    | 'textarea'
+  >,
+
+  /**
+   * Allows you to define the desired width-to-height ratio of an element's box.
+   * This means that even if the parent container or viewport size changes,
+   * the browser will adjust the element's dimensions to maintain the specified
+   * width-to-height ratio. The specified aspect ratio is used in
+   * the calculation of auto sizes and some other layout functions.
+   *
+   * At least one of the box's sizes needs to be automatic in order for
+   * `aspect-ratio` to have any effect. If neither the width nor height
+   * is an automatic size, then the provided aspect ratio has no effect
+   * on the box's preferred sizes.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/aspect-ratio)
+   */
+  aspectRatio?: Bindable<
+    string
+    | 'auto'
+    | GlobalValues
+  >,
+
+  /**
+   * Lets you apply graphical effects such as blurring or color shifting to
+   * the area behind an element. Because it applies to everything *behind*
+   * the element, to see the effect the element or its background needs to
+   * be transparent or partially transparent.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backdrop-filter)
+   */
+  backdropFilter?: Bindable<
+    string
+    | 'none'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets whether the back face of an element is visible when turned towards
+   * the user.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backface-visibility)
+   */
+  backfaceVisibility?: Bindable<boolean|'visible'|'hidden'|GlobalValues>,
+
+  /**
+   * Sets all background style properties at once, such as color, image,
+   * origin and size, or repeat method. Component properties not set in
+   * the `background` shorthand property value declaration are set to
+   * their default values.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background)
+   */
+  background?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets whether a background image's position is fixed within the viewport,
+   * or scrolls with its containing block.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-attachment)
+   */
+  backgroundAttachment?: Bindable<'fixed'|'local'|'scroll'|GlobalValues>,
+
+  /**
+   * Sets how an element's background images should blend with each other
+   * and with the element's background color.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-blend-mode)
+   */
+  backgroundBlendMode?: Bindable<
+    'normal'
+    | 'multiply'
+    | 'screen'
+    | 'overlay'
+    | 'darken'
+    | 'lighten'
+    | 'color-dodge'
+    | 'saturation'
+    | 'color'
+    | 'luminosity'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets whether an element's background extends underneath its border box,
+   * padding box, or content box.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-clip)
+   */
+  backgroundClip?: Bindable<
+    'border-box'
+    | 'padding-box'
+    | 'content-box'
+    | 'text'
+    | 'border-area'
+    | GlobalValues
+  >,
+
+  /**
+   * Sets the background color of an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-color)
+   */
+  backgroundColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Sets one or more background images on an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-image)
+   */
+  backgroundImage?: Bindable<string|'none'|'url()'|GlobalValues>,
+
+  /**
+   * Sets the background's origin: from the border start, inside the border,
+   * or inside the padding.
+   *
+   * - `border-box`: The background is positioned relative to the border box.
+   *
+   * - `padding-box`: The background is positioned relative to the padding box.
+   *
+   * - `content-box`: The background is positioned relative to the content box.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-origin)
+   */
+  backgroundOrigin?: Bindable<
+    string
+    |'border-box'
+    |'content-box'
+    |'padding-box'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the initial position for each background image.
+   * The position is relative to the position layer set by `background-origin`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position)
+   */
+  backgroundPosition?: Bindable<string|Positions|GlobalValues>,
+
+  /**
+   * Sets the initial horizontal position for each background image.
+   * The position is relative to the position layer set by `background-origin`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position-x)
+   */
+  backgroundPositionX?: Bindable<string|Positions|GlobalValues>,
+
+  /**
+   * Sets the initial vertical position for each background image.
+   * The position is relative to the position layer set by `background-origin`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position-y)
+   */
+  backgroundPositionY?: Bindable<string|Positions|GlobalValues>,
+
+  /**
+   * Sets how background images are repeated. A background image can be repeated
+   * along the horizontal and vertical axes, or not repeated at all.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-repeat)
+   */
+  backgroundRepeat?: Bindable<
+    'repeat'
+    |'repeat-x'
+    |'repeat-y'
+    |'space'
+    |'round'
+    |'no-repeat'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the size of the element's background image. The image can be left to
+   * its natural size, stretched, or constrained to fit the available space.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-size)
+   */
+  backgroundSize?: Bindable<string|'auto'|'cover'|'contain'|GlobalValues>,
+
+  /**
+   * Defines the horizontal or vertical size of an element's block, depending
+   * on its writing mode. It corresponds to either the `width` or the `height`
+   * property, depending on the value of writing-mode.
+   *
+   * If the writing mode is vertically oriented, the value of `block-size`
+   * relates to the width of the element; otherwise, it relates to the height
+   * of the element. A related property is `inline-size`, which defines the
+   * other dimension of the element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/block-size)
+   */
+  blockSize?: Bindable<
+    string
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets an element's border. It sets the values of `border-width`,
+   * `border-style`, and `border-color`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border)
+   */
+  border?: Bindable<string|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical block border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block)
+   */
+  borderBlock?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical block borders of an element, which maps
+   * to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color` and `border-bottom-color`,
+   * or `border-right-color` and `border-left-color` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-color)
+   */
+  borderBlockColor?: Bindable<string|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical block-end border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end)
+   */
+  borderBlockEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical block-end border of an element, which maps
+   * to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color`, `border-right-color`,
+   * `border-bottom-color`, or `border-left-color` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-color)
+   */
+  borderBlockEndColor?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the style of the logical block-end border of an element, which maps
+   * to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style`, `border-right-style`,
+   * `border-bottom-style`, or `border-left-style` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-style)
+   */
+  borderBlockEndStyle?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the width of the logical block-end border of an element, which maps
+   * to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width`, `border-right-width`,
+   * `border-bottom-width`, or `border-left-width` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-width)
+   */
+  borderBlockEndWidth?: Bindable<string|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical block-start border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start)
+   */
+  borderBlockStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical block-start border of an element, which
+   * maps to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color`, `border-right-color`,
+   * `border-bottom-color`, or `border-left-color` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-color)
+   */
+  borderBlockStartColor?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the style of the logical block-start border of an element, which
+   * maps to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style`, `border-right-style`,
+   * `border-bottom-style`, or `border-left-style` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-style)
+   */
+  borderBlockStartStyle?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the width of the logical block-start border of an element, which
+   * maps to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width`, `border-right-width`,
+   * `border-bottom-width`, or `border-left-width` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-width)
+   */
+  borderBlockStartWidth?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the style of the logical block borders of an element, which maps
+   * to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style` and `border-bottom-style`,
+   * or `border-left-style` and `border-right-style` properties depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-style)
+   */
+  borderBlockStyle?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the width of the logical block borders of an element, which maps
+   * to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width` and `border-bottom-width`,
+   * or `border-left-width`, and `border-right-width` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-width)
+   */
+  borderBlockWidth?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets an element's bottom border.
+   * It sets the values of `border-bottom-width`, `border-bottom-style`
+   * and `border-bottom-color`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom)
+   */
+  borderBottom?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the color of an element's bottom border. It can also be set with
+   * the shorthand CSS properties `border-color` or `border-bottom`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-color)
+   */
+  borderBottomColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Rounds the bottom-left corner of an element by specifying the radius
+   * (or the radius of the semi-major and semi-minor axes) of the ellipse
+   * defining the curvature of the corner.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius)
+   */
+  borderBottomLeftRadius?: Bindable<string|GlobalValues>,
+
+  /**
+   * Rounds the bottom-right corner of an element by specifying the radius
+   * (or the radius of the semi-major and semi-minor axes) of the ellipse
+   * defining the curvature of the corner.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius)
+   */
+  borderBottomRightRadius?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the line style of an element's bottom border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-style)
+   */
+  borderBottomStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the width of the bottom border of an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-width)
+   */
+  borderBottomWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Sets whether cells inside a <table> have shared or separate borders.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-collapse)
+   */
+  borderCollapse?: Bindable<'separate'|'collapse'|GlobalValues>,
+
+  /**
+   * Sets the color of an element's border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-color)
+   */
+  borderColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Defines a logical border radius on an element, which maps to a physical
+   * border radius that depends on the element's `writing-mode`, `direction`,
+   * and `text-orientation`. This is useful when building styles to work
+   * regardless of the text orientation and writing mode.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius)
+   */
+  borderEndEndRadius?: Bindable<'string'|GlobalValues>,
+
+  /**
+   * Defines a logical border radius on an element, which maps to a physical
+   * border radius depending on the element's `writing-mode`, `direction`,
+   * and `text-orientation`. This is useful when building styles to work
+   * regardless of the text orientation and writing mode.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius)
+   */
+  borderEndStartRadius?: Bindable<'string'|GlobalValues>,
+
+  /**
+   * Draws an image around a given element. It replaces the element's
+   * regular border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image)
+   */
+  borderImage?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the distance by which an element's border image is set out from
+   * its border box.
+   *
+   * The parts of the border image that are rendered outside the element's
+   * border box with `border-image-outset` do not trigger overflow
+   * scrollbars and don't capture mouse events.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-outset)
+   */
+  borderImageOutset?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines how the edge regions and middle region of a source image are
+   * adjusted to fit the dimensions of an element's border image.
+   * The middle region can be displayed by using the keyword "fill" in
+   * the `border-image-slice` property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-repeat)
+   */
+  borderImageRepeat?: Bindable<
+    'stretch' |'repeat' |'round'|'space'|GlobalValues
+  >,
+
+  /**
+   * Divides the image specified by `border-image-source` into regions.
+   * These regions form the components of an element's border image.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-slice)
+   */
+  borderImageSlice?: Bindable<string|number|'fill'|GlobalValues>,
+
+  /**
+   * Sets the source image used to create an element's border image.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-source)
+   */
+  borderImageSource?: Bindable<string|'none'|'url()'|GlobalValues>,
+
+  /**
+   * Sets the width of an element's border image.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-width)
+   */
+  borderImageWidth?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical inline border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline)
+   */
+  borderInline?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical inline borders of an element, which maps
+   * to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color` and `border-bottom-color`,
+   * or `border-right-color` and `border-left-color` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-color)
+   */
+  borderInlineColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical inline-end border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end)
+   */
+  borderInlineEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical inline-end border of an element, which
+   * maps to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color`, `border-right-color`,
+   * `border-bottom-color`, or `border-left-color` property depending
+   * on the values defined for `writing-mode`, direction,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color)
+   */
+  borderInlineEndColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Defines the style of the logical inline-end border of an element, which
+   * maps to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style`, `border-right-style`,
+   * `border-bottom-style`, or `border-left-style` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style)
+   */
+  borderInlineEndStyle?: Bindable<'dashed'|'dotted'|'groove'|GlobalValues>,
+
+  /**
+   * Defines the width of the logical inline-end border of an element, which
+   * maps to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width`, `border-right-width`,
+   * `border-bottom-width`, or `border-left-width` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width)
+   */
+  borderInlineEndWidth?: Bindable<string|'thick'|GlobalValues>,
+
+  /**
+   * A shorthand property for setting the individual logical inline-start border
+   * property values in a single place in the style sheet.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start)
+   */
+  borderInlineStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the color of the logical inline-start border of an element, which
+   * maps to a physical border color depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-color`, `border-right-color`,
+   * `border-bottom-color`, or `border-left-color` property depending
+   * on the values defined for `writing-mode`, direction,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color)
+   */
+  borderInlineStartColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Defines the style of the logical inline-start border of an element, which
+   * maps to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style`, `border-right-style`,
+   * `border-bottom-style`, or `border-left-style` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style)
+   */
+  borderInlineStartStyle?: Bindable<'dashed'|'dotted'|'groove'|GlobalValues>,
+
+  /**
+   * Defines the width of the logical inline-start border of an element, which
+   * maps to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width`, `border-right-width`,
+   * `border-bottom-width`, or `border-left-width` property depending
+   * on the values defined for `writing-mode`, `direction`,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width)
+   */
+  borderInlineStartWidth?: Bindable<string|'thick'|GlobalValues>,
+
+  /**
+   * Defines the style of the logical inline borders of an element, which maps
+   * to a physical border style depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-style` and `border-bottom-style`,
+   * or `border-left-style` and `border-right-style` properties depending
+   * on the values defined for `writing-mode`, direction,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-style)
+   */
+  borderInlineStyle?: Bindable<'dashed'|'dotted'|'groove'|GlobalValues>,
+
+  /**
+   * Defines the width of the logical inline borders of an element, which maps
+   * to a physical border width depending on the element's writing mode,
+   * directionality, and text orientation.
+   * It corresponds to the `border-top-width` and `border-bottom-width`,
+   * or `border-left-width`, and `border-right-width` property depending
+   * on the values defined for `writing-mode`, direction,
+   * and `text-orientation`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-width)
+   */
+  borderInlineWidth?: Bindable<string|'thick'|GlobalValues>,
+
+  /**
+   * Sets all the properties of an element's left border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left)
+   */
+  borderLeft?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the color of an element's left border. It can also be set with
+   * the shorthand CSS properties `border-color` or `border-left`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-color)
+   */
+  borderLeftColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Sets the line style of an element's left border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-style)
+   */
+  borderLeftStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the width of the left border of an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-width)
+   */
+  borderLeftWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Rounds the corners of an element's outer border edge. You can set a single
+   * radius to make circular corners, or two radii to make elliptical corners.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-radius)
+   */
+  borderRadius?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets all the properties of an element's right border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right)
+   */
+  borderRight?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the color of an element's right border. It can also be set with
+   * the shorthand CSS properties `border-color` or `border-right`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-color)
+   */
+  borderRightColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Sets the line style of an element's right border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-style)
+   */
+  borderRightStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the width of the right border of an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-width)
+   */
+  borderRightWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Sets the distance between the borders of adjacent cells in a `<table>`.
+   * This property applies only when `border-collapse` is separate.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-spacing)
+   */
+  borderSpacing?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines a logical border radius on an element, which maps to a physical
+   * border radius depending on the element's `writing-mode`, `direction`,
+   * and `text-orientation`. This is useful when building styles to work
+   * regardless of the text orientation and writing mode.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius)
+   */
+  borderStartEndRadius?: Bindable<'string'|GlobalValues>,
+
+  /**
+   * Defines a logical border radius on an element, which maps to a physical
+   * border radius that depends on the element's `writing-mode`, `direction`,
+   * and `text-orientation`. This is useful when building styles to work
+   * regardless of the text orientation and writing mode.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius)
+   */
+  borderStartStartRadius?: Bindable<'string'|GlobalValues>,
+
+  /**
+   * Sets the line style for all four sides of an element's border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-style)
+   */
+  borderStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets all the properties of an element's top border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top)
+   */
+  borderTop?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the color of an element's top border. It can also be set with
+   * the shorthand CSS properties `border-color` or `border-top`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-color)
+   */
+  borderTopColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Rounds the top-left corner of an element by specifying the radius
+   * (or the radius of the semi-major and semi-minor axes) of
+   * the ellipse defining the curvature of the corner.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius)
+   */
+  borderTopLeftRadius?: Bindable<string|GlobalValues>,
+
+  /**
+   * Rounds the top-right corner of an element by specifying the radius
+   * (or the radius of the semi-major and semi-minor axes) of
+   * the ellipse defining the curvature of the corner.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius)
+   */
+  borderTopRightRadius?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the line style of an element's top border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-style)
+   */
+  borderTopStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the width of the top border of an element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-width)
+   */
+  borderTopWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Sets the width of an element's border.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-width)
+   */
+  borderWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Participates in setting the vertical position of a positioned element.
+   * This inset property has no effect on non-positioned elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/bottom)
+   */
+  bottom?: Bindable<
+    string
+    |'auto'
+    |'anchor()'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * Specifies how an element's fragments should be rendered when broken
+   * across multiple lines, columns, or pages.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/bottom)
+   */
+  boxDecorationBreak?: Bindable<'slice'|'clone'|GlobalValues>,
+
+  /**
+   * Adds shadow effects around an element's frame. You can set multiple
+   * effects separated by commas. A box shadow is described by X and Y
+   * offsets relative to the element, blur and spread radius, and color.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-shadow)
+   */
+  boxShadow?: Bindable<string|'inset'|GlobalValues>,
+
+  /**
+   * Sets how the total width and height of an element is calculated.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-sizing)
+   */
+  boxSizing?: Bindable<'content-box'|'border-box'|GlobalValues>,
+
+  /**
+   * Sets how page, column, or region breaks should behave after
+   * a generated box. If there is no generated box, the property
+   * is ignored.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-after)
+   */
+  breakAfter?: Bindable<
+    'auto'
+    |'avoid'
+    |'always'
+    |'all'
+    |'avoid-page'
+    |'page'
+    |'left'
+    |'right'
+    |'recto'
+    |'verso'
+    |'avoid-column'
+    |'column'
+    |'region'
+    |'avoid-region'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets how page, column, or region breaks should behave before
+   * a generated box. If there is no generated box, the property
+   * is ignored.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-before)
+   */
+  breakBefore?: Bindable<
+    'auto'
+    |'avoid'
+    |'always'
+    |'all'
+    |'avoid-page'
+    |'page'
+    |'left'
+    |'right'
+    |'recto'
+    |'verso'
+    |'avoid-column'
+    |'column'
+    |'region'
+    |'avoid-region'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets how page, column, or region breaks should behave inside
+   * a generated box. If there is no generated box, the property
+   * is ignored.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-inside)
+   */
+  breakInside?: Bindable<
+    'auto'
+    |'avoid'
+    |'avoid-page'
+    |'avoid-column'
+    |'avoid-region'
+    |GlobalValues
+  >,
+
+  /**
+   * Puts the content of a table's `<caption>` on the specified side.
+   * The values are relative to the writing-mode of the table.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/caption-side)
+   */
+  captionSide?: Bindable<'top'|'bottom'|GlobalValues>,
+
+  /**
+   * Sets the color of the insertion caret, the visible marker where the next
+   * character typed will be inserted. This is sometimes referred to as
+   * the text input cursor. The caret appears in elements such as `<input>`
+   * or those with the `contentEditable` attribute. The caret is typically
+   * a thin vertical line that flashes to help make it more noticeable.
+   * By default, it is black, but its color can be altered with this property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/caret-color)
+   */
+  caretColor?: Bindable<'auto'|CSSColors|GlobalValues>,
+
+  /**
+   * Sets whether an element must be moved below (cleared) floating elements
+   * that precede it. The `clear` property applies to floating and
+   * non-floating elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clear)
+   */
+  clear?: Bindable<
+    'none'|'left'|'right'|'both'|'inline-start'|'inline-end'|GlobalValues
+  >,
+
+  /**
+   * Creates a clipping region that sets what part of an element should be
+   * shown. Parts that are inside the region are shown, while those outside
+   * are hidden.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clip-path)
+   */
+  clipPath?: Bindable<
+    string
+    |'none'
+    |'url()'
+    |'margin-box'
+    |'border-box'
+    |'padding-box'
+    |'content-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |GlobalValues
+  >,
+
+  /**
+   * Defines how to determine which pixels in a mask's box are inside
+   * the clipping shape defined by a `clip-path`, and which are outside,
+   * when parts of the path overlap other parts. Specifically, it chooses
+   * between the "non-zero" and "even-odd" methods of determining inclusion.
+   * `clip-rule` can be applied to all SVG elements, but only has an effect on
+   * those which are part of a clipping path. CSS values of the `clip-rule`
+   * property can override SVG values of the `clip-rule` attribute.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clip-rule)
+   */
+  clipRule?: Bindable<
+    string
+    |'none'
+    |'url()'
+    |'margin-box'
+    |'border-box'
+    |'padding-box'
+    |'content-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the foreground color value of an element's text and text decorations,
+   * and sets the `currentColor` value. `currentColor` may be used as
+   * an indirect value on other properties and is the default for other
+   * color properties, such as `border-color`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color)
+   */
+  color?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Used in SVG to specify which color space to use for `<linearGradient>`
+   * and `<radialGradient>` SVG elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color-interpolation)
+   */
+  colorInterpolation?: Bindable<
+    'auto'
+    | 'sRGB'
+    | 'linearRGB'
+  >,
+
+  /**
+   * Specifies the color space for imaging operations performed via SVG filter
+   * effects. If explicitly declared, the value of the CSS property overrides
+   * any value given in the element's color-interpolation-filters attribute.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters)
+   */
+  colorInterpolationFilters?: Bindable<
+    'auto'
+    | 'sRGB'
+    | 'linearRGB'
+    | GlobalValues
+  >,
+
+  /**
+   * Allows an element to indicate which color schemes it can comfortably be
+   * rendered in. User agents change the following aspects of the UI chrome
+   * to match the used color scheme:
+   *
+   * - The color of the canvas surface.
+   * - The default colors of scrollbars and other interaction UI.
+   * - The default colors of form controls.
+   * - The default colors of other browser-provided UI, such as
+   * "spellcheck" underlines.
+   *
+   * Component authors must use the `prefers-color-scheme` media feature to
+   * support the color schemes on the rest of the elements.
+   *
+   * Common choices for operating system color schemes are "light" and "dark",
+   * or "day mode" and "night mode". When a user selects one of these color
+   * schemes, the operating system makes adjustments to the user interface.
+   * This includes form controls, scrollbars, and the used values of CSS
+   * system colors.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color-scheme)
+   */
+  colorScheme?: Bindable<
+    'normal'
+    | 'light'
+    | 'dark'
+    | 'light dark'
+    | 'only light'
+    | GlobalValues
+  >,
+
+  /**
+   * Breaks an element's content into the specified number of columns.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-count)
+   */
+  columnCount?: Bindable<number|'auto'|GlobalValues>,
+
+  /**
+   * Controls how an element's contents are balanced when broken into columns.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-fill)
+   */
+  columnFill?: Bindable<'auto'|'balance'|GlobalValues>,
+
+  /**
+   * Sets the size of the gap (gutter) between an element's columns.
+   *
+   * Initially a part of Multi-column Layout, the definition of `column-gap`
+   * has been broadened to include multiple layout methods. Now specified
+   * in CSS box alignment, it may be used in multi-column, flexible box,
+   * and grid layouts.
+   *
+   * Early versions of the specification called this property `grid-column-gap`,
+   * and to maintain compatibility with legacy websites, browsers will still
+   * accept `grid-column-gap` as an alias for `column-gap`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-gap)
+   */
+  columnGap?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * Sets the width, style, and color of the line drawn between columns in
+   * a multi-column layout.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule)
+   */
+  columnRule?: Bindable<string|GlobalValues>,
+
+  /**
+   * Sets the color of the line drawn between columns in a multi-column layout.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-color)
+   */
+  columnRuleColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * Sets the color of the line drawn between columns in a multi-column layout.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-style)
+   */
+  columnRuleStyle?: Bindable<
+    'none'
+    |'hidden'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets the width of the line drawn between columns in a multi-column layout.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-width)
+   */
+  columnRuleWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * Makes it possible for an element to span across all columns when its
+   * value is set to `all`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-span)
+   */
+  columnSpan?: Bindable<'none'|'all'|GlobalValues>,
+
+  /**
+   * Sets the ideal column width in a multi-column layout. The container will
+   * have as many columns as can fit without any of them having a width less
+   * than the `column-width` value. If the width of the container is narrower
+   * than the specified value, the single column's width will be smaller
+   * than the declared column width.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-width)
+   */
+  columnWidth?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * Sets the number of columns to use when drawing an element's contents,
+   * as well as those columns' widths.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/columns)
+   */
+  columns?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * Indicates that an element and its contents are, as much as possible,
+   * independent from the rest of the document tree. Containment enables
+   * isolating a subsection of the DOM, providing performance benefits by
+   * limiting calculations of layout, style, paint, size, or any combination
+   * to a DOM subtree rather than the entire page. Containment can also be
+   * used to scope CSS counters and quotes.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain)
+   */
+  contain?: Bindable<
+    string
+    |'none'
+    |'strict'
+    |'content'
+    |'size'
+    |'inline-size'
+    |'layout'
+    |'style'
+    |'paint'
+    |GlobalValues
+  >,
+
+  /**
+   * Defines the block size of an element that a browser can use for layout
+   * when the element is subject to size containment.
+   *
+   * Block size is the size of an element in the dimension perpendicular to
+   * the flow of text within a line. In a horizontal writing mode like
+   * standard English, block size is the vertical dimension (height);
+   * in a vertical writing mode, block size is the horizontal dimension.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size)
+   */
+  containIntrinsicBlockSize?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets the height of an element that a browser can use for layout when
+   * the element is subject to size containment.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height)
+   */
+  containIntrinsicHeight?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Defines the inline-size of an element that a browser can use for layout
+   * when the element is subject to size containment.
+   *
+   * Inline-size is the size of the element in the dimension parallel to
+   * the flow of text within a line. In a horizontal writing mode like
+   * standard English, inline size is the horizontal dimension (width);
+   * for a vertical writing mode, inline size is the vertical dimension.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size)
+   */
+  containIntrinsicInlineSize?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets the size of an element that a browser will use for layout when
+   * the element is subject to size containment.
+   *
+   * #### Constituent properties
+   * This property is a shorthand for the following CSS properties:
+   *
+   * - `contain-intrinsic-width`
+   * - `contain-intrinsic-height`
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size)
+   */
+  containIntrinsicSize?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets the width of an element that a browser will use for layout when
+   * the element is subject to size containment.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width)
+   */
+  containIntrinsicWidth?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Establishes the element as a query container and specifies the name
+   * and type of the containment context used in a container query.
+   *
+   * #### Constituent properties
+   * This property is a shorthand for the following CSS properties:
+   *
+   * - `container-name`
+   * - `container-type`
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container)
+   */
+  container?: Bindable<string|GlobalValues>,
+
+  /**
+   * Specifies a list of query container names used by the @container at-rule
+   * in a container query. A container query will apply styles to elements
+   * based on the size of the nearest ancestor with a containment context.
+   * When a containment context is given a name, it can be specifically
+   * targeted using the @container at-rule instead of the nearest ancestor
+   * with containment.
+   *
+   * > **_NOTE:_**
+   * When using the `container-type` and `container-name` properties,
+   * the `style` and `layout` values of the `contain` property are
+   * automatically applied.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container-name)
+   */
+  containerName?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * An element can be established as a query container for container size
+   * queries using the `container-type` CSS property. `container-type` is
+   * used to define the type of size containment used in a container query.
+   *
+   * Size containment turns off the ability of an element to get size
+   * information from its contents, which is important for container
+   * queries to avoid infinite loops. If this were not the case,
+   * a CSS rule inside a container query could change the content size,
+   * which in turn could make the query evaluate to false and change
+   * the parent element's size, which in turn could change the content
+   * size and flip the query back to true, and so on.
+   *
+   * The container size has to be set explicitly or by context — for example,
+   * block elements, flex containers, and grid containers stretching to the full
+   * width of their parent. If an explicit or contextual size is not available,
+   * elements with size containment will collapse.
+   *
+   * > **_NOTE:_**
+   * When using the `container-type` and `container-name` properties,
+   * the `style` and `layout` values of the `contain` property are
+   * automatically applied.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container-type)
+   */
+  containerType?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Replaces content with a generated value. It can be used to define what is
+   * rendered inside an element or pseudo-element. For elements, the `content`
+   * property specifies whether the element renders normally (`normal` or
+   * `none`) or is replaced with an image (and associated "alt" text).
+   * For pseudo-elements and margin boxes, `content` defines the content as
+   * images, text, both, or none, which determines whether the element
+   * renders at all.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/content)
+   */
+  content?: Bindable<
+    string
+    |'normal'
+    |'none'
+    |'open-quote'
+    |'close-quote'
+    |'no-open-quote'
+    |'no-close-quote'
+    |'attr()'
+    |'counter()'
+    |'url()'
+    |GlobalValues>,
+
+  /**
+   * Controls whether an element renders its contents at all, along with forcing
+   * a strong set of containments, allowing user agents to potentially omit
+   * large swathes of layout and rendering work until it becomes needed.
+   * It enables the user agent to skip an element's rendering work
+   * (including layout and painting) until it is needed — which
+   * makes the initial page load much faster.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/content-visibility)
+   */
+  contentVisibility?: Bindable<
+    'visible'
+    |'hidden'
+    |'auto'
+    |GlobalValues>,
+
+  /**
+   * Can be used to increase or decrease the value of the named CSS counters
+   * by the specified values, or to prevent all counters or an individual
+   * counter's value from being changed.
+   *
+   * If a named counter in the list of space-separated counters and values
+   * doesn't exist, it will be created. If no value is provided for a counter
+   * in the list of counters, the counter will be increased by `1`.
+   *
+   * The counter's value can be reset to any integer value with
+   * the `counter-reset` CSS property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-increment)
+   */
+  counterIncrement?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Creates named CSS counters and initializes them to a specific value.
+   * It supports creating counters that count up from one to the number
+   * of elements, as well as those that count down from the number of
+   * elements to one.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-reset)
+   */
+  counterReset?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets CSS counters on the element to the given values.
+   *
+   * If the counters don't exist the `counter-set` property creates a new
+   * counter for each named counter in the list of space-separated counter
+   * and value pairs. However, to create a new counter it is recommended
+   * to use the `counter-reset` CSS property.
+   *
+   * If a named counter in the list is missing a value, the value of
+   * the counter will be set to `0`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-set)
+   */
+  counterSet?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * Sets the mouse cursor, if any, to show when the mouse pointer is over
+   * an element.
+   *
+   * The cursor setting should inform users of the mouse operations that can
+   * be performed at the current location, including: text selection,
+   * activating help or context menus, copying content, resizing tables,
+   * and so on. You can specify either the type of cursor using a keyword,
+   * or load a specific icon to use (with optional fallback images and
+   * mandatory keyword as a final fallback).
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/cursor)
+   */
+  cursor?: Bindable<
+    string
+    |'auto'
+    |'alias'|'all-scroll'
+    |'cell'|'context-menu'|'col-resize'|'copy'|'crosshair'
+    |'default'
+    |'e-resize'|'ew-resize'
+    |'grab'|'grabbing'
+    |'help'|'move'
+    |'n-resize'|'ne-resize'|'nesw-resize'|'ns-resize'|'nw-resize'|'nwse-resize'
+    |'no-drop'|'none'|'not-allowed'
+    |'pointer'|'progress'
+    |'row-resize'
+    |'s-resize'|'se-resize'|'sw-resize'
+    |'text'
+    |'vertical-text'
+    |'w-resize'|'wait'
+    |'zoom-in'|'zoom-out'
+    |GlobalValues
+  >,
+
+  /**
+   * Defines the x-axis center point of an SVG `<circle>` or `<ellipse>`
+   * element. If present, it overrides the element's `cx` attribute.
+   *
+   * > **_NOTE:_**
+   * While SVG the `cx` attribute is relevant to the SVG `<radialGradient>`
+   * element, the `cx` property only applies to `<circle>` and `<ellipse>`
+   * elements nested in an `<svg>`. It doesn't apply to `<radialGradient>`
+   * or other SVG elements nor to HTML elements or pseudo-elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/cx)
+   */
+  cx?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines the y-axis center point of an SVG `<circle>` or `<ellipse>`
+   * element. If present, it overrides the element's `cy` attribute.
+   *
+   * > **_NOTE:_**
+   * While the SVG `<radialGradient>` element supports the `cy` attribute,
+   * the `cy` property only applies to `<circle>` and `<ellipse>` elements
+   * nested in an `<svg>`. This attribute does not apply to `<radialGradient>`
+   * or other SVG elements nor to HTML elements or pseudo-elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/cy)
+   */
+  cy?: Bindable<string|GlobalValues>,
+
+  /**
+   * Defines a path to be drawn by the SVG `<path>` element. If present,
+   * it overrides the element's `d` attribute.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/d)
+   */
+  d?: Bindable<string|'none'|'path()'|GlobalValues>,
+
+  /**
+   * > **_WARNING:_**
+   * Where possible, authors are encouraged to avoid using the direction CSS
+   * property and use the HTML `dir` global attribute instead.
+   *
+   * Sets the direction of text, table columns, and horizontal overflow.
+   * Use `rtl` for languages written from right to left (like Hebrew or Arabic),
+   * and `ltr` for those written from left to right (like English and most other
+   * languages).
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/direction)
+   */
+  direction?: Bindable<'ltr'|'rtl'|GlobalValues>,
+
+  /**
+   * Sets whether an element is treated as a block or inline box and the layout
+   * used for its children, such as flow layout, grid or flex.
+   *
+   * Formally, the `display` property sets an element's inner and outer
+   * *display types*. The outer type sets an element's participation in flow
+   * layout; the inner type sets the layout of children. Some values of
+   * `display` are fully defined in their own individual specifications;
+   * for example the detail of what happens when `display: flex` is declared
+   * is defined in the CSS Flexible Box Model specification.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/direction)
+   */
+  display?: Bindable<
+    'block'
+    |'inline'
+    |'inline-block'
+    |'flex'
+    |'inline-flex'
+    |'grid'
+    |'inline-grid'
+    |'flow-root'
+    |'none'
+    |'contents'
+    |'table'
+    |'table-row'
+    |'list-item'
+    |'inline-table'
+    |'run-in'
+    |'table-caption'
+    |'table-column-group'
+    |'table-header-group'
+    |'table-footer-group'
+    |'table-row-group'
+    |'table-cell'
+    |'table-column'
+    |GlobalValues
+  >,
+
+  /**
+   * Specifies the specific baseline used to align the box's text and
+   * inline-level contents. It also indicates the default alignment baseline
+   * of any boxes participating in baseline alignment in the box's alignment
+   * context. If present, it overrides the shape's `dominant-baseline`
+   * attribute.
+   *
+   * Baselines are selected from the font baseline table. If there is no
+   * baseline table in the nominal font, or if the baseline table lacks
+   * an entry for the desired baseline, then the browser may use heuristics
+   * to determine the position of the desired baseline.
+   *
+   * The `dominant-baseline` property is used to determine or re-determine
+   * a scaled-baseline-table. A scaled-baseline-table is a compound value
+   * with three components:
+   *
+   * - 1: a baseline-identifier for the `dominant-baseline`,
+   * - 2: a baseline-table, and
+   * - 3: a baseline-table font-size.
+   *
+   * Some values of `dominant-baseline` re-determine all three values.
+   * Others only re-establish the baseline-table font-size. When the
+   * initial value, `auto`, would give an undesired result, this property
+   * can be used to explicitly set the desired scaled-baseline-table.
+   *
+   * > **_NOTE:_**
+   * The `dominant-baseline` property only has an effect on the `<text>`,
+   * `<textPath>`, `<tref>`, and `<tspan>` SVG elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/dominant-baseline)
+   */
+  dominantBaseline?: Bindable<
+    'auto'
+    |'alphabetic'
+    |'central'
+    |'hanging'
+    |'ideographic'
+    |'mathematical'
+    |'middle'
+    |'text-bottom'
+    |'text-top'
+    |GlobalValues
+  >,
+
+  /**
+   * Sets whether borders and backgrounds appear around `<table>` cells
+   * that have no visible content.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/empty-cells)
+   */
+  emptyCells?: Bindable<'show'|'hide'|GlobalValues>,
+
+  /**
+   * Enables you to control the sizing behavior of elements that are given
+   * a default preferred size, such as form control elements. This property
+   * enables you to override the default sizing behavior, allowing form
+   * controls to adjust in size to fit their contents.
+   *
+   * This property is typically used to style text `<input>` and `<textarea>`
+   * elements to allow them to shrinkwrap their content as well as grow when
+   * more text is entered into the form control.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/field-sizing)
+   */
+  fieldSizing?: Bindable<'content'|'fixed'|GlobalValues>,
+
+  /**
+   * Defines how SVG text content and the interior canvas of SVG shapes are
+   * filled or painted. If present, it overrides the element's `fill` attribute.
+   *
+   * The areas inside the outline of the SVG shape or text are painted.
+   * What is "inside" a shape may not always be clear. The paths defining
+   * a shape may overlap. The areas considered "inside" these complex
+   * shapes are clarified by the `fill-rule` property or attribute.
+   *
+   * If subpaths are open, `fill` closes the path before painting,
+   * as if a "closepath" command were included connecting the last
+   * point of the subpath with the first point of the subpath.
+   * In other words, fill applies to open subpaths within `path` elements
+   * (i.e., subpaths without a closepath command) and `polyline` elements.
+   *
+   * > **_NOTE:_**
+   * The `fill` property only applies to `<circle`>, `<ellipse>`, `<path>`,
+   * `<polygon>`, `<polyline>`, `<rect>`, `<text>`, `<textPath>`, `<tref>`,
+   * and `<tspan>` elements nested in an `<svg>`. It doesn't apply other
+   * SVG, HTML, or pseudo-elements.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/fill)
+   */
+  fill?: Bindable<
+    'none'
+    |'context-fill'
+    |'context-stroke'
+    |'url()'
+    |CSSColors
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/fill-opacity)
+   */
+  fillOpacity?: Bindable<number|string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/fill-rule)
+   */
+  fillRule?: Bindable<'evenodd'|'nonzero'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/filter)
+   */
+  filter?: Bindable<
+    string
+    |'none'
+    |'blur(px)'
+    |'brightness(%)'
+    |'contrast(%)'
+    |'drop-shadow()'
+    |'grayscale(%)'
+    |'hue-rotate(deg)'
+    |'invert(%)'
+    |'opacity(%)'
+    |'saturate(%)'
+    |'sepia(%)'
+    |'url()'
+    |GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex)
+   */
+  flex?: Bindable<number|'none'|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-basis)
+   */
+  flexBasis?: Bindable<
+    string
+    |'auto'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'content'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-direction)
+   */
+  flexDirection?: Bindable<
+    'row'
+    |'row-reverse'
+    |'column'
+    |'column-reverse'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-flow)
+   */
+  flexFlow?: Bindable<
+    string
+    |'row'
+    |'row-reverse'
+    |'column'
+    |'column-reverse'
+    |'nowrap'
+    |'wrap'
+    |'wrap-reverse'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-grow)
+   */
+  flexGrow?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-shrink)
+   */
+  flexShrink?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-wrap)
+   */
+  flexWrap?: Bindable<'nowrap'|'wrap'|'wrap-reverse'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/float)
+   */
+  float?: Bindable<
+    'none'
+    |'left'
+    |'right'
+    |'inline-start'
+    |'inline-end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flood-color)
+   */
+  floodColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flood-opacity)
+   */
+  floodOpacity?: Bindable<number|string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font)
+   */
+  font?: Bindable<
+    string
+    |'caption'
+    |'icon'
+    |'menu'
+    |'message-box'
+    |'small-caption'
+    |'status-bar'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-family)
+   */
+  fontFamily?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-feature-settings)
+   */
+  fontFeatureSettings?: Bindable<string|'normal'>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-kerning)
+   */
+  fontKerning?: Bindable<'auto'|'normal'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-language-override)
+   */
+  fontLanguageOverride?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing)
+   */
+  fontOpticalSizing?: Bindable<'none'|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-palette)
+   */
+  fontPalette?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-size)
+   */
+  fontSize?: Bindable<
+    string
+    |'xx-small'
+    |'x-small'
+    |'small'
+    |'medium'
+    |'large'
+    |'x-large'
+    |'xx-large'
+    |'xxx-large'
+    |'smaller'
+    |'larger'
+    |'math'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-size-adjust)
+   */
+  fontSizeAdjust?: Bindable<
+    number
+    |'none'
+    |'from-font'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-smooth)
+   */
+  fontSmooth?: Bindable<
+    string
+    |'auto'
+    |'never'
+    |'always'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-stretch)
+   */
+  fontStretch?: Bindable<
+    string
+    |'normal'
+    |'ultra-condensed'
+    |'extra-condensed'
+    |'condensed'
+    |'semi-condensed'
+    |'semi-expanded'
+    |'expanded'
+    |'extra-expanded'
+    |'ultra-expanded'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-style)
+   */
+  fontStyle?: Bindable<string|'normal'|'italic'|'oblique'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis)
+   */
+  fontSynthesis?: Bindable<
+    string
+    |'none'
+    |'weight'
+    |'style'
+    |'position'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-position)
+   */
+  fontSynthesisPosition?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps)
+   */
+  fontSynthesisSmallCaps?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style)
+   */
+  fontSynthesisStyle?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight)
+   */
+  fontSynthesisWeight?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant)
+   */
+  fontVariant?: Bindable<string|'normal'|'none'|'small-caps'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates)
+   */
+  fontVariantAlternates?: Bindable<
+    string
+    |'normal'
+    |'historical-forms'
+    |'stylistic()'
+    |'styleset()'
+    |'character-variant()'
+    |'swash()'
+    |'ornaments()'
+    |'annotation()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-caps)
+   */
+  fontVariantCaps?: Bindable<
+    'normal'
+    |'small-caps'
+    |'all-small-caps'
+    |'petite-caps'
+    |'all-petite-caps'
+    |'unicase'
+    |'titling-caps'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian)
+   */
+  fontVariantEastAsian?: Bindable<
+    string
+    |'normal'
+    |'ruby'
+    |'jis78'
+    |'jis83'
+    |'jis90'
+    |'jis04'
+    |'simplified'
+    |'traditional'
+    |'full-width'
+    |'proportional-width'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji)
+   */
+  fontVariantEmoji?: Bindable<
+    'normal'
+    |'text'
+    |'emoji'
+    |'unicode'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures)
+   */
+  fontVariantLigatures?: Bindable<
+    'normal'
+    |'none'
+    |'common-ligatures'
+    |'no-common-ligatures'
+    |'discretionary-ligatures'
+    |'no-discretionary-ligatures'
+    |'historical-ligatures'
+    |'no-historical-ligatures'
+    |'contextual'
+    |'no-contextual'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures)
+   */
+  fontVariantNumeric?: Bindable<
+    'normal'
+    |'ordinal'
+    |'slashed-zero'
+    |'lining-nums'
+    |'oldstyle-nums'
+    |'proportional-nums'
+    |'tabular-nums'
+    |'diagonal-fractions'
+    |'stacked-fractions'
+    |'oldstyle-nums stacked-fractions'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-position)
+   */
+  fontVariantPosition?: Bindable<'normal'|'sub'|'super'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-settings)
+   */
+  fontVariantSettings?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-weight)
+   */
+  fontWeight?: Bindable<
+    'normal'
+    |'bold'
+    |100
+    |200
+    |300
+    |400
+    |500
+    |600
+    |700
+    |800
+    |900
+    |'lighter'
+    |'bolder'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust)
+   */
+  forcedColorAdjust?: Bindable<
+    'auto'
+    |'none'
+    |'preserve-parent-color'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/gap)
+   */
+  gap?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid)
+   */
+  grid?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-area)
+   */
+  gridArea?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns)
+   */
+  gridAutoColumns?: Bindable<
+    string
+    |'auto'
+    |'min-content'
+    |'max-content'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow)
+   */
+  gridAutoFlow?: Bindable<
+    'row'|'column'|'dense'|'row dense'|'column dense'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows)
+   */
+  gridAutoRows?: Bindable<
+    string
+    |'auto'
+    |'min-content'
+    |'max-content'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column)
+   */
+  gridColumn?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column-end)
+   */
+  gridColumnEnd?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column-start)
+   */
+  gridColumnStart?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row)
+   */
+  gridRow?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row-end)
+   */
+  gridRowEnd?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row-start)
+   */
+  gridRowStart?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template)
+   */
+  gridTemplate?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-areas)
+   */
+  gridTemplateAreas?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-columns)
+   */
+  gridTemplateColumns?: Bindable<
+    string
+    |'none'
+    |'auto'
+    |'max-content'
+    |'min-content'
+    |'minmax(min, max)'
+    |'fit-content()'
+    |'repeat()'
+    |'masonry'
+    |'subgrid'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-columns)
+   */
+  gridTemplateRows?: Bindable<
+    string
+    |'none'
+    |'auto'
+    |'max-content'
+    |'min-content'
+    |'minmax(min, max)'
+    |'fit-content()'
+    |'repeat()'
+    |'masonry'
+    |'subgrid'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation)
+   */
+  hangingPunctuation?: Bindable<
+    string
+    |'none'
+    |'first'
+    |'last'
+    |'allow-end'
+    |'force-end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/height)
+   */
+  height?: Bindable<
+    string
+    |'auto'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'fit-content()'
+    |'stretch'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphenate-character)
+   */
+  hyphenateCharacter?: Bindable<string|'auto'>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars)
+   */
+  hyphenateLimitChars?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphens)
+   */
+  hyphens?: Bindable<'none'|'manual'|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/image-orientation)
+   */
+  imageOrientation?: Bindable<'none'|'from-image'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/image-rendering)
+   */
+  imageRendering?: Bindable<
+    'auto'
+    |'smooth'
+    |'crisp-edges'
+    |'pixelated'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/image-resolution)
+   */
+  imageResolution?: Bindable<
+    string
+    |'from-image'
+    |'snap'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/initial-letter)
+   */
+  initialLetter?: Bindable<
+    number
+    |'normal'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inline-size)
+   */
+  inlineSize?: Bindable<
+    string
+    |'auto'
+    |'anchor-size()'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset)
+   */
+  inset?: Bindable<
+    string
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block)
+   */
+  insetBlock?: Bindable<
+    string
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block-end)
+   */
+  insetBlockEnd?: Bindable<
+    string
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block-start)
+   */
+  insetBlockStart?: Bindable<
+    string
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline)
+   */
+  insetInline?: Bindable<
+    string
+    |'auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline-end)
+   */
+  insetInlineEnd?: Bindable<
+    string
+    |'auto'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline-start)
+   */
+  insetInlineStart?: Bindable<
+    string
+    |'auto'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/interpolate-size)
+   */
+  interpolateSize?: Bindable<
+    string
+    |'allow-keywords'
+    |'numeric-only'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/isolation)
+   */
+  isolation?: Bindable<'auto'|'isolate'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-content)
+   */
+  justifyContent?: Bindable<
+    'center'
+    |'start'
+    |'end'
+    |'flex-start'
+    |'flex-end'
+    |'left'
+    |'right'
+    |'normal'
+    |'space-between'
+    |'space-around'
+    |'space-evenly'
+    |'stretch'
+    |'safe center'
+    |'unsafe center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-items)
+   */
+  justifyItems?: Bindable<
+    'normal'
+    |'stretch'
+    |'center'
+    |'start'
+    |'end'
+    |'flex-start'
+    |'flex-end'
+    |'self-start'
+    |'self-end'
+    |'left'
+    |'right'
+    |'anchor-center'
+    |'baseline'
+    |'first baseline'
+    |'last baseline'
+    |'safe center'
+    |'unsafe center'
+    |'legacy right'
+    |'legacy left'
+    |'legacy center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-self)
+   */
+  justifySelf?: Bindable<
+    'auto'
+    |'normal'
+    |'stretch'
+    |'center'
+    |'start'
+    |'end'
+    |'flex-start'
+    |'flex-end'
+    |'self-start'
+    |'self-end'
+    |'left'
+    |'right'
+    |'anchor-center'
+    |'baseline'
+    |'first baseline'
+    |'last baseline'
+    |'safe center'
+    |'unsafe center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/left)
+   */
+  left?: Bindable<
+    string
+    |'auto'
+    |'anchor()'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/letter-spacing)
+   */
+  letterSpacing?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/lighting-color)
+   */
+  lightingColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-break)
+   */
+  lineBreak?: Bindable<
+    'auto'
+    |'loose'
+    |'normal'
+    |'strict'
+    |'anywhere'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-clamp)
+   */
+  lineClamp?: Bindable<
+    number
+    |'none'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-height)
+   */
+  lineHeight?: Bindable<string|number|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-height-step)
+   */
+  lineHeightStep?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style)
+   */
+  listStyle?: Bindable<
+    string
+    |'none'
+    |'square'
+    |'url()'
+    |'inside'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-image)
+   */
+  listStyleImage?: Bindable<
+    string
+    |'none'
+    |'url()'
+    |'linear-gradient()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-position)
+   */
+  listStylePosition?: Bindable<'inside'|'outside'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-type)
+   */
+  listStyleType?: Bindable<
+    'none'
+    |'disc'
+    |'circle'
+    |'square'
+    |'decimal'
+    |'cjk-decimal'
+    |'decimal-leading-zero'
+    |'lower-roman'
+    |'upper-roman'
+    |'lower-greek'
+    |'lower-alpha'
+    |'lower-latin'
+    |'upper-alpha'
+    |'upper-latin'
+    |'arabic-indic'
+    |'armenian'
+    |'bengali'
+    |'cambodian'
+    |'khmer'
+    |'cjk-earthly-branch'
+    |'cjk-heavenly-stem'
+    |'cjk-ideographic'
+    |'devanagari'
+    |'ethiopic-numeric'
+    |'georgian'
+    |'gujarati'
+    |'gurmukhi'
+    |'hebrew'
+    |'hiragana'
+    |'hiragana-iroha'
+    |'japanese-formal'
+    |'japanese-informal'
+    |'kannada'
+    |'katakana'
+    |'katakana-iroha'
+    |'korean-hangul-formal'
+    |'korean-hanja-formal'
+    |'korean-hanja-informal'
+    |'lao'
+    |'lower-armenian'
+    |'malayalam'
+    |'mongolian'
+    |'myanmar'
+    |'oriya'
+    |'persian'
+    |'simp-chinese-formal'
+    |'simp-chinese-informal'
+    |'tamil'
+    |'telugu'
+    |'thai'
+    |'tibetan'
+    |'trad-chinese-formal'
+    |'trad-chinese-informal'
+    |'upper-armenian'
+    |'disclosure-open'
+    |'disclosure-closed'
+    |'custom-counter-style'
+    |'symbols()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin)
+   */
+  margin?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block)
+   */
+  marginBlock?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-end)
+   */
+  marginBlockEnd?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-start)
+   */
+  marginBlockStart?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-bottom)
+   */
+  marginBottom?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline)
+   */
+  marginInline?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-end)
+   */
+  marginInlineEnd?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-start)
+   */
+  marginInlineStart?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-left)
+   */
+  marginLeft?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-right)
+   */
+  marginRight?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-top)
+   */
+  marginTop?: Bindable<string|'auto'|'anchor-size()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-trim)
+   */
+  marginTrim?: Bindable<
+    'none'
+    |'block'
+    |'block-start'
+    |'block-end'
+    |'inline'
+    |'inline-start'
+    |'inline-end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker)
+   */
+  marker?: Bindable<
+    'none'
+    |'url()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-end)
+   */
+  markerEnd?: Bindable<
+    'none'
+    |'url()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-mid)
+   */
+  markerMid?: Bindable<
+    'none'
+    |'url()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-start)
+   */
+  markerStart?: Bindable<
+    'none'
+    |'url()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask)
+   */
+  mask?: Bindable<string|'none'|'url()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border)
+   */
+  maskBorder?: Bindable<string|'none'|'url()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-mode)
+   */
+  maskBorderMode?: Bindable<'luminance'|'alpha'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-outset)
+   */
+  maskBorderOutset?: Bindable<string|number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat)
+   */
+  maskBorderRepeat?: Bindable<string|'stretch'|'repeat'|'round'|'space'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-slice)
+   */
+  maskBorderSlice?: Bindable<string|number|'fill'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-source)
+   */
+  maskBorderSource?: Bindable<string|'none'|'url()'|'linear-gradient()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-width)
+   */
+  maskBorderWidth?: Bindable<string|number|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-clip)
+   */
+  maskClip?: Bindable<
+    string
+    |'content-box'
+    |'padding-box'
+    |'border-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |'no-clip'
+    |'border'
+    |'padding'
+    |'content'
+    |'text'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-composite)
+   */
+  maskComposite?: Bindable<
+    string
+    |'add'
+    |'subtract'
+    |'intersect'
+    |'exclude'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-image)
+   */
+  maskImage?: Bindable<
+    string
+    |'none'
+    |'url()'
+    |'linear-gradient()'
+    |'image()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-image)
+   */
+  maskMode?: Bindable<
+    string
+    |'alpha'
+    |'luminance'
+    |'match-source'
+    |GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-origin)
+   */
+  maskOrigin?: Bindable<
+    string
+    |'content-box'
+    |'padding-box'
+    |'border-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |'content'
+    |'padding'
+    |'border'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-position)
+   */
+  maskPosition?: Bindable<
+    string
+    |'top'
+    |'bottom'
+    |'left'
+    |'right'
+    |'center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-repeat)
+   */
+  maskRepeat?: Bindable<
+    string
+    |'repeat'
+    |'repeat-x'
+    |'repeat-y'
+    |'space'
+    |'round'
+    |'no-repeat'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-size)
+   */
+  maskSize?: Bindable<
+    string
+    |'auto'
+    |'contain'
+    |'cover'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-type)
+   */
+  maskType?: Bindable<'luminance'|'alpha'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/math-depth)
+   */
+  mathDepth?: Bindable<string|number|'auto-add'|'add()'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/math-shift)
+   */
+  mathShift?: Bindable<'normal'|'compact'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/math-style)
+   */
+  mathStyle?: Bindable<'normal'|'compact'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-block-size)
+   */
+  maxBlockSize?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'anchor-size()'
+    |'calc()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-height)
+   */
+  maxHeight?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'stretch'
+    |'anchor-size()'
+    |'calc()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-inline-size)
+   */
+  maxInlineSize?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'anchor-size()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-width)
+   */
+  maxWidth?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'stretch'
+    |'anchor-size()'
+    |'calc()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-block-size)
+   */
+  minBlockSize?: Bindable<
+    string
+    |'anchor-size()'
+    |'calc()'
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-inline-size)
+   */
+  minInlineSize?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'stretch'
+    |'anchor-size()'
+    |'calc()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-block-size)
+   */
+  minHeight?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'anchor-size()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-width)
+   */
+  minWidth?: Bindable<
+    string
+    |'none'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'stretch'
+    |'anchor-size()'
+    |'calc()'
+    |'fit-content()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode)
+   */
+  mixBlendMode?: Bindable<
+    'normal'
+    |'multiply'
+    |'screen'
+    |'overlay'
+    |'darken'
+    |'lighten'
+    |'color-dodge'
+    |'color-burn'
+    |'hard-light'
+    |'soft-light'
+    |'difference'
+    |'exclusion'
+    |'hue'
+    |'saturation'
+    |'color'
+    |'luminosity'
+    |'plus-darker'
+    |'plus-lighter'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/object-fit)
+   */
+  objectFit?: Bindable<'none'|'contain'|'cover'|'fill'|'scale-down'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/object-position)
+   */
+  objectPosition?: Bindable<
+    string
+    |'top'
+    |'bottom'
+    |'left'
+    |'right'
+    |'center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset)
+   */
+  offset?: Bindable<
+    string
+    |'auto'
+    |'none'
+    |'ray()'
+    |'path()'
+    |'url()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-anchor)
+   */
+  offsetAnchor?: Bindable<
+    string
+    |'auto'
+    |'top'
+    |'bottom'
+    |'left'
+    |'right'
+    |'center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-distance)
+   */
+  offsetDistance?: Bindable<
+    string
+    |number
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-path)
+   */
+  offsetPath?: Bindable<
+    string
+    |'none'
+    |'ray()'
+    |'url()'
+    |'circle()'
+    |'circle(50% at 25% 25%)'
+    |'ellipse()'
+    |'ellipse(50% 50% at 25% 25%)'
+    |'inset()'
+    |'inset(50% 50% 50% 50%)'
+    |'polygon()'
+    |'polygon(30% 0%, 70% 0%, 100% 50%, 30% 100%, 0% 70%, 0% 30%)'
+    |'path()'
+    |'path("M 0,200 Q 200,200 260,80 Q 290,20 400,0 Q 300,100 400,200")'
+    |'rect()'
+    |'rect(5px 5px 160px 145px round 20%)'
+    |'xywh()'
+    |'xywh(0 5px 100% 75% round 15% 0)'
+    |'content-box'
+    |'padding-box'
+    |'border-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-position)
+   */
+  offsetPosition?: Bindable<
+    string
+    |'auto'
+    |'normal'
+    |'top'
+    |'bottom'
+    |'left'
+    |'right'
+    |'center'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-rotate)
+   */
+  offsetRotate?: Bindable<
+    string
+    |'auto'
+    |'reverse'
+    |'90deg'
+    |'0.5turn'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/opacity)
+   */
+  opacity?: Bindable<string|number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/order)
+   */
+  order?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/orphans)
+   */
+  orphans?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline)
+   */
+  outline?: Bindable<string|'solid'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-color)
+   */
+  outlineColor?: Bindable<'invert'|CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-offset)
+   */
+  outlineOffset?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-style)
+   */
+  outlineStyle?: Bindable<
+    'auto'
+    |'none'
+    |'dotted'
+    |'dashed'
+    |'solid'
+    |'double'
+    |'groove'
+    |'ridge'
+    |'inset'
+    |'outset'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-width)
+   */
+  outlineWidth?: Bindable<string|'medium'|'thin'|'thick'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow)
+   */
+  overflow?: Bindable<
+    'auto'
+    |'visible'
+    |'hidden'
+    |'clip'
+    |'scroll'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-anchor)
+   */
+  overflowAnchor?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-block)
+   */
+  overflowBlock?: Bindable<
+    'auto'
+    |'visible'
+    |'hidden'
+    |'clip'
+    |'scroll'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin)
+   */
+  overflowClipMargin?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-inline)
+   */
+  overflowInline?: Bindable<
+    'auto'
+    |'visible'
+    |'hidden'
+    |'clip'
+    |'scroll'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-wrap)
+   */
+  overflowWrap?: Bindable<'normal'|'break-word'|'anywhere'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-x)
+   */
+  overflowX?: Bindable<
+    'auto'
+    |'visible'
+    |'hidden'
+    |'clip'
+    |'scroll'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-y)
+   */
+  overflowY?: Bindable<
+    'auto'
+    |'visible'
+    |'hidden'
+    |'clip'
+    |'scroll'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overlay)
+   */
+  overlay?: Bindable<'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior)
+   */
+  overscrollBehavior?: Bindable<
+    string
+    |'auto'
+    |'none'
+    |'contain'
+    |'auto contain'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block)
+   */
+  overscrollBehaviorBlock?: Bindable<
+    'auto'
+    |'none'
+    |'contain'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline)
+   */
+  overscrollBehaviorInline?: Bindable<
+    'auto'
+    |'none'
+    |'contain'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x)
+   */
+  overscrollBehaviorX?: Bindable<
+    'auto'
+    |'none'
+    |'contain'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y)
+   */
+  overscrollBehaviorY?: Bindable<
+    'auto'
+    |'none'
+    |'contain'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding)
+   */
+  padding?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block)
+   */
+  paddingBlock?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block-end)
+   */
+  paddingBlockEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block-start)
+   */
+  paddingBlockStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-bottom)
+   */
+  paddingBottom?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline)
+   */
+  paddingInline?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline-end)
+   */
+  paddingInlineEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline-start)
+   */
+  paddingInlineStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-left)
+   */
+  paddingLeft?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-right)
+   */
+  paddingRight?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-top)
+   */
+  paddingTop?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/page)
+   */
+  page?: Bindable<'auto'|'exampleName'|'chapterIntro'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/paint-order)
+   */
+  paintOrder?: Bindable<
+    string
+    |'normal'
+    |'stroke'
+    |'markers'
+    |'stroke fill'
+    |'markers stroke fill'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective)
+   */
+  perspective?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective-origin)
+   */
+  perspectiveOrigin?: Bindable<
+    string
+    |'left'|'center'|'right'|'bottom'|'top'
+    |'bottom left'|'bottom right'
+    |'top left'|'top right'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-content)
+   */
+  placeContent?: Bindable<
+    string
+    |'center start'
+    |'start center'
+    |'end left'
+    |'flex-start center'
+    |'flex-end center'
+    |'baseline center'
+    |'first baseline space-evenly'
+    |'last baseline right'
+    |'space-between space-evenly'
+    |'space-around space-evenly'
+    |'space-evenly stretch'
+    |'stretch space-evenly'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-items)
+   */
+  placeItems?: Bindable<
+    string
+    |'center'
+    |'normal start'
+    |'center normal'
+    |'start legacy'
+    |'end normal'
+    |'self-start legacy'
+    |'self-end normal'
+    |'flex-start legacy'
+    |'flex-end normal'
+    |'anchor-center'
+    |'baseline normal'
+    |'first baseline legacy'
+    |'last baseline normal'
+    |'stretch legacy'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-self)
+   */
+  placeSelf?: Bindable<
+    string
+    |'auto center'
+    |'normal start'
+    |'center normal'
+    |'start auto'
+    |'end normal'
+    |'self-start auto'
+    |'self-end normal'
+    |'flex-start auto'
+    |'flex-end normal'
+    |'anchor-center'
+    |'baseline normal'
+    |'first baseline auto'
+    |'last baseline normal'
+    |'stretch auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/pointer-events)
+   */
+  pointerEvents?: Bindable<
+    'auto'
+    |'none'
+    |'visiblePainted'
+    |'visibleFill'
+    |'visibleStroke'
+    |'visible'
+    |'painted'
+    |'fill'
+    |'stroke'
+    |'bounding-box'
+    |'all'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position)
+   */
+  position?: Bindable<
+    'static'|'absolute'|'fixed'|'relative'|'sticky'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-anchor)
+   */
+  positionAnchor?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-area)
+   */
+  positionArea?: Bindable<
+    string
+    |'none'
+    |'top'
+    |'inline-start'
+    |'center'
+    |'span-all'
+    |'end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-try)
+   */
+  positionTry?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-try-fallbacks)
+   */
+  positionTryFallbacks?: Bindable<
+    string
+    |'none'
+    |'top'
+    |'flip-block'
+    |'flip-inline'
+    |'flip-start'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-try-order)
+   */
+  positionTryOrder?: Bindable<
+    'normal'
+    |'most-height'
+    |'most-width'
+    |'most-block-size'
+    |'most-inline-size'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position-visibility)
+   */
+  positionVisibility?: Bindable<
+    'always'
+    |'anchors-visible'
+    |'no-overflow'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/print-color-adjust)
+   */
+  printColorAdjust?: Bindable<
+    'economy'
+    |'exact'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/quotes)
+   */
+  quotes?: Bindable<string|'auto'|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/r)
+   */
+  r?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/resize)
+   */
+  resize?: Bindable<
+    'none'
+    |'both'
+    |'horizontal'
+    |'vertical'
+    |'block'
+    |'inline'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/right)
+   */
+  right?: Bindable<
+    string
+    |'auto'
+    |'anchor()'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/rotate)
+   */
+  rotate?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/row-gap)
+   */
+  rowGap?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/ruby-align)
+   */
+  rubyAlign?: Bindable<
+    'start'
+    |'center'
+    |'space-between'
+    |'space-around'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/ruby-position)
+   */
+  rubyPosition?: Bindable<
+    string
+    |'over'
+    |'under'
+    |'alternate'
+    |'inter-character'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/rx)
+   */
+  rx?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/ry)
+   */
+  ry?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scale)
+   */
+  scale?: Bindable<string|number|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-behavior)
+   */
+  scrollBehavior?: Bindable<'auto'|'smooth'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin)
+   */
+  scrollMargin?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block)
+   */
+  scrollMarginBlock?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end)
+   */
+  scrollMarginBlockEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start)
+   */
+  scrollMarginBlockStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom)
+   */
+  scrollMarginBottom?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline)
+   */
+  scrollMarginInline?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end)
+   */
+  scrollMarginInlineEnd?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start)
+   */
+  scrollMarginInlineStart?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left)
+   */
+  scrollMarginLeft?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right)
+   */
+  scrollMarginRight?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top)
+   */
+  scrollMarginTop?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding)
+   */
+  scrollPadding?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block)
+   */
+  scrollPaddingBlock?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end)
+   */
+  scrollPaddingBlockEnd?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start)
+   */
+  scrollPaddingBlockStart?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom)
+   */
+  scrollPaddingBottom?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline)
+   */
+  scrollPaddingInline?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end)
+   */
+  scrollPaddingInlineEnd?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start)
+   */
+  scrollPaddingInlineStart?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left)
+   */
+  scrollPaddingLeft?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right)
+   */
+  scrollPaddingRight?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top)
+   */
+  scrollPaddingTop?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align)
+   */
+  scrollSnapAlign?: Bindable<
+    string
+    |'none'
+    |'center'
+    |'start'
+    |'end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop)
+   */
+  scrollSnapStop?: Bindable<
+    'normal'
+    |'always'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type)
+   */
+  scrollSnapType?: Bindable<
+    string
+    |'none'
+    |'x'
+    |'y'
+    |'block'
+    |'inline'
+    |'both'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-timeline)
+   */
+  scrollTimeline?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-axis)
+   */
+  scrollTimelineAxis?: Bindable<
+    'block'
+    |'inline'
+    |'x'
+    |'y'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name)
+   */
+  scrollTimelineName?: Bindable<string|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-color)
+   */
+  scrollbarColor?: Bindable<string|'auto'|CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter)
+   */
+  scrollbarGutter?: Bindable<
+    string
+    |'auto'
+    |'stable'
+    |'both-edges'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-width)
+   */
+  scrollbarWidth?: Bindable<
+    'auto'
+    |'none'
+    |'thin'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold)
+   */
+  shapeImageThreshold?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-margin)
+   */
+  shapeMargin?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-outside)
+   */
+  shapeOutside?: Bindable<
+    string
+    |'none'
+    |'margin-box'
+    |'content-box'
+    |'border-box'
+    |'padding-box'
+    |'circle()'
+    |'ellipse()'
+    |'inset()'
+    |'inset(10px 10px 10px 10px)'
+    |'polygon()'
+    |'polygon(10px 10px, 20px 20px, 30px 30px)'
+    |'url()'
+    |'linear-gradient()'
+    |'linear-gradient(45deg, #fff 150px, red 150px)'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-rendering)
+   */
+  shapeRendering?: Bindable<
+    'auto'
+    |'crispEdges'
+    |'geometricPrecision'
+    |'optimizeSpeed'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stop-color)
+   */
+  stopColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-opacity)
+   */
+  stopOpacity?: Bindable<string|number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke)
+   */
+  stroke?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray)
+   */
+  strokeDashArray?: Bindable<string|number|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset)
+   */
+  strokeDashOffset?: Bindable<string|number|'none'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-linecap)
+   */
+  strokeLineCap?: Bindable<'butt'|'round'|'square'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin)
+   */
+  strokeLineJoin?: Bindable<'bevel'|'miter'|'round'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit)
+   */
+  strokeMiterLimit?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-opacity)
+   */
+  strokeOpacity?: Bindable<string|number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-width)
+   */
+  strokeWidth?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/tab-size)
+   */
+  tabSize?: Bindable<string|number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/table-layout)
+   */
+  tableLayout?: Bindable<'auto'|'fixed'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-align)
+   */
+  textAlign?: Bindable<
+    'start'
+    |'end'
+    |'left'
+    |'right'
+    |'center'
+    |'justify'
+    |'match-parent'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-align-last)
+   */
+  textAlignLast?: Bindable<
+    'auto'
+    |'start'
+    |'end'
+    |'left'
+    |'right'
+    |'center'
+    |'justify'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-anchor)
+   */
+  textAnchor?: Bindable<
+    'start'
+    |'middle'
+    |'end'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-combine-upright)
+   */
+  textCombineUpright?: Bindable<
+    'none'
+    |'all'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration)
+   */
+  textDecoration?: Bindable<
+    string
+    |'none'
+    |'underline'
+    |'overline'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-color)
+   */
+  textDecorationColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-line)
+   */
+  textDecorationLine?: Bindable<
+    'none'|'underline'|'overline'|'line-through'|'blink'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip)
+   */
+  textDecorationSkip?: Bindable<
+    string|'none'|'objects'|'spaces'|'edges'|'box-decoration'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink)
+   */
+  textDecorationSkipInk?: Bindable<
+    'none'|'auto'|'all'|GlobalValues
+  >,
+
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-style)
+   */
+  textDecorationStyle?: Bindable<
+    'solid'|'double'|'dotted'|'dashed'|'wavy'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness)
+   */
+  textDecorationThickness?: Bindable<string|'auto'|'from-font'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis)
+   */
+  textEmphasis?: Bindable<
+    string
+    |'none'
+    |'filled'
+    |'open'
+    |'dot'
+    |'circle'
+    |'double-circle'
+    |'triangle'
+    |'sesame'
+    |CSSColors
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color)
+   */
+  textEmphasisColor?: Bindable<CSSColors|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position)
+   */
+  textEmphasisPosition?: Bindable<
+    string
+    |'auto'
+    |'over'
+    |'under'
+    |'right'
+    |'left'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style)
+   */
+  textEmphasisStyle?: Bindable<
+    string
+    |'none'
+    |'filled'
+    |'open'
+    |'dot'
+    |'circle'
+    |'double-circle'
+    |'triangle'
+    |'sesame'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-indent)
+   */
+  textIndent?: Bindable<string|'each-line'|'hanging'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-justify)
+   */
+  textJustify?: Bindable<
+    'none'|'auto'|'inter-word'|'inter-character'|GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-orientation)
+   */
+  textOrientation?: Bindable<
+    'mixed'
+    |'upright'
+    |'sideways-right'
+    |'sideways'
+    |'use-glyph-orientation'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-overflow)
+   */
+  textOverflow?: Bindable<string|'clip'|'ellipsis'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-rendering)
+   */
+  textRendering?: Bindable<
+    'auto'
+    |'optimizeSpeed'
+    |'optimizeLegibility'
+    |'geometricPrecision'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-shadow)
+   */
+  textShadow?: Bindable<
+    string
+    |'none'
+    |'1px 1px 2px black'
+    | CSSColors
+    | GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-size-adjust)
+   */
+  textSizeAdjust?: Bindable<
+    string
+    |'none'
+    |'auto'
+    | GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-spacing-trim)
+   */
+  textSpacingTrim?: Bindable<
+    'normal'
+    |'space-all'
+    |'space-first'
+    |'trim-start'
+    | GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-transform)
+   */
+  textTransform?: Bindable<
+    'none'
+    |'capitalize'
+    |'uppercase'
+    |'lowercase'
+    |'full-width'
+    |'full-size-kana'
+    |'math-auto'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset)
+   */
+  textUnderlineOffset?: Bindable<string|'auto'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-position)
+   */
+  textUnderlinePosition?: Bindable<
+    'auto'
+    |'from-font'
+    |'under'
+    |'left'
+    |'right'
+    |'under left'
+    |'right under'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-wrap)
+   */
+  textWrap?: Bindable<
+    'wrap'
+    |'nowrap'
+    |'balance'
+    |'pretty'
+    |'stable'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode)
+   */
+  textWrapMode?: Bindable<
+    'wrap'
+    |'nowrap'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-wrap-style)
+   */
+  textWrapStyle?: Bindable<
+    'auto'
+    |'balance'
+    |'pretty'
+    |'stable'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/timeline-scope)
+   */
+  timelineScope?: Bindable<string|'none'|GlobalValues>,
+
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/top)
+   */
+  top?: Bindable<
+    string
+    |'auto'
+    |'anchor()'
+    |'anchor-size()'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/touch-action)
+   */
+  touchAction?: Bindable<
+    'auto'
+    |'none'
+    |'pan-x'
+    |'pan-left'
+    |'pan-right'
+    |'pan-y'
+    |'pan-up'
+    |'pan-down'
+    |'pinch-zoom'
+    |'manipulation'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform)
+   */
+  transform?: Bindable<
+    string
+    |'none'
+    |'matrix()'
+    |'matrix(1, 2, 3, 4, 5, 6)'
+    |'matrix3d()'
+    |'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)'
+    |'perspective()'
+    |'perspective(17px)'
+    |'rotate()'
+    |'rotate(0.5turn)'
+    |'rotate3d()'
+    |'rotate3d(1, 2, 3, 10deg)'
+    |'rotateX()'
+    |'rotateX(10deg)'
+    |'rotateY()'
+    |'rotateY(10deg)'
+    |'rotateZ()'
+    |'rotateZ(10deg)'
+    |'translate()'
+    |'translate(12px, 50%)'
+    |'translate3d()'
+    |'translate3d(12px, 50%, 3em)'
+    |'translateX()'
+    |'translateX(2em)'
+    |'translateY()'
+    |'translateY(3in)'
+    |'translateZ()'
+    |'translateZ(2px)'
+    |'scale()'
+    |'scale(2, 0.5)'
+    |'scale3d()'
+    |'scale3d(2.5, 1.2, 0.3)'
+    |'scaleX()'
+    |'scaleX(2)'
+    |'scaleY()'
+    |'scaleY(0.5)'
+    |'scaleZ()'
+    |'scaleZ(0.3)'
+    |'skew()'
+    |'skew(30deg, 20deg)'
+    |'skewX()'
+    |'skewX(30deg)'
+    |'skewY()'
+    |'skewY(1.07rad)'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-box)
+   */
+  transformBox?: Bindable<
+    'content-box'
+    |'border-box'
+    |'fill-box'
+    |'stroke-box'
+    |'view-box'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-origin)
+   */
+  transformOrigin?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-style)
+   */
+  transformStyle?: Bindable<'flat'|'preserve-3d'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition)
+   */
+  transition?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-behavior)
+   */
+  transitionBehavior?: Bindable<'allow-discrete'|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-delay)
+   */
+  transitionDelay?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-duration)
+   */
+  transitionDuration?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-property)
+   */
+  transitionProperty?: Bindable<string|'none'|'all'|GlobalValues>,
 
   /** @see https://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp */
-  transitionTimingFunction? : Combo<'linear'|'ease'|'ease-in'|'ease-out'|'ease-in-out'
-  |'step-start'|'step-end'|'steps(int,start|end)' |'cubic-bezier(n,n,n,n)'
-  |CSSGeneral>,
+  transitionTimingFunction?: Bindable<
+    string
+    |'linear'
+    |'ease'
+    |'ease-in'
+    |'ease-out'
+    |'ease-in-out'
+    |'step-start'
+    |'step-end'
+    |'cubic-bezier()'
+    |'linear()'
+    |'steps()'
+    |GlobalValues
+  >,
 
-  /** @see https://www.w3schools.com/cssref/pr_text_unicode-bidi.asp */
-  unicodeBidi? : Combo<'normal'|'embed'|'bidi-override'|'isolate'|'isolate-override'|'plaintext'
-  |CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/translate)
+   */
+  translate?: Bindable<string|'none'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/css3_pr_user-select.asp */
-  userSelect? : Combo<'auto'|'none'|'text'|'all'>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/unicode-bidi)
+   */
+  unicodeBidi?: Bindable<
+    'normal'
+    |'embed'
+    |'isolate'
+    |'bidi-override'
+    |'isolate-override'
+    |'plaintext'
+    |GlobalValues
+  >,
 
-  /** @see https://www.w3schools.com/cssref/pr_pos_vertical-align.asp */
-  verticalAlign? : Combo<string|'baseline'|'sub'|'super'|'top'|'text-top'|'middle'|'bottom'|'text-bottom'
-  |CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/user-select)
+   */
+  userSelect?: Bindable<'auto'|'none'|'text'|'all'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/pr_class_visibility.asp */
-  visibility? : Combo<'visible'|'hidden'|'collapse'|CSSGeneral|boolean>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/vector-effect)
+   */
+  vectorEffect?: Bindable<
+    'none'
+    |'non-scaling-stroke'
+    |'non-scaling-size'
+    |'non-rotation'
+    |'fixed-position'
+    |GlobalValues
+  >,
 
-  /** @see https://www.w3schools.com/cssref/pr_text_white-space.asp */
-  whiteSpace? : Combo<'normal'|'nowrap'|'pre'|'pre-line'|'pre-wrap'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/vertical-align)
+   */
+  verticalAlign?: Bindable<
+    string
+    |'baseline'
+    |'sub'
+    |'super'
+    |'text-top'
+    |'text-bottom'
+    |'middle'
+    |'top'
+    |'bottom'
+    |GlobalValues
+  >,
 
-  /** @see https://developer.mozilla.org/en-US/docs/Web/CSS/widows */
-  widows? : Combo<number|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/view-timeline)
+   */
+  viewTimeline?: Bindable<string|'none'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/pr_dim_width.asp */
-  width? : Combo<string|'auto'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/view-timeline-axis)
+   */
+  viewTimelineAxis?: Bindable<'block'|'inline'|'x'|'y'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/css3_pr_word-break.asp */
-  wordBreak? : Combo<'normal'|'break-all'|'keep-all'|'break-word'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/view-timeline-inset)
+   */
+  viewTimelineInset?: Bindable<string|'auto'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/pr_text_word-spacing.asp */
-  wordSpacing? : Combo<string|'normal'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/view-timeline-name)
+   */
+  viewTimelineName?: Bindable<string|'none'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/css3_pr_word-wrap.asp */
-  wordWrap? : Combo<'normal'|'break-word'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/view-transition-name)
+   */
+  viewTransitionName?: Bindable<'header'|'figure-caption'|GlobalValues>,
 
-  /** @see https://www.w3schools.com/cssref/css3_pr_writing-mode.asp */
-  writingMode? : Combo<'horizontal-tb'|'vertical-rl'|'vertical-lr'>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/visibility)
+   */
+  visibility?: Bindable<
+    'visible'
+    |'hidden'
+    |'collapse'
+    |GlobalValues
+  >,
 
-  /** @see https://www.w3schools.com/cssref/pr_pos_z-index.asp */
-  zIndex? : Combo<number|'auto'|CSSGeneral>,
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/white-space)
+   */
+  whiteSpace?: Bindable<
+    'normal'
+    |'pre'
+    |'nowrap'
+    |'pre-wrap'
+    |'pre-line'
+    |'break-spaces'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/white-space-collapse)
+   */
+  whiteSpaceCollapse?: Bindable<
+    'collapse'
+    |'preserve'
+    |'preserve-breaks'
+    |'preserve-spaces'
+    |'break-spaces'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/widows)
+   */
+  widows?: Bindable<number|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/width)
+   */
+  width?: Bindable<
+    string
+    |'auto'
+    |'max-content'
+    |'min-content'
+    |'fit-content'
+    |'fit-content()'
+    |'fit-content(20em)'
+    |'stretch'
+    |'anchor-size()'
+    |'anchor-size(--myAnchor inline, 120%)'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/will-change)
+   */
+  willChange?: Bindable<
+    string
+    |'auto'
+    |'scroll-position'
+    |'contents'
+    |'transform'
+    |'opacity'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/word-break)
+   */
+  wordBreak?: Bindable<
+    'normal'
+    |'break-all'
+    |'keep-all'
+    |'auto-phrase'
+    |'break-word'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/word-spacing)
+   */
+  wordSpacing?: Bindable<string|'normal'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/word-wrap)
+   */
+  wordWrap?: Bindable<'normal'|'break-word'|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/writing-mode)
+   */
+  writingMode?: Bindable<
+    'horizontal-tb'
+    |'vertical-rl'
+    |'vertical-lr'
+    |'sideways-rl'
+    |'sideways-lr'
+    |GlobalValues
+  >,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/x)
+   */
+  x?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/y)
+   */
+  y?: Bindable<string|GlobalValues>,
+
+  /**
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/z-index)
+   */
+  zIndex?: Bindable<number|'auto'|GlobalValues>,
+
+  /**
+   * Can be used to control the magnification level of an element.
+   * `transform: scale()` can be used as an alternative to this property.
+   *
+   * The `zoom` CSS property scales the targeted element, which can affect
+   * the page layout. When scaling, the zoomed element scales from `top`
+   * and `center` when using the default `writing-mode`.
+   *
+   * In contrast, an element scaled using `scale()` will not cause layout
+   * recalculation or move other elements on the page. If using `scale()`
+   * makes the contents larger than the containing element, then `overflow`
+   * comes into effect. Additionally, elements adjusted using `scale()`
+   * transform from the `center` by default; this can be changed with
+   * the `transform-origin` CSS property.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/zoom)
+   */
+  zoom?: Bindable<string|number|'normal'|'reset'|GlobalValues>,
 }
 
 type CSSPropertiesHyphenStyle = {
-  'align-content'? : CSSPropertiesJsStyle['alignContent'],
-  'align-items'? : CSSPropertiesJsStyle['alignItems'],
-  'align-self'? : CSSPropertiesJsStyle['alignSelf'],
-  'animation-delay'? : CSSPropertiesJsStyle['animationDelay'],
-  'animation-direction'? : CSSPropertiesJsStyle['animationDirection'],
-  'animation-duration'? : CSSPropertiesJsStyle['animationDuration'],
-  'animation-fill-mode'? : CSSPropertiesJsStyle['animationFillMode'],
-  'animation-iteration-count'? : CSSPropertiesJsStyle['animationIterationCount'],
-  'animation-name'? : CSSPropertiesJsStyle['animationName'],
-  'animation-play-state'? : CSSPropertiesJsStyle['animationPlayState'],
-  'animation-timing-function'? : CSSPropertiesJsStyle['animationTimingFunction'],
-  'backface-visibility'? : CSSPropertiesJsStyle['backfaceVisibility'],
-  'background-attachment'? : CSSPropertiesJsStyle['backgroundAttachment'],
-  'background-blend-mode'? : CSSPropertiesJsStyle['backgroundBlendMode'],
-  'background-clip'? : CSSPropertiesJsStyle['backgroundClip'],
-  'background-color'? : CSSPropertiesJsStyle['backgroundColor'],
-  'background-image'? : CSSPropertiesJsStyle['backgroundImage'],
-  'background-origin'? : CSSPropertiesJsStyle['backgroundOrigin'],
-  'background-position'? : CSSPropertiesJsStyle['backgroundPosition'],
-  'background-repeat'? : CSSPropertiesJsStyle['backgroundRepeat'],
-  'background-size'? : CSSPropertiesJsStyle['backgroundSize'],
-  'border-bottom'? : CSSPropertiesJsStyle['borderBottom'],
-  'border-bottom-color'? : CSSPropertiesJsStyle['borderBottomColor'],
-  'border-bottom-left-radius'? : CSSPropertiesJsStyle['borderBottomLeftRadius'],
-  'border-bottom-right-radius'? : CSSPropertiesJsStyle['borderBottomRightRadius'],
-  'border-bottom-style'? : CSSPropertiesJsStyle['borderBottomStyle'],
-  'border-bottom-width'? : CSSPropertiesJsStyle['borderBottomWidth'],
-  'border-collapse'? : CSSPropertiesJsStyle['borderCollapse'],
-  'border-color'? : CSSPropertiesJsStyle['borderColor'],
-  'border-image'? : CSSPropertiesJsStyle['borderImage'],
-  'border-image-outset'? : CSSPropertiesJsStyle['borderImageOutset'],
-  'border-image-repeat'? : CSSPropertiesJsStyle['borderImageRepeat'],
-  'border-image-slice'? : CSSPropertiesJsStyle['borderImageSlice'],
-  'border-image-source'? : CSSPropertiesJsStyle['borderImageSource'],
-  'border-image-width'? : CSSPropertiesJsStyle['borderImageWidth'],
-  'border-left'? : CSSPropertiesJsStyle['borderLeft'],
-  'border-left-color'? : CSSPropertiesJsStyle['borderLeftColor'],
-  'border-left-style'? : CSSPropertiesJsStyle['borderLeftStyle'],
-  'border-left-width'? : CSSPropertiesJsStyle['borderLeftWidth'],
-  'border-radius'? : CSSPropertiesJsStyle['borderRadius'],
-  'border-right'? : CSSPropertiesJsStyle['borderRight'],
-  'border-right-color'? : CSSPropertiesJsStyle['borderRightColor'],
-  'border-right-style'? : CSSPropertiesJsStyle['borderRightStyle'],
-  'border-right-width'? : CSSPropertiesJsStyle['borderRightWidth'],
-  'border-spacing'? : CSSPropertiesJsStyle['borderSpacing'],
-  'border-style'? : CSSPropertiesJsStyle['borderStyle'],
-  'border-top'? : CSSPropertiesJsStyle['borderTop'],
-  'border-top-color'? : CSSPropertiesJsStyle['borderTopColor'],
-  'border-top-left-radius'? : CSSPropertiesJsStyle['borderTopLeftRadius'],
-  'border-top-right-radius'? : CSSPropertiesJsStyle['borderTopRightRadius'],
-  'border-top-style'? : CSSPropertiesJsStyle['borderTopStyle'],
-  'border-top-width'? : CSSPropertiesJsStyle['borderTopWidth'],
-  'border-width'? : CSSPropertiesJsStyle['borderWidth'],
-  'box-shadow'? : CSSPropertiesJsStyle['boxShadow'],
-  'box-sizing'? : CSSPropertiesJsStyle['boxSizing'],
-  'break-after'? : CSSPropertiesJsStyle['breakAfter'],
-  'break-before'? : CSSPropertiesJsStyle['breakBefore'],
-  'break-inside'? : CSSPropertiesJsStyle['breakInside'],
-  'caption-side'? : CSSPropertiesJsStyle['captionSide'],
-  'caret-color'? : CSSPropertiesJsStyle['caretColor'],
-  'clip-path'? : CSSPropertiesJsStyle['clipPath'],
-  'column-count'? : CSSPropertiesJsStyle['columnCount'],
-  'column-fill'? : CSSPropertiesJsStyle['columnFill'],
-  'column-gap'? : CSSPropertiesJsStyle['columnGap'],
-  'column-rule'? : CSSPropertiesJsStyle['columnRule'],
-  'column-rule-color'? : CSSPropertiesJsStyle['columnRuleColor'],
-  'column-rule-style'? : CSSPropertiesJsStyle['columnRuleStyle'],
-  'column-rule-width'? : CSSPropertiesJsStyle['columnRuleWidth'],
-  'column-span'? : CSSPropertiesJsStyle['columnSpan'],
-  'column-width'? : CSSPropertiesJsStyle['columnWidth'],
-  'counter-increment'? : CSSPropertiesJsStyle['counterIncrement'],
-  'counter-reset'? : CSSPropertiesJsStyle['counterReset'],
-  'empty-cells'? : CSSPropertiesJsStyle['emptyCells'],
-  'flex-basis'? : CSSPropertiesJsStyle['flexBasis'],
-  'flex-direction'? : CSSPropertiesJsStyle['flexDirection'],
-  'flex-flow'? : CSSPropertiesJsStyle['flexFlow'],
-  'flex-grow'? : CSSPropertiesJsStyle['flexGrow'],
-  'flex-shrink'? : CSSPropertiesJsStyle['flexShrink'],
-  'flex-wrap'? : CSSPropertiesJsStyle['flexWrap'],
-  'font-family'? : CSSPropertiesJsStyle['fontFamily'],
-  'font-feature-settings'? : CSSPropertiesJsStyle['fontFeatureSettings'],
-  'font-kerning'? : CSSPropertiesJsStyle['fontKerning'],
-  'font-size'? : CSSPropertiesJsStyle['fontSize'],
-  'font-size-adjust'? : CSSPropertiesJsStyle['fontSizeAdjust'],
-  'font-stretch'? : CSSPropertiesJsStyle['fontStretch'],
-  'font-style'? : CSSPropertiesJsStyle['fontStyle'],
-  'font-variant'? : CSSPropertiesJsStyle['fontVariant'],
-  'font-variant-caps'? : CSSPropertiesJsStyle['fontVariantCaps'],
-  'font-weight'? : CSSPropertiesJsStyle['fontWeight'],
-  'grid-area'? : CSSPropertiesJsStyle['gridArea'],
-  'grid-auto-columns'? : CSSPropertiesJsStyle['gridAutoColumns'],
-  'grid-auto-flow'? : CSSPropertiesJsStyle['gridAutoFlow'],
-  'grid-auto-rows'? : CSSPropertiesJsStyle['gridAutoRows'],
-  'grid-column'? : CSSPropertiesJsStyle['gridColumn'],
-  'grid-column-end'? : CSSPropertiesJsStyle['gridColumnEnd'],
-  'grid-column-gap'? : CSSPropertiesJsStyle['gridColumnGap'],
-  'grid-column-start'? : CSSPropertiesJsStyle['gridColumnStart'],
-  'grid-gap'? : CSSPropertiesJsStyle['gridGap'],
-  'grid-row'? : CSSPropertiesJsStyle['gridRow'],
-  'grid-row-end'? : CSSPropertiesJsStyle['gridRowEnd'],
-  'grid-row-gap'? : CSSPropertiesJsStyle['gridRowGap'],
-  'grid-row-start'? : CSSPropertiesJsStyle['gridRowStart'],
-  'grid-template'? : CSSPropertiesJsStyle['gridTemplate'],
-  'grid-template-areas'? : CSSPropertiesJsStyle['gridTemplateAreas'],
-  'grid-template-columns'? : CSSPropertiesJsStyle['gridTemplateColumns'],
-  'grid-template-rows'? : CSSPropertiesJsStyle['gridTemplateRows'],
-  'hanging-punctuation'? : CSSPropertiesJsStyle['hangingPunctuation'],
-  'justify-content'? : CSSPropertiesJsStyle['justifyContent'],
-  'letter-spacing'? : CSSPropertiesJsStyle['letterSpacing'],
-  'line-height'? : CSSPropertiesJsStyle['lineHeight'],
-  'list-style'? : CSSPropertiesJsStyle['listStyle'],
-  'list-style-image'? : CSSPropertiesJsStyle['listStyleImage'],
-  'list-style-position'? : CSSPropertiesJsStyle['listStylePosition'],
-  'list-style-type'? : CSSPropertiesJsStyle['listStyleType'],
-  'margin-bottom'? : CSSPropertiesJsStyle['marginBottom'],
-  'margin-left'? : CSSPropertiesJsStyle['marginLeft'],
-  'margin-right'? : CSSPropertiesJsStyle['marginRight'],
-  'margin-top'? : CSSPropertiesJsStyle['marginTop'],
-  'mask'? : CSSPropertiesJsStyle['mask'],
-  'mask-image'? : CSSPropertiesJsStyle['maskImage'],
-  'mask-mode'? : CSSPropertiesJsStyle['maskMode'],
-  'mask-origin'? : CSSPropertiesJsStyle['maskOrigin'],
-  'mask-position'? : CSSPropertiesJsStyle['maskPosition'],
-  'mask-repeat'? : CSSPropertiesJsStyle['maskRepeat'],
-  'mask-size'? : CSSPropertiesJsStyle['maskSize'],
-  'mask-type'? : CSSPropertiesJsStyle['maskType'],
-  'max-height'? : CSSPropertiesJsStyle['maxHeight'],
-  'max-width'? : CSSPropertiesJsStyle['maxWidth'],
-  'min-height'? : CSSPropertiesJsStyle['minHeight'],
-  'min-width'? : CSSPropertiesJsStyle['minWidth'],
-  'mix-blend-mode'? : CSSPropertiesJsStyle['mixBlendMode'],
-  'object-fit'? : CSSPropertiesJsStyle['objectFit'],
-  'object-position'? : CSSPropertiesJsStyle['objectPosition'],
-  'outline-color'? : CSSPropertiesJsStyle['outlineColor'],
-  'outline-offset'? : CSSPropertiesJsStyle['outlineOffset'],
-  'outline-style'? : CSSPropertiesJsStyle['outlineStyle'],
-  'outline-width'? : CSSPropertiesJsStyle['outlineWidth'],
-  'overflow-x'? : CSSPropertiesJsStyle['overflowX'],
-  'overflow-y'? : CSSPropertiesJsStyle['overflowY'],
-  'padding-bottom'? : CSSPropertiesJsStyle['paddingBottom'],
-  'padding-left'? : CSSPropertiesJsStyle['paddingLeft'],
-  'padding-right'? : CSSPropertiesJsStyle['paddingRight'],
-  'padding-top'? : CSSPropertiesJsStyle['paddingTop'],
-  'page-break-after'? : CSSPropertiesJsStyle['pageBreakAfter'],
-  'page-break-before'? : CSSPropertiesJsStyle['pageBreakBefore'],
-  'page-break-inside'? : CSSPropertiesJsStyle['pageBreakInside'],
-  'perspective-origin'? : CSSPropertiesJsStyle['perspectiveOrigin'],
-  'pointer-events'? : CSSPropertiesJsStyle['pointerEvents'],
-  'row-gap'? : CSSPropertiesJsStyle['rowGap'],
-  'scroll-behavior'? : CSSPropertiesJsStyle['scrollBehavior'],
-  'tab-size'? : CSSPropertiesJsStyle['tabSize'],
-  'table-layout'? : CSSPropertiesJsStyle['tableLayout'],
-  'text-align'? : CSSPropertiesJsStyle['textAlign'],
-  'text-align-last'? : CSSPropertiesJsStyle['textAlignLast'],
-  'text-decoration'? : CSSPropertiesJsStyle['textDecoration'],
-  'text-decoration-color'? : CSSPropertiesJsStyle['textDecorationColor'],
-  'text-decoration-line'? : CSSPropertiesJsStyle['textDecorationLine'],
-  'text-decoration-style'? : CSSPropertiesJsStyle['textDecorationStyle'],
-  'text-indent'? : CSSPropertiesJsStyle['textIndent'],
-  'text-justify'? : CSSPropertiesJsStyle['textJustify'],
-  'text-overflow'? : CSSPropertiesJsStyle['textOverflow'],
-  'text-shadow'? : CSSPropertiesJsStyle['textShadow'],
-  'text-transform'? : CSSPropertiesJsStyle['textTransform'],
-  'transform-origin'? : CSSPropertiesJsStyle['transformOrigin'],
-  'transform-style'? : CSSPropertiesJsStyle['transformStyle'],
-  'transition-delay'? : CSSPropertiesJsStyle['transitionDelay'],
-  'transition-duration'? : CSSPropertiesJsStyle['transitionDuration'],
-  'transition-property'? : CSSPropertiesJsStyle['transitionProperty'],
-  'transition-timing-function'? : CSSPropertiesJsStyle['transitionTimingFunction'],
-  'unicode-bidi'? : CSSPropertiesJsStyle['unicodeBidi'],
-  'user-select'? : CSSPropertiesJsStyle['userSelect'],
-  'vertical-align'? : CSSPropertiesJsStyle['verticalAlign'],
-  'white-space'? : CSSPropertiesJsStyle['whiteSpace'],
-  'width'? : CSSPropertiesJsStyle['width'],
-  'word-break'? : CSSPropertiesJsStyle['wordBreak'],
-  'word-spacing'? : CSSPropertiesJsStyle['wordSpacing'],
-  'word-wrap'? : CSSPropertiesJsStyle['wordWrap'],
-  'writing-mode'? : CSSPropertiesJsStyle['writingMode'],
-  'z-index'? : CSSPropertiesJsStyle['zIndex'],
+  'accent-color'?: CSSPropertiesJsStyle['accentColor'],
+  'align-content'?: CSSPropertiesJsStyle['alignContent'],
+  'align-items'?: CSSPropertiesJsStyle['alignItems'],
+  'align-self'?: CSSPropertiesJsStyle['alignSelf'],
+  'alignment-baseline'?: CSSPropertiesJsStyle['alignmentBaseline'],
+  // 'all'?: CSSPropertiesJsStyle['all'],
+
+  // 'animation'?: CSSPropertiesJsStyle['animation'],
+  'animation-composition'?: CSSPropertiesJsStyle['animationComposition'],
+  'animation-delay'?: CSSPropertiesJsStyle['animationDelay'],
+  'animation-direction'?: CSSPropertiesJsStyle['animationDirection'],
+  'animation-duration'?: CSSPropertiesJsStyle['animationDuration'],
+  'animation-fill-mode'?: CSSPropertiesJsStyle['animationFillMode'],
+  'animation-iteration-count'?: CSSPropertiesJsStyle['animationIterationCount'],
+  'animation-name'?: CSSPropertiesJsStyle['animationName'],
+  'animation-play-state'?: CSSPropertiesJsStyle['animationPlayState'],
+  'animation-range'?: CSSPropertiesJsStyle['animationRange'],
+  'animation-range-end'?: CSSPropertiesJsStyle['animationRangeEnd'],
+  'animation-range-start'?: CSSPropertiesJsStyle['animationRangeStart'],
+  'animation-timeline'?: CSSPropertiesJsStyle['animationTimeline'],
+  'animation-timing-function'?: CSSPropertiesJsStyle['animationTimingFunction'],
+
+  // 'appearance'?: CSSPropertiesJsStyle['appearance'],
+  'aspect-ratio'?: CSSPropertiesJsStyle['aspectRatio'],
+  'backdrop-filter'?: CSSPropertiesJsStyle['backdropFilter'],
+  'backface-visibility'?: CSSPropertiesJsStyle['backfaceVisibility'],
+
+  'background-attachment'?: CSSPropertiesJsStyle['backgroundAttachment'],
+  'background-blend-mode'?: CSSPropertiesJsStyle['backgroundBlendMode'],
+  'background-clip'?: CSSPropertiesJsStyle['backgroundClip'],
+  'background-color'?: CSSPropertiesJsStyle['backgroundColor'],
+  'background-image'?: CSSPropertiesJsStyle['backgroundImage'],
+  'background-origin'?: CSSPropertiesJsStyle['backgroundOrigin'],
+  'background-position'?: CSSPropertiesJsStyle['backgroundPosition'],
+  'background-position-x'?: CSSPropertiesJsStyle['backgroundPositionX'],
+  'background-position-y'?: CSSPropertiesJsStyle['backgroundPositionY'],
+  'background-repeat'?: CSSPropertiesJsStyle['backgroundRepeat'],
+  'background-size'?: CSSPropertiesJsStyle['backgroundSize'],
+
+  'block-size'?: CSSPropertiesJsStyle['blockSize'],
+
+  // 'border'?: CSSPropertiesJsStyle['border'],
+  'border-block'?: CSSPropertiesJsStyle['borderBlock'],
+  'border-block-color'?: CSSPropertiesJsStyle['borderBlockColor'],
+  'border-block-end'?: CSSPropertiesJsStyle['borderBlockEnd'],
+  'border-block-end-color'?: CSSPropertiesJsStyle['borderBlockEndColor'],
+  'border-block-end-style'?: CSSPropertiesJsStyle['borderBlockEndStyle'],
+  'border-block-end-width'?: CSSPropertiesJsStyle['borderBlockEndWidth'],
+  'border-block-start'?: CSSPropertiesJsStyle['borderBlockStart'],
+  'border-block-start-color'?: CSSPropertiesJsStyle['borderBlockStartColor'],
+  'border-block-start-style'?: CSSPropertiesJsStyle['borderBlockStartStyle'],
+  'border-block-start-width'?: CSSPropertiesJsStyle['borderBlockStartWidth'],
+  'border-block-style'?: CSSPropertiesJsStyle['borderBlockStyle'],
+  'border-block-width'?: CSSPropertiesJsStyle['borderBlockWidth'],
+  'border-bottom'?: CSSPropertiesJsStyle['borderBottom'],
+  'border-bottom-color'?: CSSPropertiesJsStyle['borderBottomColor'],
+  'border-bottom-left-radius'?: CSSPropertiesJsStyle['borderBottomLeftRadius'],
+  'border-bottom-right-radius'?: CSSPropertiesJsStyle['borderBottomRightRadius'],
+  'border-bottom-style'?: CSSPropertiesJsStyle['borderBottomStyle'],
+  'border-bottom-width'?: CSSPropertiesJsStyle['borderBottomWidth'],
+  'border-collapse'?: CSSPropertiesJsStyle['borderCollapse'],
+  'border-color'?: CSSPropertiesJsStyle['borderColor'],
+  'border-end-end-radius'?: CSSPropertiesJsStyle['borderEndEndRadius'],
+  'border-end-start-radius'?: CSSPropertiesJsStyle['borderEndStartRadius'],
+  'border-image'?: CSSPropertiesJsStyle['borderImage'],
+  'border-image-outset'?: CSSPropertiesJsStyle['borderImageOutset'],
+  'border-image-repeat'?: CSSPropertiesJsStyle['borderImageRepeat'],
+  'border-image-slice'?: CSSPropertiesJsStyle['borderImageSlice'],
+  'border-image-source'?: CSSPropertiesJsStyle['borderImageSource'],
+  'border-image-width'?: CSSPropertiesJsStyle['borderImageWidth'],
+  'border-inline'?: CSSPropertiesJsStyle['borderInline'],
+  'border-inline-color'?: CSSPropertiesJsStyle['borderInlineColor'],
+  'border-inline-end'?: CSSPropertiesJsStyle['borderInlineEnd'],
+  'border-inline-end-color'?: CSSPropertiesJsStyle['borderInlineEndColor'],
+  'border-inline-end-style'?: CSSPropertiesJsStyle['borderInlineEndStyle'],
+  'border-inline-end-width'?: CSSPropertiesJsStyle['borderInlineEndWidth'],
+  'border-inline-start'?: CSSPropertiesJsStyle['borderInlineStart'],
+  'border-inline-start-color'?: CSSPropertiesJsStyle['borderInlineStartColor'],
+  'border-inline-start-style'?: CSSPropertiesJsStyle['borderInlineStartStyle'],
+  'border-inline-start-width'?: CSSPropertiesJsStyle['borderInlineStartWidth'],
+  'border-inline-style'?: CSSPropertiesJsStyle['borderInlineStyle'],
+  'border-inline-width'?: CSSPropertiesJsStyle['borderInlineWidth'],
+  'border-left'?: CSSPropertiesJsStyle['borderLeft'],
+  'border-left-color'?: CSSPropertiesJsStyle['borderLeftColor'],
+  'border-left-style'?: CSSPropertiesJsStyle['borderLeftStyle'],
+  'border-left-width'?: CSSPropertiesJsStyle['borderLeftWidth'],
+  'border-radius'?: CSSPropertiesJsStyle['borderRadius'],
+  'border-right'?: CSSPropertiesJsStyle['borderRight'],
+  'border-right-color'?: CSSPropertiesJsStyle['borderRightColor'],
+  'border-right-style'?: CSSPropertiesJsStyle['borderRightStyle'],
+  'border-right-width'?: CSSPropertiesJsStyle['borderRightWidth'],
+  'border-spacing'?: CSSPropertiesJsStyle['borderSpacing'],
+  'border-start-end-radius'?: CSSPropertiesJsStyle['borderStartEndRadius'],
+  'border-start-start-radius'?: CSSPropertiesJsStyle['borderStartStartRadius'],
+  'border-style'?: CSSPropertiesJsStyle['borderStyle'],
+  'border-top'?: CSSPropertiesJsStyle['borderTop'],
+  'border-top-color'?: CSSPropertiesJsStyle['borderTopColor'],
+  'border-top-left-radius'?: CSSPropertiesJsStyle['borderTopLeftRadius'],
+  'border-top-right-radius'?: CSSPropertiesJsStyle['borderTopRightRadius'],
+  'border-top-style'?: CSSPropertiesJsStyle['borderTopStyle'],
+  'border-top-width'?: CSSPropertiesJsStyle['borderTopWidth'],
+  'border-width'?: CSSPropertiesJsStyle['borderWidth'],
+
+  'box-decoration-break'?: CSSPropertiesJsStyle['boxDecorationBreak'],
+  'box-shadow'?: CSSPropertiesJsStyle['boxShadow'],
+  'box-sizing'?: CSSPropertiesJsStyle['boxSizing'],
+
+  'break-after'?: CSSPropertiesJsStyle['breakAfter'],
+  'break-before'?: CSSPropertiesJsStyle['breakBefore'],
+  'break-inside'?: CSSPropertiesJsStyle['breakInside'],
+
+  'caption-side'?: CSSPropertiesJsStyle['captionSide'],
+  'caret-color'?: CSSPropertiesJsStyle['caretColor'],
+  'clip-path'?: CSSPropertiesJsStyle['clipPath'],
+  'clip-rule'?: CSSPropertiesJsStyle['clipRule'],
+
+  'color-interpolation'?: CSSPropertiesJsStyle['colorInterpolation'],
+  'color-interpolation-filters'?: CSSPropertiesJsStyle['colorInterpolationFilters'],
+  'color-scheme'?: CSSPropertiesJsStyle['colorScheme'],
+
+  'column-count'?: CSSPropertiesJsStyle['columnCount'],
+  'column-fill'?: CSSPropertiesJsStyle['columnFill'],
+  'column-gap'?: CSSPropertiesJsStyle['columnGap'],
+  'column-rule'?: CSSPropertiesJsStyle['columnRule'],
+  'column-rule-color'?: CSSPropertiesJsStyle['columnRuleColor'],
+  'column-rule-style'?: CSSPropertiesJsStyle['columnRuleStyle'],
+  'column-rule-width'?: CSSPropertiesJsStyle['columnRuleWidth'],
+  'column-span'?: CSSPropertiesJsStyle['columnSpan'],
+  'column-width'?: CSSPropertiesJsStyle['columnWidth'],
+
+  'contain-intrinsic-block-size'?: CSSPropertiesJsStyle['containIntrinsicBlockSize'],
+  'contain-intrinsic-height'?: CSSPropertiesJsStyle['containIntrinsicHeight'],
+  'contain-intrinsic-inline-size'?: CSSPropertiesJsStyle['containIntrinsicInlineSize'],
+  'contain-intrinsic-size'?: CSSPropertiesJsStyle['containIntrinsicSize'],
+  'contain-intrinsic-width'?: CSSPropertiesJsStyle['containIntrinsicWidth'],
+
+  'container-name'?: CSSPropertiesJsStyle['containerName'],
+  'container-type'?: CSSPropertiesJsStyle['containerType'],
+
+  'content-visibility'?: CSSPropertiesJsStyle['contentVisibility'],
+
+  'counter-increment'?: CSSPropertiesJsStyle['counterIncrement'],
+  'counter-reset'?: CSSPropertiesJsStyle['counterReset'],
+  'counter-set'?: CSSPropertiesJsStyle['counterSet'],
+
+  'dominant-baseline'?: CSSPropertiesJsStyle['dominantBaseline'],
+  'empty-cells'?: CSSPropertiesJsStyle['emptyCells'],
+  'field-sizing'?: CSSPropertiesJsStyle['fieldSizing'],
+
+  'fill-opacity'?: CSSPropertiesJsStyle['fillOpacity'],
+  'fill-rule'?: CSSPropertiesJsStyle['fillRule'],
+
+  'flex-basis'?: CSSPropertiesJsStyle['flexBasis'],
+  'flex-direction'?: CSSPropertiesJsStyle['flexDirection'],
+  'flex-flow'?: CSSPropertiesJsStyle['flexFlow'],
+  'flex-grow'?: CSSPropertiesJsStyle['flexGrow'],
+  'flex-shrink'?: CSSPropertiesJsStyle['flexShrink'],
+  'flex-wrap'?: CSSPropertiesJsStyle['flexWrap'],
+
+  'flood-color'?: CSSPropertiesJsStyle['floodColor'],
+  'flood-opacity'?: CSSPropertiesJsStyle['floodOpacity'],
+
+  'font-family'?: CSSPropertiesJsStyle['fontFamily'],
+  'font-feature-settings'?: CSSPropertiesJsStyle['fontFeatureSettings'],
+  'font-kerning'?: CSSPropertiesJsStyle['fontKerning'],
+  'font-language-override'?: CSSPropertiesJsStyle['fontLanguageOverride'],
+  'font-optical-sizing'?: CSSPropertiesJsStyle['fontOpticalSizing'],
+  'font-palette'?: CSSPropertiesJsStyle['fontPalette'],
+  'font-size'?: CSSPropertiesJsStyle['fontSize'],
+  'font-size-adjust'?: CSSPropertiesJsStyle['fontSizeAdjust'],
+  'font-smooth'?: CSSPropertiesJsStyle['fontSmooth'],
+  'font-stretch'?: CSSPropertiesJsStyle['fontStretch'],
+  'font-style'?: CSSPropertiesJsStyle['fontStyle'],
+  'font-synthesis'?: CSSPropertiesJsStyle['fontSynthesis'],
+  'font-synthesis-position'?: CSSPropertiesJsStyle['fontSynthesisPosition'],
+  'font-synthesis-small-caps'?: CSSPropertiesJsStyle['fontSynthesisSmallCaps'],
+  'font-synthesis-style'?: CSSPropertiesJsStyle['fontSynthesisStyle'],
+  'font-synthesis-weight'?: CSSPropertiesJsStyle['fontSynthesisWeight'],
+  'font-variant'?: CSSPropertiesJsStyle['fontVariant'],
+  'font-variant-alternates'?: CSSPropertiesJsStyle['fontVariantAlternates'],
+  'font-variant-caps'?: CSSPropertiesJsStyle['fontVariantCaps'],
+  'font-variant-east-asian'?: CSSPropertiesJsStyle['fontVariantEastAsian'],
+  'font-variant-emoji'?: CSSPropertiesJsStyle['fontVariantEmoji'],
+  'font-variant-ligatures'?: CSSPropertiesJsStyle['fontVariantLigatures'],
+  'font-variant-numeric'?: CSSPropertiesJsStyle['fontVariantNumeric'],
+  'font-variant-position'?: CSSPropertiesJsStyle['fontVariantPosition'],
+  'font-variant-settings'?: CSSPropertiesJsStyle['fontVariantSettings'],
+  'font-weight'?: CSSPropertiesJsStyle['fontWeight'],
+
+  'forced-color-adjust'?: CSSPropertiesJsStyle['forcedColorAdjust'],
+
+  'grid-area'?: CSSPropertiesJsStyle['gridArea'],
+  'grid-auto-columns'?: CSSPropertiesJsStyle['gridAutoColumns'],
+  'grid-auto-flow'?: CSSPropertiesJsStyle['gridAutoFlow'],
+  'grid-auto-rows'?: CSSPropertiesJsStyle['gridAutoRows'],
+  'grid-column'?: CSSPropertiesJsStyle['gridColumn'],
+  'grid-column-end'?: CSSPropertiesJsStyle['gridColumnEnd'],
+  'grid-column-start'?: CSSPropertiesJsStyle['gridColumnStart'],
+  'grid-row'?: CSSPropertiesJsStyle['gridRow'],
+  'grid-row-end'?: CSSPropertiesJsStyle['gridRowEnd'],
+  'grid-row-start'?: CSSPropertiesJsStyle['gridRowStart'],
+  'grid-template'?: CSSPropertiesJsStyle['gridTemplate'],
+  'grid-template-areas'?: CSSPropertiesJsStyle['gridTemplateAreas'],
+  'grid-template-columns'?: CSSPropertiesJsStyle['gridTemplateColumns'],
+  'grid-template-rows'?: CSSPropertiesJsStyle['gridTemplateRows'],
+
+  'hanging-punctuation'?: CSSPropertiesJsStyle['hangingPunctuation'],
+
+  'hyphenate-character'?: CSSPropertiesJsStyle['hyphenateCharacter'],
+  'hyphenate-limit-chars'?: CSSPropertiesJsStyle['hyphenateLimitChars'],
+
+  'image-orientation'?: CSSPropertiesJsStyle['imageOrientation'],
+  'image-rendering'?: CSSPropertiesJsStyle['imageRendering'],
+  'image-resolution'?: CSSPropertiesJsStyle['imageResolution'],
+
+  'initial-letter'?: CSSPropertiesJsStyle['initialLetter'],
+  'inline-size'?: CSSPropertiesJsStyle['inlineSize'],
+
+  'inset-block'?: CSSPropertiesJsStyle['insetBlock'],
+  'inset-block-end'?: CSSPropertiesJsStyle['insetBlockEnd'],
+  'inset-block-start'?: CSSPropertiesJsStyle['insetBlockStart'],
+  'inset-inline'?: CSSPropertiesJsStyle['insetInline'],
+  'inset-inline-end'?: CSSPropertiesJsStyle['insetInlineEnd'],
+  'inset-inline-start'?: CSSPropertiesJsStyle['insetInlineStart'],
+
+  'interpolate-size'?: CSSPropertiesJsStyle['interpolateSize'],
+
+  'justify-content'?: CSSPropertiesJsStyle['justifyContent'],
+  'justify-items'?: CSSPropertiesJsStyle['justifyItems'],
+  'justify-self'?: CSSPropertiesJsStyle['justifySelf'],
+
+  'letter-spacing'?: CSSPropertiesJsStyle['letterSpacing'],
+  'lighting-color'?: CSSPropertiesJsStyle['lightingColor'],
+
+  'line-break'?: CSSPropertiesJsStyle['lineBreak'],
+  'line-clamp'?: CSSPropertiesJsStyle['lineClamp'],
+  'line-height'?: CSSPropertiesJsStyle['lineHeight'],
+  'line-height-step'?: CSSPropertiesJsStyle['lineHeightStep'],
+
+  'list-style'?: CSSPropertiesJsStyle['listStyle'],
+  'list-style-image'?: CSSPropertiesJsStyle['listStyleImage'],
+  'list-style-position'?: CSSPropertiesJsStyle['listStylePosition'],
+  'list-style-type'?: CSSPropertiesJsStyle['listStyleType'],
+
+  'margin-block'?: CSSPropertiesJsStyle['marginBlock'],
+  'margin-block-end'?: CSSPropertiesJsStyle['marginBlockEnd'],
+  'margin-block-start'?: CSSPropertiesJsStyle['marginBlockStart'],
+  'margin-bottom'?: CSSPropertiesJsStyle['marginBottom'],
+  'margin-inline'?: CSSPropertiesJsStyle['marginInline'],
+  'margin-inline-end'?: CSSPropertiesJsStyle['marginInlineEnd'],
+  'margin-inline-start'?: CSSPropertiesJsStyle['marginInlineStart'],
+  'margin-left'?: CSSPropertiesJsStyle['marginLeft'],
+  'margin-right'?: CSSPropertiesJsStyle['marginRight'],
+  'margin-top'?: CSSPropertiesJsStyle['marginTop'],
+  'margin-trim'?: CSSPropertiesJsStyle['marginTrim'],
+
+  'marker-end'?: CSSPropertiesJsStyle['markerEnd'],
+  'marker-mid'?: CSSPropertiesJsStyle['markerMid'],
+  'marker-start'?: CSSPropertiesJsStyle['markerStart'],
+
+  'mask-border'?: CSSPropertiesJsStyle['maskBorder'],
+  'mask-border-mode'?: CSSPropertiesJsStyle['maskBorderMode'],
+  'mask-border-outset'?: CSSPropertiesJsStyle['maskBorderOutset'],
+  'mask-border-repeat'?: CSSPropertiesJsStyle['maskBorderRepeat'],
+  'mask-border-slice'?: CSSPropertiesJsStyle['maskBorderSlice'],
+  'mask-border-source'?: CSSPropertiesJsStyle['maskBorderSource'],
+  'mask-border-width'?: CSSPropertiesJsStyle['maskBorderWidth'],
+  'mask-clip'?: CSSPropertiesJsStyle['maskClip'],
+  'mask-composite'?: CSSPropertiesJsStyle['maskComposite'],
+  'mask-image'?: CSSPropertiesJsStyle['maskImage'],
+  'mask-mode'?: CSSPropertiesJsStyle['maskMode'],
+  'mask-origin'?: CSSPropertiesJsStyle['maskOrigin'],
+  'mask-position'?: CSSPropertiesJsStyle['maskPosition'],
+  'mask-repeat'?: CSSPropertiesJsStyle['maskRepeat'],
+  'mask-size'?: CSSPropertiesJsStyle['maskSize'],
+  'mask-type'?: CSSPropertiesJsStyle['maskType'],
+
+  'math-depth'?: CSSPropertiesJsStyle['mathDepth'],
+  'math-shift'?: CSSPropertiesJsStyle['mathShift'],
+  'math-style'?: CSSPropertiesJsStyle['mathStyle'],
+
+  'max-block-size'?: CSSPropertiesJsStyle['maxBlockSize'],
+  'max-height'?: CSSPropertiesJsStyle['maxHeight'],
+  'max-inline-size'?: CSSPropertiesJsStyle['maxInlineSize'],
+  'max-width'?: CSSPropertiesJsStyle['maxWidth'],
+
+  'min-block-size'?: CSSPropertiesJsStyle['minBlockSize'],
+  'min-height'?: CSSPropertiesJsStyle['minHeight'],
+  'min-inline-size'?: CSSPropertiesJsStyle['minInlineSize'],
+  'min-width'?: CSSPropertiesJsStyle['minWidth'],
+
+  'mix-blend-mode'?: CSSPropertiesJsStyle['mixBlendMode'],
+  'object-fit'?: CSSPropertiesJsStyle['objectFit'],
+  'object-position'?: CSSPropertiesJsStyle['objectPosition'],
+
+  'offset-anchor'?: CSSPropertiesJsStyle['offsetAnchor'],
+  'offset-distance'?: CSSPropertiesJsStyle['offsetDistance'],
+  'offset-path'?: CSSPropertiesJsStyle['offsetPath'],
+  'offset-position'?: CSSPropertiesJsStyle['offsetPosition'],
+  'offset-rotate'?: CSSPropertiesJsStyle['offsetRotate'],
+
+  'outline-color'?: CSSPropertiesJsStyle['outlineColor'],
+  'outline-offset'?: CSSPropertiesJsStyle['outlineOffset'],
+  'outline-style'?: CSSPropertiesJsStyle['outlineStyle'],
+  'outline-width'?: CSSPropertiesJsStyle['outlineWidth'],
+
+  'overflow-anchor'?: CSSPropertiesJsStyle['overflowAnchor'],
+  'overflow-block'?: CSSPropertiesJsStyle['overflowBlock'],
+  'overflow-clip-margin'?: CSSPropertiesJsStyle['overflowClipMargin'],
+  'overflow-inline'?: CSSPropertiesJsStyle['overflowInline'],
+  'overflow-wrap'?: CSSPropertiesJsStyle['overflowWrap'],
+  'overflow-x'?: CSSPropertiesJsStyle['overflowX'],
+  'overflow-y'?: CSSPropertiesJsStyle['overflowY'],
+
+  'overscroll-behavior'?: CSSPropertiesJsStyle['overscrollBehavior'],
+  'overscroll-behavior-block'?: CSSPropertiesJsStyle['overscrollBehaviorBlock'],
+  'overscroll-behavior-inline'?: CSSPropertiesJsStyle['overscrollBehaviorInline'],
+  'overscroll-behavior-x'?: CSSPropertiesJsStyle['overscrollBehaviorX'],
+  'overscroll-behavior-y'?: CSSPropertiesJsStyle['overscrollBehaviorY'],
+
+  'padding-block'?: CSSPropertiesJsStyle['paddingBlock'],
+  'padding-block-end'?: CSSPropertiesJsStyle['paddingBlockEnd'],
+  'padding-block-start'?: CSSPropertiesJsStyle['paddingBlockStart'],
+  'padding-bottom'?: CSSPropertiesJsStyle['paddingBottom'],
+  'padding-inline'?: CSSPropertiesJsStyle['paddingInline'],
+  'padding-inline-end'?: CSSPropertiesJsStyle['paddingInlineEnd'],
+  'padding-inline-start'?: CSSPropertiesJsStyle['paddingInlineStart'],
+  'padding-left'?: CSSPropertiesJsStyle['paddingLeft'],
+  'padding-right'?: CSSPropertiesJsStyle['paddingRight'],
+  'padding-top'?: CSSPropertiesJsStyle['paddingTop'],
+
+  'paint-order'?: CSSPropertiesJsStyle['paintOrder'],
+  'perspective-origin'?: CSSPropertiesJsStyle['perspectiveOrigin'],
+
+  'place-content'?: CSSPropertiesJsStyle['placeContent'],
+  'place-items'?: CSSPropertiesJsStyle['placeItems'],
+  'place-self'?: CSSPropertiesJsStyle['placeSelf'],
+
+  'position-anchor'?: CSSPropertiesJsStyle['positionAnchor'],
+  'position-area'?: CSSPropertiesJsStyle['positionArea'],
+  'position-try'?: CSSPropertiesJsStyle['positionTry'],
+  'position-try-order'?: CSSPropertiesJsStyle['positionTryOrder'],
+  'position-visibility'?: CSSPropertiesJsStyle['positionVisibility'],
+
+  'print-color-adjust'?: CSSPropertiesJsStyle['printColorAdjust'],
+  'pointer-events'?: CSSPropertiesJsStyle['pointerEvents'],
+  'row-gap'?: CSSPropertiesJsStyle['rowGap'],
+  'ruby-align'?: CSSPropertiesJsStyle['rubyAlign'],
+  'ruby-position'?: CSSPropertiesJsStyle['rubyPosition'],
+
+  'scroll-behavior'?: CSSPropertiesJsStyle['scrollBehavior'],
+  'scroll-margin'?: CSSPropertiesJsStyle['scrollMargin'],
+  'scroll-margin-block'?: CSSPropertiesJsStyle['scrollMarginBlock'],
+  'scroll-margin-block-end'?: CSSPropertiesJsStyle['scrollMarginBlockEnd'],
+  'scroll-margin-block-start'?: CSSPropertiesJsStyle['scrollMarginBlockStart'],
+  'scroll-margin-bottom'?: CSSPropertiesJsStyle['scrollMarginBottom'],
+  'scroll-margin-inline'?: CSSPropertiesJsStyle['scrollMarginInline'],
+  'scroll-margin-inline-end'?: CSSPropertiesJsStyle['scrollMarginInlineEnd'],
+  'scroll-margin-inline-start'?: CSSPropertiesJsStyle['scrollMarginInlineStart'],
+  'scroll-margin-left'?: CSSPropertiesJsStyle['scrollMarginLeft'],
+  'scroll-margin-right'?: CSSPropertiesJsStyle['scrollMarginRight'],
+  'scroll-margin-top'?: CSSPropertiesJsStyle['scrollMarginTop'],
+  'scroll-padding'?: CSSPropertiesJsStyle['scrollPadding'],
+  'scroll-padding-block'?: CSSPropertiesJsStyle['scrollPaddingBlock'],
+  'scroll-padding-block-end'?: CSSPropertiesJsStyle['scrollPaddingBlockEnd'],
+  'scroll-padding-block-start'?: CSSPropertiesJsStyle['scrollPaddingBlockStart'],
+  'scroll-padding-bottom'?: CSSPropertiesJsStyle['scrollPaddingBottom'],
+  'scroll-padding-inline'?: CSSPropertiesJsStyle['scrollPaddingInline'],
+  'scroll-padding-inline-end'?: CSSPropertiesJsStyle['scrollPaddingInlineEnd'],
+  'scroll-padding-inline-start'?: CSSPropertiesJsStyle['scrollPaddingInlineStart'],
+  'scroll-padding-right'?: CSSPropertiesJsStyle['scrollPaddingRight'],
+  'scroll-padding-top'?: CSSPropertiesJsStyle['scrollPaddingTop'],
+  'scroll-snap-align'?: CSSPropertiesJsStyle['scrollSnapAlign'],
+  'scroll-snap-stop'?: CSSPropertiesJsStyle['scrollSnapStop'],
+  'scroll-snap-type'?: CSSPropertiesJsStyle['scrollSnapType'],
+  'scroll-timeline'?: CSSPropertiesJsStyle['scrollTimeline'],
+  'scroll-timeline-axis'?: CSSPropertiesJsStyle['scrollTimelineAxis'],
+  'scroll-timeline-name'?: CSSPropertiesJsStyle['scrollTimelineName'],
+
+  'scrollbar-color'?: CSSPropertiesJsStyle['scrollbarColor'],
+  'scrollbar-gutter'?: CSSPropertiesJsStyle['scrollbarGutter'],
+  'scrollbar-width'?: CSSPropertiesJsStyle['scrollbarWidth'],
+
+  'shape-image-threshold'?: CSSPropertiesJsStyle['shapeImageThreshold'],
+  'shape-margin'?: CSSPropertiesJsStyle['shapeMargin'],
+  'shape-outside'?: CSSPropertiesJsStyle['shapeOutside'],
+  'shape-rendering'?: CSSPropertiesJsStyle['shapeRendering'],
+
+  'stop-color'?: CSSPropertiesJsStyle['stopColor'],
+  'stop-opacity'?: CSSPropertiesJsStyle['stopOpacity'],
+
+  'stroke-dasharray'?: CSSPropertiesJsStyle['strokeDashArray'],
+  'stroke-dashoffset'?: CSSPropertiesJsStyle['strokeDashOffset'],
+  'stroke-linecap'?: CSSPropertiesJsStyle['strokeLineCap'],
+  'stroke-linejoin'?: CSSPropertiesJsStyle['strokeLineJoin'],
+  'stroke-miterlimit'?: CSSPropertiesJsStyle['strokeMiterLimit'],
+  'stroke-opacity'?: CSSPropertiesJsStyle['strokeOpacity'],
+  'stroke-width'?: CSSPropertiesJsStyle['strokeWidth'],
+
+  'tab-size'?: CSSPropertiesJsStyle['tabSize'],
+  'table-layout'?: CSSPropertiesJsStyle['tableLayout'],
+
+  'text-align'?: CSSPropertiesJsStyle['textAlign'],
+  'text-align-last'?: CSSPropertiesJsStyle['textAlignLast'],
+  'text-anchor'?: CSSPropertiesJsStyle['textAnchor'],
+  'text-combine-upright'?: CSSPropertiesJsStyle['textCombineUpright'],
+  'text-decoration'?: CSSPropertiesJsStyle['textDecoration'],
+  'text-decoration-color'?: CSSPropertiesJsStyle['textDecorationColor'],
+  'text-decoration-line'?: CSSPropertiesJsStyle['textDecorationLine'],
+  'text-decoration-skip'?: CSSPropertiesJsStyle['textDecorationSkip'],
+  'text-decoration-skip-ink'?: CSSPropertiesJsStyle['textDecorationSkipInk'],
+  'text-decoration-style'?: CSSPropertiesJsStyle['textDecorationStyle'],
+  'text-decoration-thickness'?: CSSPropertiesJsStyle['textDecorationThickness'],
+  'text-emphasis'?: CSSPropertiesJsStyle['textEmphasis'],
+  'text-emphasis-color'?: CSSPropertiesJsStyle['textEmphasisColor'],
+  'text-emphasis-position'?: CSSPropertiesJsStyle['textEmphasisPosition'],
+  'text-emphasis-style'?: CSSPropertiesJsStyle['textEmphasisStyle'],
+  'text-indent'?: CSSPropertiesJsStyle['textIndent'],
+  'text-justify'?: CSSPropertiesJsStyle['textJustify'],
+  'text-orientation'?: CSSPropertiesJsStyle['textOrientation'],
+  'text-overflow'?: CSSPropertiesJsStyle['textOverflow'],
+  'text-rendering'?: CSSPropertiesJsStyle['textRendering'],
+  'text-shadow'?: CSSPropertiesJsStyle['textShadow'],
+  'text-size-adjust'?: CSSPropertiesJsStyle['textSizeAdjust'],
+  'text-spacing-trim'?: CSSPropertiesJsStyle['textSpacingTrim'],
+  'text-transform'?: CSSPropertiesJsStyle['textTransform'],
+  'text-underline-offset'?: CSSPropertiesJsStyle['textUnderlineOffset'],
+  'text-underline-position'?: CSSPropertiesJsStyle['textUnderlinePosition'],
+  'text-wrap'?: CSSPropertiesJsStyle['textWrap'],
+  'text-wrap-mode'?: CSSPropertiesJsStyle['textWrapMode'],
+  'text-wrap-style'?: CSSPropertiesJsStyle['textWrapStyle'],
+
+  'timeline-scope'?: CSSPropertiesJsStyle['timelineScope'],
+  'touch-action'?: CSSPropertiesJsStyle['touchAction'],
+
+  'transform-box'?: CSSPropertiesJsStyle['transformBox'],
+  'transform-origin'?: CSSPropertiesJsStyle['transformOrigin'],
+  'transform-style'?: CSSPropertiesJsStyle['transformStyle'],
+
+  'transition-behavior'?: CSSPropertiesJsStyle['transitionBehavior'],
+  'transition-delay'?: CSSPropertiesJsStyle['transitionDelay'],
+  'transition-duration'?: CSSPropertiesJsStyle['transitionDuration'],
+  'transition-property'?: CSSPropertiesJsStyle['transitionProperty'],
+  'transition-timing-function'?: CSSPropertiesJsStyle['transitionTimingFunction'],
+
+  'unicode-bidi'?: CSSPropertiesJsStyle['unicodeBidi'],
+  'user-select'?: CSSPropertiesJsStyle['userSelect'],
+  'vector-effect'?: CSSPropertiesJsStyle['vectorEffect'],
+  'vertical-align'?: CSSPropertiesJsStyle['verticalAlign'],
+
+  'view-timeline'?: CSSPropertiesJsStyle['viewTimeline'],
+  'view-timeline-axis'?: CSSPropertiesJsStyle['viewTimelineAxis'],
+  'view-timeline-inset'?: CSSPropertiesJsStyle['viewTimelineInset'],
+  'view-timeline-name'?: CSSPropertiesJsStyle['viewTimelineName'],
+  'view-transition-name'?: CSSPropertiesJsStyle['viewTransitionName'],
+
+  'white-space'?: CSSPropertiesJsStyle['whiteSpace'],
+  'white-space-collapse'?: CSSPropertiesJsStyle['whiteSpaceCollapse'],
+  'will-change'?: CSSPropertiesJsStyle['willChange'],
+  'word-break'?: CSSPropertiesJsStyle['wordBreak'],
+  'word-spacing'?: CSSPropertiesJsStyle['wordSpacing'],
+  'word-wrap'?: CSSPropertiesJsStyle['wordWrap'],
+  'writing-mode'?: CSSPropertiesJsStyle['writingMode'],
+  'z-index'?: CSSPropertiesJsStyle['zIndex'],
 }
 
 export type CSSProperties = CSSPropertiesJsStyle & CSSPropertiesHyphenStyle

@@ -5,7 +5,8 @@
  * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#ambient-modules
  */
 
-type Component = import('./types').Component
+type Composable = import('./types').Composable
+type Composition = import('./types').Composition
 type State = import('./types').State
 type States = import('./types').States
 type Template = import('./types').Template

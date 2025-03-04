@@ -1,10 +1,10 @@
 /**
- * @see https://www.w3schools.com/colors/colors_names.asp
+ * [W3Schools](https://www.w3schools.com/colors/colors_names.asp)
+ *
+ * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/named-color)
  */
-
 type CSSColorsCamelCase =
-  string
-  |'AliceBlue'|'AntiqueWhite'|'Aqua'|'Aquamarine'|'Azure'
+  'AliceBlue'|'AntiqueWhite'|'Aqua'|'Aquamarine'|'Azure'
 
   |'Beige'|'Bisque'|'Black'|'BlanchedAlmond'|'Blue'|'BlueViolet'|'Brown'|'BurlyWood'
 
@@ -52,8 +52,7 @@ type CSSColorsCamelCase =
   |'Yellow'|'YellowGreen'
 
 type CSSColorsLowerCase =
-  string
-  |'aliceblue'|'antiquewhite'|'aqua'|'aquamarine'|'azure'
+  'aliceblue'|'antiquewhite'|'aqua'|'aquamarine'|'azure'
 
   |'beige'|'bisque'|'black'|'blanchedalmond'|'blue'|'blueviolet'|'brown'|'burlywood'
 
@@ -100,4 +99,31 @@ type CSSColorsLowerCase =
 
   |'yellow'|'yellowgreen'
 
-export type CSSColors = CSSColorsCamelCase | CSSColorsLowerCase
+export type CSSColors = string
+  | (CSSColorsCamelCase | CSSColorsLowerCase)
+  | 'transparent'
+  | 'currentColor'
+  | 'rgb()'
+  | 'rgb(255 0 153)'
+  | 'rgb(255 0 153 / 80%)'
+  | 'hsl()'
+  | 'hsl(150 30% 60%)'
+  | 'hsl(150 30% 60% / 80%)'
+  | 'hwb()'
+  | 'hwb(12 50% 0%)'
+  | 'hwb(194 0% 0% / 0.5)'
+  | 'lab()'
+  | 'lab(50% 40 59.5)'
+  | 'lab(50% 40 59.5 / 0.5)'
+  | 'lch()'
+  | 'lch(52.2% 72.2 50)'
+  | 'lch(52.2% 72.2 50 / 0.5)'
+  | 'oklab()'
+  | 'oklab(59% 0.1 0.1)'
+  | 'oklab(59% 0.1 0.1 / 0.5)'
+  | 'oklch()'
+  | 'oklch(60% 0.15 50)'
+  | 'oklch(60% 0.15 50 / 0.5)'
+  | 'light-dark()'
+  | 'light-dark(white, black)'
+  | 'light-dark(rgb(255 255 255), rgb(0 0 0))'

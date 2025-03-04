@@ -1,5 +1,5 @@
 declare module "galaxia/paintor" {
-  import './paintor/global.d.ts'
+  import 'types/exports/paintor/global'
 
   export {
     default,
@@ -8,5 +8,5 @@ declare module "galaxia/paintor" {
     component, state, style, template,
     on, off,
     paintor
-  } from './paintor/index.d.ts'
+  } from 'types/exports/paintor/index'
 }

@@ -3,179 +3,174 @@
  * @see https://www.typescriptlang.org/docs/handbook/utility-types.html
  */
 
+import { Reactive } from './common'
 import { Template } from './types'
 
 export interface Statements {
-  if (
-    condition: boolean | (() => boolean),
-    handler: (() => void | Template) | Template,
-    elseHandler?: (() => void | Template) | Template,
-  ) : HTMLElement[]
+  $if: {
+    (
+      condition: Reactive<boolean>,
+      handler: Template,
+      elseHandler?: Template,
+    ): HTMLElement[]
+  }
+
+  $each: {
+    /**
+     * Calls the handler function for each element in the input Object or Map.
+     */
+    <
+      Input extends (...args: any[]) => Array<any>
+    >(
+      func: Input,
+      handler: (
+        value: ReturnType<Input>[number],
+        key: string
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+     * Calls the handler function for each element in the input Object or Map.
+     */
+    <
+      Input extends (...args: any[]) => Set<any>
+    >(
+      func: Input,
+      handler: (
+        value: ReturnType<Input> extends Set<infer V> ? V : never,
+        key: number
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+     * Calls the handler function for each element in the input Object or Map.
+     */
+      <
+        Input extends (...args: any[]) => Map<any, any>
+      >(
+      func: Input,
+      handler: (
+        value: ReturnType<Input> extends Map<any, infer V> ? V : never,
+        key: ReturnType<Input> extends Map<infer K, any> ? K : never
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+     * Calls the handler function for each element in the input Object or Map.
+     */
+      <
+        Input extends (...args: any[]) => Record<keyof any, any>
+      >(
+      func: Input,
+      handler: (
+        value: ReturnType<Input> extends Record<PropertyKey, infer V> ? V : never,
+        key: ReturnType<Input> extends Record<infer K, infer V> ? K : never
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+      * Calls the handler function for each element in the input Array.
+      */
+    <
+      Input extends Array<any>
+    >(
+      array: Input,
+      handler: (
+        value: Input[number],
+        key: string
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+      * Calls the handler function for each element in the input Set.
+      */
+    <
+      Input extends Set<any>
+    >(
+      set: Input,
+      handler: (
+        value: Input extends Set<infer V> ? V : never,
+        key: number
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+      * Calls the handler function for each element in the input Map.
+      */
+    <
+      Input extends Map<any, any>,
+      Key extends keyof Input
+    >(
+      map: Input,
+      handler: (
+        value: Input extends Map<any, infer V> ? V : never,
+        key: Input extends Map<infer K, any> ? K : never
+      ) => boolean | any,
+      handlerOnEmpty?: () => void
+    ): HTMLElement[] | Error
+
+    /**
+      * Calls the handler function for each element in the input Object.
+      */
+    <
+      Input extends Record<keyof any, any>,
+      Key extends keyof Input
+    >(
+      object: Input,
+      handler: ((value?: Input[Key], key?: Key) => (boolean | any)),
+      handlerOnEmpty?: () => void,
+    ): (HTMLElement[]|Error)
+  }
+
+  $state: {
+    /**
+      * Calls the handler function initially, and then every time
+      * the input state changes.
+      */
+    <Input extends Array<any>>(
+      arrayState: Input,
+      handler: ((state: Input) => (Template|void)),
+      handlerOnEmpty?: () => void,
+    ): (HTMLElement[]|Error)
+
+    <Input extends Array<any>>(
+      arrayState: Input,
+      handler: Template,
+      handlerOnEmpty?: () => void,
+    ): (HTMLElement[]|Error)
+
+    <Input extends Record<keyof any, any>>(
+      objectState: Input,
+      handler: ((state: Input) => (Template|void)),
+      handlerOnEmpty?: () => void,
+    ): (HTMLElement[]|Error)
+
+    <Input extends Record<keyof any, any>>(
+      objectState: Input,
+      handler: Template,
+      handlerOnEmpty?: () => void,
+    ): (HTMLElement[]|Error)
+  }
 
   /**
-   * Calls a callback function for each element in the input Object or Map.
+   * Run the handler repeatedly for each number between "from"
+   * and "to", including "from" and "to".
    */
-  forEach<
-    Input extends (...args: any) => Array<>
-  >(
-    func : Input,
-    handler : (
-      value : ReturnType<Input>[number],
-      key : string
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
+  $repeat(
+    from: Reactive<number>,
+    to: Reactive<number>,
+    handler: (key: number) => boolean | any
+  ): (HTMLElement[]|Error)
 
-  /**
-   * Calls a callback function for each element in the input Object or Map.
-   */
-  forEach<
-    Input extends (...args: any) => Set<>
-  >(
-    func : Input,
-    handler : (
-      value : ReturnType<Input> extends Set<infer V> ? V : never,
-      key : number
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
+  $css(sheet: CSSStyleSheet | string | string[]): void
 
-  /**
-   * Calls a callback function for each element in the input Object or Map.
-   */
-  forEach<
-    Input extends (...args: any) => Map<>
-  >(
-    func : Input,
-    handler : (
-      value : ReturnType<Input> extends Map<any, infer V> ? V : never,
-      key : ReturnType<Input> extends Map<infer K, any> ? K : never
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
+  $html(htmlString: string): HTMLElement[];
 
-  /**
-   * Calls a callback function for each element in the input Object or Map.
-   */
-  forEach<
-    Input extends (...args: any) => Object<>
-  >(
-    func : Input,
-    handler : (
-      value : ReturnType<Input> extends Object<PropertyKey, infer V> ? V : never,
-      key : ReturnType<Input> extends Object<infer K, infer V> ? K : never
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the input Array.
-   */
-  forEach<
-    Input extends Array<>
-  >(
-    array : Input,
-    handler : (
-      value : Input[number],
-      key : string
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the input Set.
-   */
-  forEach<
-    Input extends Set<>
-  >(
-    set : Input,
-    handler : (value : Input extends Set<infer V> ? V : never, key : number) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the input Map.
-   */
-  forEach<
-    Input extends Map<>,
-    Key extends keyof Input
-  >(
-    map : Input,
-    handler : (
-      value : Input extends Map<any, infer V> ? V : never,
-      key : Input extends Map<infer K, any> ? K : never
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the input Object.
-   */
-  forEach<
-    Input extends Object<>,
-    Key extends keyof Input
-  >(
-    object : Input,
-    handler : (
-      value : Input[Key],
-      key : Key
-    ) => boolean | any,
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the state,
-   * when the state is an Array.
-   */
-  forState<
-    Input extends Array<>
-  >(
-    array : Input,
-    handler: Template | ((state: Input) => Template) | ((state: Input) => void),
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the state,
-   * when the state is a Set.
-   */
-  forState<
-    Input extends Set<>
-  >(
-    set : Input,
-    handler: Template | ((state: Input) => Template) | ((state: Input) => void),
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the state,
-   * when the state is a Map.
-   */
-  forState<
-    Input extends Map<>,
-    Key extends keyof Input
-  >(
-    map : Input,
-    handler: Template | ((state: Input) => Template) | ((state: Input) => void),
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  /**
-   * Calls a callback function for each element in the state,
-   * when the state is an Object.
-   */
-  forState<
-    Input extends Object<>,
-    Key extends keyof Input
-  >(
-    object : Input,
-    handler: Template | ((state: Input) => Template) | ((state: Input) => void),
-    handlerOnEmpty?: () => void
-  ) : HTMLElement[] | Error
-
-  for(
-    from : number | (() => number),
-    to : number | (() => number),
-    handler : (key: number) => boolean | any
-  ) : HTMLElement[] | Error
+  $html(str: TemplateStringsArray, ...keys: any[]): HTMLElement[];
 }
