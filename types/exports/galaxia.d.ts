@@ -30,35 +30,34 @@ type GalaxiaOptions = {
   useCluster? : boolean
 }
 
-class Url {
+declare class Url {
   host: string
-  get hostname(): string {}
-  get origin(): string {}
+  readonly hostname: string
+  readonly origin: string
   pathname: string
-  get port(): string {}
+  readonly port: string
   protocol: string
   search: string
-  get searchParams(): URLSearchParams {}
+  readonly searchParams: URLSearchParams
 }
 
-class HttpRequest {
+declare class HttpRequest {
   headers: import('http').IncomingHttpHeaders
   httpVersion: string
   method: string
   original: import('http').IncomingMessage | import('http2').Http2ServerRequest
-  get complete(): boolean {}
-  get cookies(): Record<string, string> {}
-  get remoteAddress(): string {}
-  get url(): Url {}
+  readonly complete: boolean
+  readonly cookies: Record<string, string>
+  readonly remoteAddress: string
+  readonly url: Url
   getCookie: (name: string) => string
   hasCookie: (name: string) => boolean
   setTimeout: (msecs: number, callback?: () => void) => void
 }
 
-class HttpResponse {
-  get headersSent(): boolean {}
-  get statusCode(): number {}
-  set statusCode(): number {}
+declare class HttpResponse {
+  readonly headersSent: boolean
+  statusCode: number
   original: import('http').ServerResponse | import('http2').Http2ServerResponse
   end: (data?: string, encoding?: BufferEncoding, callback?: () => void) => HttpResponse
   getHeader: (name: string) => number | string | string[] | undefined
@@ -72,23 +71,23 @@ class HttpResponse {
   writeContinue: () => void
 }
 
-class HttpContext {
+declare class HttpContext {
   request: HttpRequest
   response: HttpResponse
 }
 
-class Routes {
+declare class Routes {
   httpContext: HttpContext
   request: HttpRequest
   response: HttpResponse
 }
 
 declare namespace Galaxia {
-  type Options = GalaxiaOptions
-  type Config = GalaxiaConfig
-  type HttpRequest = HttpRequest
-  type HttpResponse = HttpResponse
-  type HttpContext = HttpContext
+  export type Options = GalaxiaOptions
+  export type Config = GalaxiaConfig
+  // export type HttpRequest = HttpRequest
+  // export type HttpResponse = HttpResponse
+  // export type HttpContext = HttpContext
 }
 
 declare module 'galaxia' {

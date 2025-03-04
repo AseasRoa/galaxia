@@ -1,5 +1,5 @@
 declare module 'galaxia/db/mongo' {
-  import { DocSchema } from './docschema/types.d.ts'
+  import { DocSchema } from 'types/exports/docschema/types'
   import { Condition, MongoServerError, ObjectId, RootFilterOperators } from 'mongodb'
 
   type MongoClient = import('mongodb').MongoClient
@@ -9,14 +9,23 @@ declare module 'galaxia/db/mongo' {
     [P in keyof T]?: T[P] | (Condition<T[P]> & RootFilterOperators<T>)
   }
 
+  // Required<SCHEMA> helps when there are optional keys in the schema
+  type ArrayUnionFromSchema<SCHEMA> = (
+    Required<SCHEMA> extends Record<infer K, unknown> ? K[] : never
+  )
+  type UnionFromArray<T> = (
+    T extends Array<infer U> ? UnionFromArray<U> : T
+  )
+  //type UnionFromArray<ARR_T extends Readonly<unknown[]>> = ARR_T[number]
+
   export class Model<SCHEMA> {
     constructor(
       databaseName: string,
       collectionName: string,
       schema: SCHEMA
-    ) : this
+    )
 
-    async ensureIndex(
+    ensureIndex(
       keys: (
         Required<SCHEMA> extends Record<infer K, any>
           ? Partial<Record<K, 1 | -1>>
@@ -28,7 +37,7 @@ declare module 'galaxia/db/mongo' {
     /**
      * @throws {MongoServerError}
      */
-    async dropIndex(
+    dropIndex(
       index:
         string
         | (
@@ -36,9 +45,9 @@ declare module 'galaxia/db/mongo' {
             ? Partial<Record<K, 1 | -1>>
             : never
         )
-    ): boolean
+    ): Promise<boolean>
 
-    async indexes(): {
+    indexes(): Promise<{
       v: number,
       key: (
         SCHEMA extends Record<infer K, any>
@@ -46,7 +55,7 @@ declare module 'galaxia/db/mongo' {
           : never
       ),
       name: string
-    }[]
+    }[]>
 
     query(
       filter: QueryFilter<SCHEMA>
@@ -60,26 +69,38 @@ declare module 'galaxia/db/mongo' {
     /**
      * The fields to include in the query.
      */
-    include<
-      T extends Required<SCHEMA> extends Record<infer K, any>
-        ? (K[] | K[][])
-        : never
-    >(
-      // Required<SCHEMA> helps when there are optional keys in the schema
-      ...fields: T
-    ): Model<Pick<SCHEMA, (T extends Array<infer V> ? V : never)>>
-    // ): Model<T extends Array<infer V> ? {[P in V]: SCHEMA[P]} : never>
+    include: {
+      <T extends ArrayUnionFromSchema<SCHEMA>>(
+        ...fields: T
+      ): Model<
+        // @ts-expect-error
+        Pick<SCHEMA, UnionFromArray<T>>
+      >
+
+      <T extends ArrayUnionFromSchema<SCHEMA>>(
+        ...fields: T[]
+      ): Model<
+        // @ts-expect-error
+        Pick<SCHEMA, UnionFromArray<T>>
+      >
+    }
+
     /**
      * The fields to exclude from the query.
      */
-    exclude<
-      T extends Required<SCHEMA> extends Record<infer K, any>
-        ? (K[] | K[][])
-        : never
-    >(
-      // Required<SCHEMA> helps when there are optional keys in the schema
-      ...fields: T
-    ): Model<Omit<SCHEMA, (T extends Array<infer V> ? V : never)>>
+    exclude: {
+      <T extends ArrayUnionFromSchema<SCHEMA>>(
+        ...fields: T
+      ): Model<
+        Omit<SCHEMA, UnionFromArray<T>>
+      >
+
+      <T extends ArrayUnionFromSchema<SCHEMA>>(
+        ...fields: T[]
+      ): Model<
+        Omit<SCHEMA, UnionFromArray<T>>
+      >
+    }
 
     /**
      * Set to skip N documents ahead in your query (useful for pagination).
@@ -101,15 +122,15 @@ declare module 'galaxia/db/mongo' {
      * Returns an integer for the number of documents that match the query of the
      * collection or view. This method is available for use in Transactions.
      */
-    async count(): Promise<number>
+    count(): Promise<number>
 
-    async exists(): Promise<boolean>
+    exists(): Promise<boolean>
 
-    async deleteMany(query?: Partial<SCHEMA>): Promise<import('mongodb').DeleteResult>
-    async deleteOne(query?: Partial<SCHEMA>): Promise<import('mongodb').DeleteResult>
+    deleteMany(query?: Partial<SCHEMA>): Promise<import('mongodb').DeleteResult>
+    deleteOne(query?: Partial<SCHEMA>): Promise<import('mongodb').DeleteResult>
 
-    async insertMany(documents: SCHEMA | SCHEMA[]): Promise<any[]>
-    async insertOne(document: SCHEMA): Promise<any>
+    insertMany(documents: SCHEMA | SCHEMA[]): Promise<any[]>
+    insertOne(document: SCHEMA): Promise<any>
 
     /**
      * Selects documents in a collection or view and returns a cursor to the
@@ -117,8 +138,8 @@ declare module 'galaxia/db/mongo' {
      */
     fetchCursor(): import('mongodb').FindCursor
 
-    async fetchById(id: string) : Promise<SCHEMA | null>
-    async fetchMany(): Promise<SCHEMA[]>
+    fetchById(id: string) : Promise<SCHEMA | null>
+    fetchMany(): Promise<SCHEMA[]>
     /**
      * Returns one document that satisfies the specified query criteria on the
      * collection or view.
@@ -129,10 +150,10 @@ declare module 'galaxia/db/mongo' {
      * same as insertion order. If no document satisfies the query, the
      * method returns null.
      */
-    async fetchOne() : Promise<SCHEMA | null>
+    fetchOne() : Promise<SCHEMA | null>
 
-    async updateMany(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
-    async updateOne(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
+    updateMany(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
+    updateOne(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
   }
 
   /**

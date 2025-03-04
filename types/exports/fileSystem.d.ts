@@ -1,5 +1,5 @@
 declare module 'galaxia/fileSystem' {
-  export * from '../../lib/functions/fileSystem.js'
+  export * from 'lib/functions/fileSystem.js'
   export {
     dirExists,
     dirExistsSync,
