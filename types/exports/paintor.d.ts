@@ -3,6 +3,7 @@ declare module "galaxia/paintor" {
 
   export {
     default,
+    css,
     fetchTranslations,
     isComposition, isTemplate,
     compose, state, style, template,
