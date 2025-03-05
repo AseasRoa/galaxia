@@ -4,8 +4,9 @@ declare module "galaxia/paintor" {
   export {
     default,
     fetchTranslations,
-    isComponent, isTemplate,
-    component, state, style, template,
+    isComposition, isTemplate,
+    compose, state, style, template,
+    onMount,
     on, off,
     paintor
   } from 'types/exports/paintor/index'
