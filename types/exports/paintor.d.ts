@@ -9,6 +9,7 @@ declare module "galaxia/paintor" {
     compose, state, style, template,
     onMount,
     on, off,
-    paintor
+    paintor,
+    Template
   } from 'types/exports/paintor/index'
 }
