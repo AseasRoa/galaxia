@@ -18,6 +18,7 @@
     "./fileSystem": "./lib/exports/fileSystem.js",
     "./docschema": "./lib/exports/docschema.js",
     "./paintor": "./lib/exports/paintor.js",
+    "./paintor-ui": "./lib/exports/paintor-ui.js",
     "./db/mongo": "./lib/exports/db/mongo.js"
   },
   "imports": {
@@ -50,6 +51,7 @@
     "marked": "^15.0.7",
     "mongodb": "^6.14.1",
     "paintor": "file:../paintor",
+    "paintor-ui": "file:../paintor-ui",
     "pug": "^3.0.3",
     "sass": "^1.85.1",
     "strip-comments": "^2.0.1",
