@@ -1,16 +1,19 @@
 // Galaxia
-import './exports/galaxia.d.ts'
+import 'types/exports/galaxia.d.ts'
 
 // DocSchema
-import './exports/docschema/global.d.ts'
-import './exports/docschema.d.ts'
+import 'types/exports/docschema/global.d.ts'
+import 'types/exports/docschema.d.ts'
 
 // Paintor
-import './exports/paintor/global.d.ts'
-import './exports/paintor.d.ts'
+import 'types/exports/paintor/global.d.ts'
+import 'types/exports/paintor.d.ts'
+
+// Paintor-UI
+import 'types/exports/paintor-ui.d.ts'
 
 // FileSystem
-import './exports/fileSystem.d.ts'
+import 'types/exports/fileSystem.d.ts'
 
 // Database
-import './exports/db-mongo.d.ts'
+import 'types/exports/db-mongo.d.ts'
