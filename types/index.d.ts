@@ -1,12 +1,12 @@
 // Galaxia
-import 'types/exports/galaxia.d.ts'
+import './exports/galaxia.d.ts'
 
 // DocSchema
-import 'types/exports/docschema/global.d.ts'
+import './exports/docschema/global.d.ts'
 import 'types/exports/docschema.d.ts'
 
 // Paintor
-import 'types/exports/paintor/global.d.ts'
+import './exports/paintor/global.d.ts'
 import 'types/exports/paintor.d.ts'
 
 // Paintor-UI
