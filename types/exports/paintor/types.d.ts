@@ -17,9 +17,9 @@ export type TargetObject = (Array<any> | Record<keyof any, any>)
 export type State = (Array<any> | Record<keyof any, any>)
 export type States = Record<string, State>
 
-export type Composable = Template | ClassComponent
+export type Composable = Template | Component
 
-export class ClassComponent {
+export class Component {
   state?: State
   onMount?: () => void
   css?: () => CSSStyleSheet | string

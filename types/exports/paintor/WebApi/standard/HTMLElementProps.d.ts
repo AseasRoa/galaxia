@@ -490,4 +490,212 @@ export interface HTMLElementProps extends ElementProps {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/writingsuggestions)
    */
   writingSuggestions?: Bindable<boolean>,
+
+  /**
+   * The `beforetoggle` event fires on a popover or `<dialog>` element just
+   * before it is shown or hidden.
+   *
+   * - If the element is transitioning from hidden to showing,
+   * the `event.oldState` property will be set to `closed` and
+   * the `event.newState` property will be set to `open`.
+   * - If the element is transitioning from showing to hidden,
+   * then `event.oldState` will be `open` and `event.newState` will be `closed`.
+   *
+   * This event is cancelable when an element is toggled to open ("show")
+   * but not when the element is closing.
+   *
+   * Among other things, this event can be used to:
+   *
+   * - prevent an element from being shown.
+   *
+   * - add or remove classes or properties from the element or associated
+   * elements, for example to control the animation behaviour of a dialog
+   * as it is opened and closed.
+   *
+   * - clear the state of the element before it is opened or after it is
+   * hidden, for example to reset a dialog form and return value to
+   * an empty state, or hide any nested manual popovers when reopening a popup.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/beforetoggle_event)
+   */
+  onBeforeToggle?(this: GlobalEventHandlers, event: ToggleEvent): any,
+
+  /**
+   * The `change` event is fired for `<input>`, `<select>`, and `<textarea>`
+   * elements when the user modifies the element's value. Unlike the `input`
+   * event, the `change` event is not necessarily fired for each alteration
+   * to an element's `value`.
+   *
+   * Depending on the kind of element being changed and the way the user
+   * interacts with the element, the `change` event fires at a different moment:
+   *
+   * - When a `<input type="checkbox">` element is checked or unchecked
+   * (by clicking or using the keyboard);
+   *
+   * - When a `<input type="radio">` element is checked
+   * (but not when unchecked);
+   * - When the user commits the change explicitly (e.g., by selecting a value
+   * from a `<select>`'s dropdown with a mouse click, by selecting a date from
+   * a date picker for `<input type="date">`, by selecting a file in the file
+   * picker for `<input type="file">`, etc.);
+   *
+   * - When the element loses focus after its value was changed: for elements
+   * where the user's interaction is typing rather than selection,
+   * such as a `<textarea>` or the `text`, `search`, `url`, `tel`,
+   * `email`, or `password` types of the `<input>` element.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/change_event)
+   */
+  onChange?(this: GlobalEventHandlers, event: Event): any,
+
+  /**
+   * The `copy` event fires when the user initiates a copy action through
+   * the browser's user interface.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/copy_event)
+   */
+  onCopy?(this: GlobalEventHandlers, event: ClipboardEvent): any,
+
+  /**
+   * The `cut` event fires when the user initiates a cut action through
+   * the browser's user interface.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/cut_event)
+   */
+  onCut?(this: GlobalEventHandlers, event: ClipboardEvent): any,
+
+  /**
+   * The `drag` event is fired every few hundred milliseconds as an element
+   * or text selection is being dragged by the user.
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/drag_event)
+   */
+  onDrag?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `dragend` event is fired when a drag operation ends (by releasing
+   * a mouse button or hitting the escape key).
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/dragend_event)
+   */
+  onDragEnd?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `dragenter` event is fired when a dragged element or text selection
+   * enters a valid drop target. The target object is the immediate user
+   * selection (the element directly indicated by the user as the drop target),
+   * or the `<body>` element.
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/dragenter_event)
+   */
+  onDragEnter?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `dragleave` event is fired when a dragged element or text selection
+   * leaves a valid drop target.
+   *
+   * This event is not cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/dragleave_event)
+   */
+  onDragLeave?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `dragover` event is fired when an element or text selection is being
+   * dragged over a valid drop target (every few hundred milliseconds).
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/dragover_event)
+   */
+  onDragOver?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `dragstart` event is fired when the user starts dragging an element
+   * or text selection.
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/dragstart_event)
+   */
+  onDragStart?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `drop` event is fired when an element or text selection is dropped
+   * on a valid drop target. To ensure that the `drop` event always fires as
+   * expected, you should always include a `preventDefault()` call in the part
+   * of your code which handles the `dragover` event.
+   *
+   * This event is cancelable and may bubble up to the `Document` and `Window`
+   * objects.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/drop_event)
+   */
+  onDrop?(this: GlobalEventHandlers, event: DragEvent): any,
+
+  /**
+   * The `error` event is fired on an element when a resource failed to load,
+   * or can't be used. For example, if a script has an execution error or
+   * an image can't be found or is invalid.
+   *
+   * This event is not cancelable and does not bubble.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/error_event)
+   */
+  onError?(this: GlobalEventHandlers, event: UIEvent): any,
+
+  /**
+   * The `load` event fires for elements containing a resource when the resource
+   * has successfully loaded. Currently, the list of supported HTML elements
+   * are: `<body>`, `<embed>`, `<iframe>`, `<img>`, `<link>`, `<object>`,
+   * `<script>`, `<style>`, and `<track>`.
+   *
+   * > **_NOTE:_**
+   * The `load` event on `HTMLBodyElement` is actually an alias for
+   * the `window.onload` event. Therefore, the `load` event will only fire on
+   * the `<body>` element once all the document's resources have loaded or
+   * errored. However, for the sake of clarity, it is recommended that
+   * the event handler is attached to the `window` object directly rather
+   * than on `HTMLBodyElement`.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/load_event)
+   */
+  onLoad?(this: GlobalEventHandlers, event: Event): any,
+
+  /**
+   * The `paste` event fires when the user initiates a paste action through
+   * the browser's user interface.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/paste_event)
+   */
+  onPaste?(this: GlobalEventHandlers, event: ClipboardEvent): any,
+
+  /**
+   * The `toggle` event fires on a popover element, `<dialog>` element,
+   * or `<details>` element just after it is shown or hidden.
+   *
+   * - If the element is transitioning from hidden to showing,
+   * the `event.oldState` property will be set to closed and
+   * the `event.newState` property will be set to open.
+   *
+   * - If the element is transitioning from showing to hidden,
+   * then `event.oldState` will be open and `event.newState` will be closed.
+   *
+   * This event is not cancelable.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/toggle_event)
+   */
+  onToggle?(this: GlobalEventHandlers, event: ToggleEvent): any,
 }

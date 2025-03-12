@@ -3,6 +3,7 @@
  */
 
 import {
+  Composable,
   Composition,
   ObserverListener,
   ObserverType,

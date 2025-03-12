@@ -70,16 +70,6 @@ export interface Elements {
     ...children: (Children | string)[]
   ): HTMLElement;
 
-  /**
-   * Create custom HTML element
-   * @deprecated
-   */
-  createElement(
-    tagName: string,
-    props?: HTMLElementProps,
-    ...children: (Children | string)[]
-  ): HTMLElement;
-
   a: {
     /**
      * The `<a>` HTML element (or anchor element), with its `href` attribute,
