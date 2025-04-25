@@ -1949,31 +1949,37 @@ type CSSPropertiesJsStyle = {
    * for example the detail of what happens when `display: flex` is declared
    * is defined in the CSS Flexible Box Model specification.
    *
-   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/direction)
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/display)
    */
   display?: Bindable<
     'block'
     |'inline'
-    |'inline-block'
-    |'flex'
-    |'inline-flex'
-    |'grid'
-    |'inline-grid'
-    |'flow-root'
-    |'none'
-    |'contents'
-    |'table'
-    |'table-row'
-    |'list-item'
-    |'inline-table'
     |'run-in'
-    |'table-caption'
-    |'table-column-group'
+    |'flow'
+    |'flow-root'
+    |'table'
+    |'flex'
+    |'grid'
+    |'ruby'
+    |'list-item'
+    |'table-row-group'
     |'table-header-group'
     |'table-footer-group'
-    |'table-row-group'
+    |'table-row'
     |'table-cell'
+    |'table-column-group'
     |'table-column'
+    |'table-caption'
+    |'ruby-base'
+    |'ruby-text'
+    |'ruby-base-container'
+    |'ruby-text-container'
+    |'contents'
+    |'none'
+    |'inline-block'
+    |'inline-table'
+    |'inline-flex'
+    |'inline-grid'
     |GlobalValues
   >,
 
@@ -2326,7 +2332,15 @@ type CSSPropertiesJsStyle = {
   /**
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant)
    */
-  fontVariant?: Bindable<string|'normal'|'none'|'small-caps'|GlobalValues>,
+  fontVariant?: Bindable<
+    string
+    |'normal'
+    |'none'
+    |'small-caps'|'all-small-caps'|'petite-caps'|'all-petite-caps'|'unicase'|'titling-caps'
+    |'sub'|'super'
+    |'text'|'emoji'|'unicode'
+    |GlobalValues
+  >,
 
   /**
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates)
@@ -3041,7 +3055,8 @@ type CSSPropertiesJsStyle = {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker)
    */
   marker?: Bindable<
-    'none'
+    string
+    |'none'
     |'url()'
     |GlobalValues
   >,
@@ -3050,7 +3065,8 @@ type CSSPropertiesJsStyle = {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-end)
    */
   markerEnd?: Bindable<
-    'none'
+    string
+    |'none'
     |'url()'
     |GlobalValues
   >,
@@ -3059,7 +3075,8 @@ type CSSPropertiesJsStyle = {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-mid)
    */
   markerMid?: Bindable<
-    'none'
+    string
+    |'none'
     |'url()'
     |GlobalValues
   >,
@@ -3068,7 +3085,8 @@ type CSSPropertiesJsStyle = {
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/marker-start)
    */
   markerStart?: Bindable<
-    'none'
+    string
+    |'none'
     |'url()'
     |GlobalValues
   >,
@@ -4300,7 +4318,7 @@ type CSSPropertiesJsStyle = {
   /**
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/stroke-width)
    */
-  strokeWidth?: Bindable<string|GlobalValues>,
+  strokeWidth?: Bindable<number|string|GlobalValues>,
 
   /**
    * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/tab-size)

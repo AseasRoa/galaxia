@@ -1,6 +1,5 @@
-import { FormatArray, Reactive, StringConvertible } from './common'
+import { Children, FormatArray, Reactive, StringConvertible } from './common'
 import {
-  AnchorElementProps,
   AreaElementProps,
   AudioElementProps,
   BaseElementProps,
@@ -15,6 +14,7 @@ import {
   DetailsElementProps,
   DialogElementProps,
   EmbedElementProps,
+  FencedFrameProps,
   FieldSetElementProps,
   FormElementProps,
   IFrameElementProps,
@@ -34,61 +34,19 @@ import {
   OutputElementProps,
   ProgressElementProps,
   QElementProps,
-  ScriptElementProps,
   SelectElementProps,
   SlotElementProps,
   SourceElementProps,
-  StyleElementProps,
-  SvgElementProps,
   TdElementProps,
   TextAreaElementProps,
   ThElementProps,
   TimeElementProps,
   TrackElementProps,
   VideoElementProps,
-} from './elementProps'
+} from './props/htmlElementProps'
 import { HTMLElementProps } from './standard/HTMLElementProps'
 
-type Child = (
-  Error
-  | HTMLElement
-  | HTMLElement[]
-  | Template
-  | Reactive<StringConvertible>
-  // The result of calling a function like this: (x) => void
-  | void
-)
-type Children = Child[]
-
 export interface Elements {
-  /**
-   * Create custom HTML element
-   */
-  $element(
-    tagName: string,
-    props?: HTMLElementProps,
-    ...children: (Children | string)[]
-  ): HTMLElement;
-
-  a: {
-    /**
-     * The `<a>` HTML element (or anchor element), with its `href` attribute,
-     * creates a hyperlink to web pages, files, email addresses, locations in
-     * the same page, or anything else a URL can address.
-     *
-     * Content within each `<a>` should indicate the link's destination.
-     * If the `href` attribute is present, pressing the enter key while
-     * focused on the `<a>` element will activate it.
-     *
-     * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/a)
-     */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: AnchorElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
-  };
-
   abbr: {
     /**
      * The `<abbr>` HTML element represents an abbreviation or acronym.
@@ -137,7 +95,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/area)
      */
-    (props: AreaElementProps): HTMLElement
+    (props: AreaElementProps): HTMLAreaElement
   };
 
   article: {
@@ -184,11 +142,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/audio)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: AudioElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLAudioElement
+    (formatArray: FormatArray, ...children: Children): HTMLAudioElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLAudioElement
+    (props: AudioElementProps, ...children: Children): HTMLAudioElement
+    (...children: Children): HTMLAudioElement
   };
 
   b: {
@@ -222,7 +180,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/base)
      */
-    (props: BaseElementProps): HTMLElement
+    (props: BaseElementProps): HTMLBaseElement
   };
 
   bdi: {
@@ -265,11 +223,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/blockquote)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: BlockquoteElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLQuoteElement
+    (formatArray: FormatArray, ...children: Children): HTMLQuoteElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLQuoteElement
+    (props: BlockquoteElementProps, ...children: Children): HTMLQuoteElement
+    (...children: Children): HTMLQuoteElement
   };
 
   body: {
@@ -279,11 +237,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/body)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLBodyElement
+    (formatArray: FormatArray, ...children: Children): HTMLBodyElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLBodyElement
+    (props: HTMLElementProps, ...children: Children): HTMLBodyElement
+    (...children: Children): HTMLBodyElement
   };
 
   br: {
@@ -298,8 +256,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/br)
      */
-    (): HTMLElement
-    (props: HTMLElementProps): HTMLElement
+    (): HTMLBRElement
+    (props: HTMLElementProps): HTMLBRElement
   };
 
   button: {
@@ -314,11 +272,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/button)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: ButtonElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLButtonElement
+    (formatArray: FormatArray, ...children: Children): HTMLButtonElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLButtonElement
+    (props: ButtonElementProps, ...children: Children): HTMLButtonElement
+    (...children: Children): HTMLButtonElement
   };
 
   canvas: {
@@ -328,11 +286,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/canvas)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: CanvasElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLCanvasElement
+    (formatArray: FormatArray, ...children: Children): HTMLCanvasElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLCanvasElement
+    (props: CanvasElementProps, ...children: Children): HTMLCanvasElement
+    (...children: Children): HTMLCanvasElement
   };
 
   caption: {
@@ -342,11 +300,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/caption)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableCaptionElement
+    (formatArray: FormatArray, ...children: Children): HTMLTableCaptionElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLTableCaptionElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableCaptionElement
+    (...children: Children): HTMLTableCaptionElement
   };
 
   cite: {
@@ -390,8 +348,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/col)
      */
-    (): HTMLElement
-    (props: ColElementProps): HTMLElement
+    (): HTMLTableColElement
+    (props: ColElementProps): HTMLTableColElement
   };
 
   colgroup: {
@@ -400,9 +358,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/colgroup)
      */
-    (): HTMLElement
-    (props: ColgroupElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableColElement
+    (props: ColgroupElementProps, ...children: Children): HTMLTableColElement
+    (...children: Children): HTMLTableColElement
   };
 
   data: {
@@ -413,11 +371,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/data)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: DataElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDataElement
+    (formatArray: FormatArray, ...children: Children): HTMLDataElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLDataElement
+    (props: DataElementProps, ...children: Children): HTMLDataElement
+    (...children: Children): HTMLDataElement
   };
 
   datalist: {
@@ -428,11 +386,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/datalist)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: DataElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDataListElement
+    (formatArray: FormatArray, ...children: Children): HTMLDataListElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLDataListElement
+    (props: DataElementProps, ...children: Children): HTMLDataListElement
+    (...children: Children): HTMLDataListElement
   };
 
   dd: {
@@ -460,11 +418,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/del)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: DelElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLModElement
+    (formatArray: FormatArray, ...children: Children): HTMLModElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLModElement
+    (props: DelElementProps, ...children: Children): HTMLModElement
+    (...children: Children): HTMLModElement
   };
 
   details: {
@@ -483,11 +441,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/details)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: DetailsElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDetailsElement
+    (formatArray: FormatArray, ...children: Children): HTMLDetailsElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLDetailsElement
+    (props: DetailsElementProps, ...children: Children): HTMLDetailsElement
+    (...children: Children): HTMLDetailsElement
   };
 
   dfn: {
@@ -530,11 +488,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/dialog)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: DialogElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDialogElement
+    (formatArray: FormatArray, ...children: Children): HTMLDialogElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLDialogElement
+    (props: DialogElementProps, ...children: Children): HTMLDialogElement
+    (...children: Children): HTMLDialogElement
   };
 
   div: {
@@ -558,11 +516,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/div)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDivElement
+    (formatArray: FormatArray, ...children: Children): HTMLDivElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLDivElement
+    (props: HTMLElementProps, ...children: Children): HTMLDivElement
+    (...children: Children): HTMLDivElement
   }
 
   dl: {
@@ -575,9 +533,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/dl)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLDListElement
+    (props: HTMLElementProps, ...children: Children): HTMLDListElement
+    (...children: Children): HTMLDListElement
   };
 
   dt: {
@@ -624,7 +582,34 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/embed)
      */
-    (props: EmbedElementProps): HTMLElement
+    (props: EmbedElementProps): HTMLEmbedElement
+  };
+
+  fencedframe: {
+    /**
+     * The `<fencedframe>` HTML element represents a nested browsing context,
+     * embedding another HTML page into the current one. `<fencedframe>`s are
+     * very similar to `<iframe>` elements in form and function, except that:
+     *
+     * - Communication is restricted between the `<fencedframe>` content
+     * and its embedding site.
+     * - A `<fencedframe>` can access cross-site data, but only in a very
+     * specific set of controlled circumstances that preserve user privacy.
+     * - A `<fencedframe>` cannot be manipulated or have its data accessed
+     * via regular scripting (for example reading or setting the source URL).
+     * `<fencedframe>` content can only be embedded via specific APIs.
+     * - A `<fencedframe>` cannot access the embedding context's DOM,
+     * nor can the embedding context access the `<fencedframe>`'s DOM.
+     *
+     * The `<fencedframe>` element is a type of `<iframe>` with more native
+     * privacy features built in. It addresses shortcomings of `<iframe>`s
+     * such as reliance on third-party cookies and other privacy risks.
+     *
+     * TODO Change the return type to HTMLFencedFrameElement eventually
+     *
+     * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/fencedframe)
+     */
+    (props: FencedFrameProps): HTMLElement
   };
 
   fieldset: {
@@ -634,9 +619,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/fieldset)
      */
-    (): HTMLElement
-    (props: FieldSetElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLFieldSetElement
+    (props: FieldSetElementProps, ...children: Children): HTMLFieldSetElement
+    (...children: Children): HTMLFieldSetElement
   };
 
   figcaption: {
@@ -693,11 +678,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/form)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: FormElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLFormElement
+    (formatArray: FormatArray, ...children: Children): HTMLFormElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLFormElement
+    (props: FormElementProps, ...children: Children): HTMLFormElement
+    (...children: Children): HTMLFormElement
   };
 
   h1: {
@@ -710,11 +695,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   h2: {
@@ -727,11 +712,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   h3: {
@@ -744,11 +729,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   h4: {
@@ -761,11 +746,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   h5: {
@@ -778,11 +763,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   h6: {
@@ -795,11 +780,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/h1)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadingElement
+    (formatArray: FormatArray, ...children: Children): HTMLHeadingElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLHeadingElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadingElement
+    (...children: Children): HTMLHeadingElement
   };
 
   head: {
@@ -811,9 +796,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/head)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHeadElement
+    (props: HTMLElementProps, ...children: Children): HTMLHeadElement
+    (...children: Children): HTMLHeadElement
   };
 
   header: {
@@ -856,8 +841,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/hr)
      */
-    (): HTMLElement
-    (props: HTMLElementProps): HTMLElement
+    (): HTMLHRElement
+    (props: HTMLElementProps): HTMLHRElement
   };
 
   html: {
@@ -872,9 +857,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/html)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLHtmlElement
+    (props: HTMLElementProps, ...children: Children): HTMLHtmlElement
+    (...children: Children): HTMLHtmlElement
   };
 
   i: {
@@ -901,7 +886,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/iframe)
      */
-    (props: IFrameElementProps): HTMLElement
+    (props: IFrameElementProps): HTMLIFrameElement
   };
 
   img: {
@@ -910,7 +895,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/img)
      */
-    (props: ImageElementProps): HTMLElement
+    (props: ImageElementProps): HTMLImageElement
   };
 
   input: {
@@ -924,7 +909,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/input)
      */
-    (props: InputElementProps): HTMLElement
+    (props: InputElementProps): HTMLInputElement
   };
 
   ins: {
@@ -935,11 +920,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/ins)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: InsElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLModElement
+    (formatArray: FormatArray, ...children: Children): HTMLModElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLModElement
+    (props: InsElementProps, ...children: Children): HTMLModElement
+    (...children: Children): HTMLModElement
   };
 
   kbd: {
@@ -966,11 +951,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/label)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: LabelElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLLabelElement
+    (formatArray: FormatArray, ...children: Children): HTMLLabelElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLLabelElement
+    (props: LabelElementProps, ...children: Children): HTMLLabelElement
+    (...children: Children): HTMLLabelElement
   };
 
   legend: {
@@ -980,11 +965,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/legend)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLLegendElement
+    (formatArray: FormatArray, ...children: Children): HTMLLegendElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLLegendElement
+    (props: HTMLElementProps, ...children: Children): HTMLLegendElement
+    (...children: Children): HTMLLegendElement
   };
 
   li: {
@@ -998,11 +983,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/li)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: LiElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLLIElement
+    (formatArray: FormatArray, ...children: Children): HTMLLIElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLLIElement
+    (props: LiElementProps, ...children: Children): HTMLLIElement
+    (...children: Children): HTMLLIElement
   };
 
   link: {
@@ -1015,7 +1000,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/link)
      */
-    (props: LinkElementProps): HTMLElement
+    (props: LinkElementProps): HTMLLinkElement
   };
 
   main: {
@@ -1042,8 +1027,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/map)
      */
-    (props: MapElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (props: MapElementProps, ...children: Children): HTMLMapElement
+    (...children: Children): HTMLMapElement
   };
 
   mark: {
@@ -1074,9 +1059,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/menu)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLMenuElement
+    (props: HTMLElementProps, ...children: Children): HTMLMenuElement
+    (...children: Children): HTMLMenuElement
   };
 
   meta: {
@@ -1104,7 +1089,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/meta)
      */
-    (props: MetaElementProps): HTMLElement
+    (props: MetaElementProps): HTMLMetaElement
   };
 
   meter: {
@@ -1114,10 +1099,10 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/meter)
      */
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: MeterElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (formatArray: FormatArray, ...children: Children): HTMLMeterElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLMeterElement
+    (props: MeterElementProps, ...children: Children): HTMLMeterElement
+    (...children: Children): HTMLMeterElement
   };
 
   nav: {
@@ -1167,8 +1152,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/object)
      */
-    (props: ObjectElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (props: ObjectElementProps, ...children: Children): HTMLObjectElement
+    (...children: Children): HTMLObjectElement
   };
 
   ol: {
@@ -1181,8 +1166,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/ol)
      */
-    (props: OlElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (props: OlElementProps, ...children: Children): HTMLOListElement
+    (...children: Children): HTMLOListElement
   };
 
   optgroup: {
@@ -1195,8 +1180,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/optgroup)
      */
-    (props: OptgroupElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (props: OptgroupElementProps, ...children: Children): HTMLOptGroupElement
+    (...children: Children): HTMLOptGroupElement
   };
 
   option: {
@@ -1211,10 +1196,10 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/option)
      */
-    (formatArray: FormatArray): HTMLElement
-    (text: Reactive<StringConvertible>): HTMLElement
-    (props: OptionElementProps, formatArray: FormatArray): HTMLElement
-    (props: OptionElementProps, text: Reactive<StringConvertible>): HTMLElement
+    (formatArray: FormatArray): HTMLOptionElement
+    (text: Reactive<StringConvertible>): HTMLOptionElement
+    (props: OptionElementProps, formatArray: FormatArray): HTMLOptionElement
+    (props: OptionElementProps, text: Reactive<StringConvertible>): HTMLOptionElement
   };
 
   output: {
@@ -1225,10 +1210,10 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/output)
      */
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: OutputElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (formatArray: FormatArray, ...children: Children): HTMLOutputElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLOutputElement
+    (props: OutputElementProps, ...children: Children): HTMLOutputElement
+    (...children: Children): HTMLOutputElement
   };
 
   p: {
@@ -1245,11 +1230,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/p)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLParagraphElement
+    (formatArray: FormatArray, ...children: Children): HTMLParagraphElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLParagraphElement
+    (props: HTMLElementProps, ...children: Children): HTMLParagraphElement
+    (...children: Children): HTMLParagraphElement
   };
 
   picture: {
@@ -1270,8 +1255,8 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/picture)
      */
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (props: HTMLElementProps, ...children: Children): HTMLPictureElement
+    (...children: Children): HTMLPictureElement
   };
 
   pre: {
@@ -1290,11 +1275,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/pre)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLPreElement
+    (formatArray: FormatArray, ...children: Children): HTMLPreElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLPreElement
+    (props: HTMLElementProps, ...children: Children): HTMLPreElement
+    (...children: Children): HTMLPreElement
   };
 
   progress: {
@@ -1305,10 +1290,10 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/progress)
      */
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: ProgressElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (formatArray: FormatArray, ...children: Children): HTMLProgressElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLProgressElement
+    (props: ProgressElementProps, ...children: Children): HTMLProgressElement
+    (...children: Children): HTMLProgressElement
   };
 
   q: {
@@ -1321,11 +1306,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/q)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: QElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLQuoteElement
+    (formatArray: FormatArray, ...children: Children): HTMLQuoteElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLQuoteElement
+    (props: QElementProps, ...children: Children): HTMLQuoteElement
+    (...children: Children): HTMLQuoteElement
   };
 
   rp: {
@@ -1415,27 +1400,6 @@ export interface Elements {
     (...children: Children): HTMLElement
   };
 
-  script: {
-    /**
-     * The `<script>` HTML element is used to embed executable code or data;
-     * this is typically used to embed or refer to JavaScript code.
-     * The `<script>` element can also be used with other languages, such as
-     * WebGL's GLSL shader programming language and JSON.
-     *
-     * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/script)
-     */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: ScriptElementProps, ...children: Children): HTMLElement
-    (
-      props: ScriptElementProps,
-      clientCode: () => void,
-      ...children: Children[]
-    ): HTMLElement
-    (...children: Children): HTMLElement
-  };
-
   search: {
     /**
      * The `<search>` HTML element is a container representing the parts of
@@ -1481,9 +1445,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/select)
      */
-    (): HTMLElement
-    (props: SelectElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLSelectElement
+    (props: SelectElementProps, ...children: Children): HTMLSelectElement
+    (...children: Children): HTMLSelectElement
   };
 
   slot: {
@@ -1495,11 +1459,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/slot)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: SlotElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLSlotElement
+    (formatArray: FormatArray, ...children: Children): HTMLSlotElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLSlotElement
+    (props: SlotElementProps, ...children: Children): HTMLSlotElement
+    (...children: Children): HTMLSlotElement
   };
 
   small: {
@@ -1530,7 +1494,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/source)
      */
-    (props: SourceElementProps): HTMLElement
+    (props: SourceElementProps): HTMLSourceElement
   };
 
   span: {
@@ -1545,11 +1509,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/span)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLSpanElement
+    (formatArray: FormatArray, ...children: Children): HTMLSpanElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLSpanElement
+    (props: HTMLElementProps, ...children: Children): HTMLSpanElement
+    (...children: Children): HTMLSpanElement
   };
 
   strong: {
@@ -1564,21 +1528,6 @@ export interface Elements {
     (formatArray: FormatArray, ...children: Children): HTMLElement
     (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
     (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
-  };
-
-  style: {
-    /**
-     * The `<style>` HTML element contains style information for a document,
-     * or part of a document. It contains CSS, which is applied to the contents
-     * of the document containing the `<style>` element.
-     *
-     * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/style)
-     */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: StyleElementProps, ...children: Children): HTMLElement
     (...children: Children): HTMLElement
   };
 
@@ -1627,19 +1576,6 @@ export interface Elements {
     (...children: Children): HTMLElement
   };
 
-  svg: {
-    /**
-     * SVG drawings and images are created using a wide array
-     * of elements which are dedicated to the construction,
-     * drawing, and layout of vector images and diagrams.
-     *
-     * [MDN Reference](https://developer.mozilla.org/docs/Web/SVG/Element)
-     */
-    (): HTMLElement
-    (props: SvgElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
-  };
-
   table: {
     /**
      * The `<table>` HTML element represents tabular data—that is, information
@@ -1658,9 +1594,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/table)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableElement
+    (...children: Children): HTMLTableElement
   };
 
   tbody: {
@@ -1674,9 +1610,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/tbody)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableSectionElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableSectionElement
+    (...children: Children): HTMLTableSectionElement
   };
 
   td: {
@@ -1686,11 +1622,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/td)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: TdElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableCellElement
+    (formatArray: FormatArray, ...children: Children): HTMLTableCellElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLTableCellElement
+    (props: TdElementProps, ...children: Children): HTMLTableCellElement
+    (...children: Children): HTMLTableCellElement
   };
 
   template: {
@@ -1701,11 +1637,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/template)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTemplateElement
+    (formatArray: FormatArray, ...children: Children): HTMLTemplateElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLTemplateElement
+    (props: HTMLElementProps, ...children: Children): HTMLTemplateElement
+    (...children: Children): HTMLTemplateElement
   };
 
   textarea: {
@@ -1719,11 +1655,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/textarea)
      */
-    (): HTMLElement
-    (formatArray: FormatArray): HTMLElement
-    (text: Reactive<StringConvertible>): HTMLElement
-    (props: TextAreaElementProps, formatArray: FormatArray): HTMLElement
-    (props: TextAreaElementProps, text: Reactive<StringConvertible>): HTMLElement
+    (): HTMLTextAreaElement
+    (formatArray: FormatArray): HTMLTextAreaElement
+    (text: Reactive<StringConvertible>): HTMLTextAreaElement
+    (props: TextAreaElementProps, formatArray: FormatArray): HTMLTextAreaElement
+    (props: TextAreaElementProps, text: Reactive<StringConvertible>): HTMLTextAreaElement
   };
 
   tfoot: {
@@ -1739,9 +1675,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/tfoot)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableSectionElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableSectionElement
+    (...children: Children): HTMLTableSectionElement
   };
 
   th: {
@@ -1752,11 +1688,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/th)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: ThElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableCellElement
+    (formatArray: FormatArray, ...children: Children): HTMLTableCellElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLTableCellElement
+    (props: ThElementProps, ...children: Children): HTMLTableCellElement
+    (...children: Children): HTMLTableCellElement
   };
 
   thead: {
@@ -1771,9 +1707,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/thead)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableSectionElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableSectionElement
+    (...children: Children): HTMLTableSectionElement
   };
 
   time: {
@@ -1794,27 +1730,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/time)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: TimeElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
-  };
-
-  title: {
-    /**
-     * The `<title>` HTML element defines the document's title that is shown in
-     * a browser's title bar or a page's tab. It only contains text; tags within
-     * the element are ignored.
-     *
-     * ###### Permitted content
-     * Text that is not inter-element whitespace.
-     *
-     * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/title)
-     */
-    (): HTMLElement
-    (formatArray: FormatArray): HTMLElement
-    (text: Reactive<StringConvertible>): HTMLElement
+    (): HTMLTimeElement
+    (formatArray: FormatArray, ...children: Children): HTMLTimeElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLTimeElement
+    (props: TimeElementProps, ...children: Children): HTMLTimeElement
+    (...children: Children): HTMLTimeElement
   };
 
   tr: {
@@ -1829,9 +1749,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/tr)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLTableRowElement
+    (props: HTMLElementProps, ...children: Children): HTMLTableRowElement
+    (...children: Children): HTMLTableRowElement
   };
 
   track: {
@@ -1853,7 +1773,7 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/track)
      */
-    (props: TrackElementProps): HTMLElement
+    (props: TrackElementProps): HTMLTrackElement
   };
 
   u: {
@@ -1882,9 +1802,9 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/ul)
      */
-    (): HTMLElement
-    (props: HTMLElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLUListElement
+    (props: HTMLElementProps, ...children: Children): HTMLUListElement
+    (...children: Children): HTMLUListElement
   };
 
   var: {
@@ -1921,11 +1841,11 @@ export interface Elements {
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/Element/video)
      */
-    (): HTMLElement
-    (formatArray: FormatArray, ...children: Children): HTMLElement
-    (text: Reactive<StringConvertible>, ...children: Children): HTMLElement
-    (props: VideoElementProps, ...children: Children): HTMLElement
-    (...children: Children): HTMLElement
+    (): HTMLVideoElement
+    (formatArray: FormatArray, ...children: Children): HTMLVideoElement
+    (text: Reactive<StringConvertible>, ...children: Children): HTMLVideoElement
+    (props: VideoElementProps, ...children: Children): HTMLVideoElement
+    (...children: Children): HTMLVideoElement
   };
 
   wbr: {

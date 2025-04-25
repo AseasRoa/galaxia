@@ -1,9 +1,11 @@
 import { CSSPropertiesJsStyle } from './WebApi/CSSProperties'
 import { Elements } from './WebApi/Elements'
 import { Statements } from './Statements'
+import { SVGElements } from './WebApi/SVGElements'
+import { MutualElements } from './WebApi/MutualElements'
 
 export interface StyleRules extends CSSPropertiesJsStyle {}
-export interface TemplateTree extends Elements, Statements {}
+export interface TemplateTree extends Elements, SVGElements, MutualElements, Statements {}
 export type Template = (tree : TemplateTree) => (
   void
   | string // For HTML

@@ -20,3 +20,24 @@ export type Reactive<T> = T | (() => T)
 export type StringConvertible = (
   string|number|BigInt|undefined|null|FormatArray
 )
+
+type Child = (
+  Error
+  | HTMLElement
+  | HTMLElement[]
+  | Template
+  | Reactive<StringConvertible>
+  // The result of calling a function like this: (x) => void
+  | void
+  )
+type Children = Child[]
+
+type SVGChild = (
+  Error
+  | SVGElement
+  | SVGElement[]
+  | Template
+  // The result of calling a function like this: (x) => void
+  | void
+  )
+export type SVGChildren = SVGChild[]
