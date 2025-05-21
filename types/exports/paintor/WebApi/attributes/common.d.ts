@@ -164,7 +164,7 @@ export interface svgCommonAttributes {
    *
    * [MDN Reference](https://developer.mozilla.org/docs/Web/SVG/Reference/Attribute/class)
    */
-  class?: Bindable<string>,
+  class?: Bindable<string | string[]>,
 
   /**
    * The `clipPathUnits` attribute indicates which coordinate system to use for

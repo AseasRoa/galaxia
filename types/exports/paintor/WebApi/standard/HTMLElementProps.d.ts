@@ -11,6 +11,27 @@ import { CSSProperties } from '../CSSProperties'
  */
 export interface HTMLElementProps extends ElementProps {
   /**
+   * The `data-*` attribute is used to store custom data private to the page
+   * or application.
+   *
+   * The `data-*` attribute gives us the ability to embed custom data attributes
+   * on all HTML elements.
+   *
+   * The stored (custom) data can then be used in the page's JavaScript to
+   * create a more engaging user experience (without any Ajax calls or
+   * server-side database queries).
+   *
+   * The `data-*` attribute consist of two parts:
+   *
+   * - The attribute name should not contain any uppercase letters,
+   * and must be at least one character long after the prefix "data-"
+   * - The attribute value can be any string
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/HTML/How_to/Use_data_attributes)
+   */
+  data?: Bindable<Record<string, StringConvertible>>,
+
+  /**
    * Sets the keystroke which a user can press to jump to a given element.
    *
    * > **_NOTE:_**

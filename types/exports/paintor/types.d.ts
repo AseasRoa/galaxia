@@ -10,6 +10,7 @@ export type Template = (tree : TemplateTree) => (
   void
   | string // For HTML
   | HTMLElement | HTMLElement[]
+  | SVGElement | SVGElement[]
   | Template | Template[]
 )
 

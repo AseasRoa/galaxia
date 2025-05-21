@@ -123,7 +123,7 @@ export interface Statements {
       Key extends keyof Input
     >(
       object: Input,
-      handler: ((value?: Input[Key], key?: Key) => (boolean | any)),
+      handler: ((value: Input[Key], key: Key) => (boolean | any)),
       handlerOnEmpty?: () => void,
     ): (HTMLElement[]|Error)
   }

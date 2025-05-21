@@ -7,11 +7,12 @@ export type FormatArray = (
   [string, ...Array<string|number|BigInt|Array<any>|Record<any, any>>]
 )
 
-export type Bindable<T> = (
+export type Bindable<T> =
   T extends string
-    ? (T | ((element: HTMLElement) => T) | FormatArray)
+    // Note: FormatArray<T> somehow makes the callback to work
+    // @ts-expect-error
+    ? (T | FormatArray<T> | ((element: HTMLElement) => T))
     : (T | ((element: HTMLElement) => T))
-)
 export type Reactive<T> = T | (() => T)
 
 /**
