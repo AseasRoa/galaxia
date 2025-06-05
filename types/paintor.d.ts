@@ -1,5 +1,5 @@
 declare module "galaxia/paintor" {
-  import 'types/exports/paintor/global'
+  import 'types/paintor/global'
 
   export {
     default,
@@ -11,5 +11,5 @@ declare module "galaxia/paintor" {
     on, off,
     paintor,
     Template
-  } from 'types/exports/paintor/index'
+  } from 'types/paintor/index'
 }
