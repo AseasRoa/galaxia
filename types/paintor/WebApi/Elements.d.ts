@@ -7,8 +7,8 @@ import {
   BlockquoteElementProps,
   ButtonElementProps,
   CanvasElementProps,
-  ColgroupElementProps,
   ColElementProps,
+  ColgroupElementProps,
   DataElementProps,
   DelElementProps,
   DetailsElementProps,
@@ -1198,6 +1198,8 @@ export interface Elements {
      */
     (formatArray: FormatArray): HTMLOptionElement
     (text: Reactive<StringConvertible>): HTMLOptionElement
+    // Special for option and textarea
+    (props: OptionElementProps): HTMLOptionElement
     (props: OptionElementProps, formatArray: FormatArray): HTMLOptionElement
     (props: OptionElementProps, text: Reactive<StringConvertible>): HTMLOptionElement
   };
@@ -1658,6 +1660,8 @@ export interface Elements {
     (): HTMLTextAreaElement
     (formatArray: FormatArray): HTMLTextAreaElement
     (text: Reactive<StringConvertible>): HTMLTextAreaElement
+    // Special for option and textarea
+    (props: TextAreaElementProps): HTMLTextAreaElement
     (props: TextAreaElementProps, formatArray: FormatArray): HTMLTextAreaElement
     (props: TextAreaElementProps, text: Reactive<StringConvertible>): HTMLTextAreaElement
   };
