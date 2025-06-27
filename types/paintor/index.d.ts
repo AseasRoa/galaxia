@@ -12,6 +12,7 @@ import {
   Template,
   Translation
 } from './types'
+import './global'
 
 /**
  * Try to fetch one or more translations, depending on the user's locale.

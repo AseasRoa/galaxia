@@ -3,6 +3,7 @@
  */
 
 import { docSchema } from './types'
+import './global'
 
 export default docSchema
 export {

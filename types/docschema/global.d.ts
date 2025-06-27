@@ -15,7 +15,14 @@ type AstScope = {
 }
 
 type AstTypeNames =
-  Primitives|'any'|'array'|'arrayLiteral'|'object'|'objectLiteral'|'typedef'
+  Primitives
+  |'any'
+  |'array'
+  |'arrayLiteral'
+  |'object'
+  |'objectLiteral'
+  |'typedef'
+  |'directImport'
 
 type Filters = {
   // array, number, string
@@ -73,6 +80,10 @@ type ParsedType = {
   types?: ParsedType[], // Used for Array
   typePairs?: ObjectPairs, // Used for Object types
   pairs?: ObjectLiteralPair[] // Used for object literal and array literal types
+  directImport?: { // Used for directImport types
+    file: string,
+    typeName: string,
+  }
 }
 
 type ParsedTag = {
@@ -115,6 +126,8 @@ type Ast = {
   ambientTypedefs: Ast[],
   // Typedefs, imported from ambient typedefs and @import
   importedTypedefs: Ast[],
+  // Typedefs, imported directly in the type by using import() (used in TS)
+  directlyImportedTypedefs: Ast[],
   strict: boolean,
 }
 
