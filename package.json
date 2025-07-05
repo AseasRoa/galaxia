@@ -15,30 +15,30 @@
       "import": "./lib/index.js",
       "default": "./lib/index.js"
     },
+    "./db/mongo": {
+      "types": "./types/db-mongo.d.ts",
+      "import": "./lib/exports/db/mongo.js",
+      "default": "./lib/exports/db/mongo.js"
+    },
     "./fileSystem": {
       "types": "./types/fileSystem.d.ts",
       "import": "./lib/exports/fileSystem.js",
       "default": "./lib/exports/fileSystem.js"
     },
     "./docschema": {
-      "types": "./types/docschema/index.d.ts",
+      "types": "./node_modules/docschema/types/index.d.ts",
       "import": "./lib/exports/docschema.js",
       "default": "./lib/exports/docschema.js"
     },
     "./paintor": {
-      "types": "./types/paintor/index.d.ts",
+      "types": "./node_modules/paintor/types/index.d.ts",
       "import": "./lib/exports/paintor.js",
       "default": "./lib/exports/paintor.js"
     },
     "./paintor-ui": {
-      "types": "./types/paintor-ui/index.d.ts",
+      "types": "./node_modules/paintor-ui/types/index.d.ts",
       "import": "./lib/exports/paintor-ui.js",
       "default": "./lib/exports/paintor-ui.js"
-    },
-    "./db/mongo": {
-      "types": "./types/db-mongo.d.ts",
-      "import": "./lib/exports/db/mongo.js",
-      "default": "./lib/exports/db/mongo.js"
     }
   },
   "imports": {
