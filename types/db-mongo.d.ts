@@ -1,5 +1,5 @@
 declare module 'galaxia/db/mongo' {
-  import { DocSchema } from 'types/docschema/types'
+  import { DocSchema } from 'docschema'
   import { Condition, ObjectId, RootFilterOperators } from 'mongodb'
 
   type MongoClient = import('mongodb').MongoClient

@@ -1,3 +1,3 @@
 declare module "galaxia/paintor-ui" {
-  export * from 'paintor'
+  export * from 'paintor-ui'
 }

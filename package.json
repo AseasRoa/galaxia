@@ -26,17 +26,17 @@
       "default": "./lib/exports/fileSystem.js"
     },
     "./docschema": {
-      "types": "./node_modules/docschema/types/index.d.ts",
+      "types": "./types/docschema.d.ts",
       "import": "./lib/exports/docschema.js",
       "default": "./lib/exports/docschema.js"
     },
     "./paintor": {
-      "types": "./node_modules/paintor/types/index.d.ts",
+      "types": "./types/paintor.d.ts",
       "import": "./lib/exports/paintor.js",
       "default": "./lib/exports/paintor.js"
     },
     "./paintor-ui": {
-      "types": "./node_modules/paintor-ui/types/index.d.ts",
+      "types": "./types/paintor-ui.d.ts",
       "import": "./lib/exports/paintor-ui.js",
       "default": "./lib/exports/paintor-ui.js"
     }
