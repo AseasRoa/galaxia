@@ -1,7 +1,9 @@
-declare module 'galaxia/db/mongo' {
-  import { DocSchema } from 'docschema'
-  import { Condition, ObjectId, RootFilterOperators } from 'mongodb'
+import { DocSchema } from 'docschema'
+import { Condition, ObjectId, RootFilterOperators } from 'mongodb'
 
+export { DocSchema, ObjectId }
+
+declare module 'galaxia/db/mongo' {
   type MongoClient = import('mongodb').MongoClient
   type Collection = import('mongodb').Collection
 
@@ -71,14 +73,14 @@ declare module 'galaxia/db/mongo' {
      */
     include: {
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T
+        ...fields: T[]
       ): Model<
         // @ts-expect-error
         Pick<SCHEMA, UnionFromArray<T>>
       >
 
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+        ...fields: T[][]
       ): Model<
         // @ts-expect-error
         Pick<SCHEMA, UnionFromArray<T>>
@@ -90,13 +92,13 @@ declare module 'galaxia/db/mongo' {
      */
     exclude: {
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T
+        ...fields: T[]
       ): Model<
         Omit<SCHEMA, UnionFromArray<T>>
       >
 
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+        ...fields: T[][]
       ): Model<
         Omit<SCHEMA, UnionFromArray<T>>
       >
@@ -183,6 +185,4 @@ declare module 'galaxia/db/mongo' {
     collectionName: string,
     schema: DS
   ): Model<DS>
-
-  export { DocSchema, ObjectId }
 }
