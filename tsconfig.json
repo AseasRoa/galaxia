@@ -55,6 +55,7 @@
     "app/**/*",
     "benchmarks/**/*",
     "dev/**/*",
+    "exports/**/*",
     "lib/**/*",
     "src/**/*",
     "tests/**/*",
