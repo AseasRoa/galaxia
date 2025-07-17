@@ -254,7 +254,7 @@ export function writeFileSync(file: string, data: string): void
  */
 export function writeJson(
   file: string,
-  data: string,
+  data: any,
   options?: WriteJsonOptions
 ): Promise<void>
 /**
@@ -265,7 +265,7 @@ export function writeJson(
  */
 export function writeJsonSync(
   file: string,
-  data: string,
+  data: any,
   options?: WriteJsonOptions
 ): void
 
@@ -274,13 +274,13 @@ export function writeJsonSync(
  * @param data
  * @throws {Error}
  */
-export function writeJson5(file: string, data: string): Promise<void>
+export function writeJson5(file: string, data: any): Promise<void>
 /**
  * @param file
  * @param data
  * @throws {Error}
  */
-export function writeJson5Sync(file: string, data: string): void
+export function writeJson5Sync(file: string, data: any): void
 
 /**
  * Change the file system timestamps of the object referenced by path.

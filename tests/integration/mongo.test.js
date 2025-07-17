@@ -1,6 +1,3 @@
-import { MongoServerError } from 'mongodb'
-import { MongoMemoryServer } from 'mongodb-memory-server'
-import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import {
   collection,
   connect,
@@ -8,7 +5,10 @@ import {
   fromSchema,
   model,
   ObjectId
-} from '#galaxia/db/mongo'
+} from 'exports/db/mongo.js'
+import { MongoServerError } from 'mongodb'
+import { MongoMemoryServer } from 'mongodb-memory-server'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 describe('mongodb', () => {
   let mongoServer = null
