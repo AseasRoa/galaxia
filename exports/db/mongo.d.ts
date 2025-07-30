@@ -73,14 +73,14 @@ declare module 'galaxia/db/mongo' {
      */
     include: {
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+        ...fields: T
       ): Model<
         // @ts-expect-error
         Pick<SCHEMA, UnionFromArray<T>>
       >
 
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[][]
+        ...fields: T[]
       ): Model<
         // @ts-expect-error
         Pick<SCHEMA, UnionFromArray<T>>
@@ -92,13 +92,13 @@ declare module 'galaxia/db/mongo' {
      */
     exclude: {
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+        ...fields: T
       ): Model<
         Omit<SCHEMA, UnionFromArray<T>>
       >
 
       <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[][]
+        ...fields: T[]
       ): Model<
         Omit<SCHEMA, UnionFromArray<T>>
       >
