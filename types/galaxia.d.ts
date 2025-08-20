@@ -1,3 +1,69 @@
+type DirNames = {
+  app: string,
+  modules: string,
+  layout: string,
+  client: string,
+  hooks: string,
+  i18n: string,
+  routes: string,
+  server: string,
+  css: string,
+  views: string,
+  dist: string
+}
+
+type SecureContextOptions = {
+  key: string,
+  cert: string,
+  ca?: string,
+  ciphers?: string
+}
+
+type HttpToHttpsRule = {
+  hostname?: string | RegExp,
+  excludePaths?: (string | RegExp)[],
+  httpsPort?: number
+}
+
+type RateLimiterRule = {
+  path: string | RegExp,
+  maxRequests: number,
+  secondsPeriod: number,
+  methods?: string[]
+}
+
+type UserAgentFilterRule = {
+  path?: string | RegExp,
+  allow?: (string | RegExp)[],
+  deny?: (string | RegExp)[]
+}
+
+type WebServerConfig = {
+  hostNames?: string[],
+  httpPort?: number,
+  httpsPort?: number,
+  responseTimeout?: number,
+  ssl?: Record<string, SecureContextOptions>,
+  redirectHttpToHttps?: boolean,
+  redirectHttpToHttpsExcludePaths?: string[],
+  proxy?: Record<string, number>,
+  earlyHints?: boolean,
+  middleware?: {
+    httpToHttps?: {
+      enabled?: boolean,
+      rules?: HttpToHttpsRule[]
+    },
+    rateLimiter?: {
+      enabled?: boolean,
+      rules?: RateLimiterRule[]
+    },
+    userAgentFilter?: {
+      enabled?: boolean,
+      rules?: UserAgentFilterRule[]
+    },
+  }
+}
+
 type GalaxiaConfig = {
   development?: boolean | -1,
   // The name of the app
@@ -8,12 +74,12 @@ type GalaxiaConfig = {
   compressionLevels?: Record<string, number>,
   // Custom mime type for each file type
   mimeTypes?: Record<string, string>,
-  server?: app.WebServerConfig,
+  server?: WebServerConfig,
   nodeModules?: { whitelist: string[] },
   ajax?: { version: string, wrongVersionMessage: string },
   // URL rewrite rules
   urlRewrite?: Record<string, string>,
-  dirNames?: app.DirNames
+  dirNames?: DirNames
 }
 
 type GalaxiaOptions = {

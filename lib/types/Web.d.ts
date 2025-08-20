@@ -1,6 +1,4 @@
 declare namespace Web {
-  type Socket = import('net').Socket
-
   type HttpServer = import('http').Server
 
   type Http2Server = import('http2').Http2SecureServer
@@ -14,6 +12,8 @@ declare namespace Web {
   type Http2Response = import('http2').Http2ServerResponse
 
   type Http2SecureServer = import('http2').Http2SecureServer
+
+  type Http2Session = import('http2').Http2Session
 
   type ServerHttp2Session = import('http2').ServerHttp2Session
 
