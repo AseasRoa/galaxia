@@ -1,7 +1,7 @@
-import { DocSchema } from 'docschema'
+import { docSchema, DocSchema } from 'docschema'
 import { Condition, ObjectId, RootFilterOperators } from 'mongodb'
 
-export { DocSchema, ObjectId }
+export { docSchema, DocSchema, ObjectId }
 
 declare module 'galaxia/db/mongo' {
   type MongoClient = import('mongodb').MongoClient
@@ -24,7 +24,7 @@ declare module 'galaxia/db/mongo' {
     constructor(
       databaseName: string,
       collectionName: string,
-      schema: SCHEMA
+      schema: DocSchema<SCHEMA>
     )
 
     ensureIndex(
@@ -158,19 +158,6 @@ declare module 'galaxia/db/mongo' {
     updateOne(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
   }
 
-  /**
-   * This function returns back the input schema, but this
-   * allows for changing the type of the schema from
-   * DocSchema to the @enum of the schema.
-   *
-   * @example
-   * /** @type {MySchema} * /
-   * const MySchemaTyped = fromSchema(MySchema)
-   */
-  export function fromSchema<T>(docSchema: DocSchema): T
-
-  export function typeSchema<T>(): T
-
   export function connect(
     uri: string
   ): Promise<MongoClient>
@@ -180,9 +167,9 @@ declare module 'galaxia/db/mongo' {
     collectionName: string
   ) : Collection
 
-  export function model<DS>(
+  export function model<SCHEMA>(
     databaseName: string,
     collectionName: string,
-    schema: DS
-  ): Model<DS>
+    schema: DocSchema<SCHEMA>,
+  ): Model<SCHEMA>
 }

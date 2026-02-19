@@ -1,8 +1,7 @@
 import {
   collection,
   connect,
-  DocSchema,
-  fromSchema,
+  docSchema,
   model,
   ObjectId
 } from 'exports/db/mongo.js'
@@ -37,13 +36,16 @@ describe('mongodb', () => {
     let PersonModel = null
 
     beforeAll(() => {
-      /** @enum {{ name: string, age: number, sex?: string }} */
-      const personSchema = new DocSchema()
+      /**
+       * @typedef {object} Schema
+       * @property {string} name
+       * @property {number} age
+       * @property {string} [sex]
+       */
 
-      /** @type {personSchema} */
-      const personTypeSchema = fromSchema(personSchema)
+      const PersonSchema = docSchema(/** @type {Schema} */ null)
 
-      PersonModel = model('db', 'person', personTypeSchema)
+      PersonModel = model('db', 'person', PersonSchema)
     })
 
     test('wrong database and collection', () => {
