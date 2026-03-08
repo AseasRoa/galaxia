@@ -22,9 +22,9 @@
      * https://www.typescriptlang.org/docs/handbook/modules/reference.html
      */
     "allowUmdGlobalAccess": true,
-    "baseUrl": "./",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "types": ["node"],
     /**
      * Interop Constraints
@@ -34,7 +34,7 @@
     /**
      * Completeness
      */
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     /*
      * Type Checking
      */

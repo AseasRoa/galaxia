@@ -1,3 +1,2 @@
-declare module 'galaxia/docschema' {
-  export * from 'docschema'
-}
+export { default } from 'docschema'
+export * from 'docschema'

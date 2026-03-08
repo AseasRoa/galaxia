@@ -5,6 +5,7 @@ export { docSchema, DocSchema, ObjectId }
 
 declare module 'galaxia/db/mongo' {
   type MongoClient = import('mongodb').MongoClient
+  type MongoServerError = import('mongodb').MongoServerError
   type Collection = import('mongodb').Collection
 
   type QueryFilter<T> = {
@@ -19,8 +20,17 @@ declare module 'galaxia/db/mongo' {
     T extends Array<infer U> ? UnionFromArray<U> : T
   )
   //type UnionFromArray<ARR_T extends Readonly<unknown[]>> = ARR_T[number]
+  type InnerOfDocSchema<T> = T extends DocSchema<infer U> ? U : never
 
-  export class Model<SCHEMA> {
+  export type IndexesKey<SCHEMA> = (
+    SCHEMA extends Record<infer K, any>
+      ? Partial<Record<(K | '_id'), 1 | -1>>
+      : never
+    )
+
+  export class Model<
+    SCHEMA extends Record<string, any>
+  > {
     constructor(
       databaseName: string,
       collectionName: string,
@@ -28,11 +38,7 @@ declare module 'galaxia/db/mongo' {
     )
 
     ensureIndex(
-      keys: (
-        Required<SCHEMA> extends Record<infer K, any>
-          ? Partial<Record<K, 1 | -1>>
-          : never
-      ),
+      keys: import('mongodb').IndexSpecification,
       options?: import('mongodb').CreateIndexesOptions
     ) : Promise<string>
 
@@ -49,15 +55,7 @@ declare module 'galaxia/db/mongo' {
         )
     ): Promise<boolean>
 
-    indexes(): Promise<{
-      v: number,
-      key: (
-        SCHEMA extends Record<infer K, any>
-          ? Partial<Record<(K | '_id'), 1 | -1>>
-          : never
-      ),
-      name: string
-    }[]>
+    indexes(): Promise<import('mongodb').IndexDescriptionInfo[]>
 
     query(
       filter: QueryFilter<SCHEMA>
@@ -72,18 +70,16 @@ declare module 'galaxia/db/mongo' {
      * The fields to include in the query.
      */
     include: {
-      <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T
+      <K extends keyof SCHEMA>(
+        fields: K[]
       ): Model<
-        // @ts-expect-error
-        Pick<SCHEMA, UnionFromArray<T>>
+        Pick<SCHEMA, K>
       >
 
-      <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+      <K extends keyof SCHEMA>(
+        ...fields: K[]
       ): Model<
-        // @ts-expect-error
-        Pick<SCHEMA, UnionFromArray<T>>
+        Pick<SCHEMA, K>
       >
     }
 
@@ -91,16 +87,16 @@ declare module 'galaxia/db/mongo' {
      * The fields to exclude from the query.
      */
     exclude: {
-      <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T
+      <K extends keyof SCHEMA>(
+        fields: K[]
       ): Model<
-        Omit<SCHEMA, UnionFromArray<T>>
+        Omit<SCHEMA, K>
       >
 
-      <T extends ArrayUnionFromSchema<SCHEMA>>(
-        ...fields: T[]
+      <K extends keyof SCHEMA>(
+        ...fields: K[]
       ): Model<
-        Omit<SCHEMA, UnionFromArray<T>>
+        Omit<SCHEMA, K>
       >
     }
 
@@ -170,6 +166,6 @@ declare module 'galaxia/db/mongo' {
   export function model<SCHEMA>(
     databaseName: string,
     collectionName: string,
-    schema: DocSchema<SCHEMA>,
+    docSchema: DocSchema<SCHEMA>,
   ): Model<SCHEMA>
 }

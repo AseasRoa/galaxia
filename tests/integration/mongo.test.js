@@ -1,10 +1,11 @@
 import {
   collection,
   connect,
-  docSchema,
   model,
-  ObjectId
+  Model,
+  ObjectId,
 } from 'exports/db/mongo.js'
+import { docSchema } from 'exports/docschema.js'
 import { MongoServerError } from 'mongodb'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
@@ -33,18 +34,20 @@ describe('mongodb', () => {
   })
 
   describe('model()', () => {
+    /**
+     * @typedef {object} Person
+     * @property {string} name
+     * @property {number} age
+     * @property {string} [sex]
+     */
+
+    const PersonSchema = docSchema(/** @type {Person} */ ({}))
+
+    /** @type {Model<Person>} */
+    // @ts-expect-error
     let PersonModel = null
 
     beforeAll(() => {
-      /**
-       * @typedef {object} Schema
-       * @property {string} name
-       * @property {number} age
-       * @property {string} [sex]
-       */
-
-      const PersonSchema = docSchema(/** @type {Schema} */ null)
-
       PersonModel = model('db', 'person', PersonSchema)
     })
 
@@ -58,6 +61,7 @@ describe('mongodb', () => {
     test('wrong schema', () => {
       // @ts-expect-error
       expect(() => model('db', 'test')).toThrow()
+      // @ts-expect-error
       expect(() => model('db', 'test', {})).toThrow()
     })
 
@@ -74,14 +78,17 @@ describe('mongodb', () => {
 
       test('invalid', async() => {
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertOne()
         ).rejects.toThrow()
 
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertOne(123)
         ).rejects.toThrow()
 
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertOne({ name: 'John', age: '31' })
         ).rejects.toThrow()
       })
@@ -105,14 +112,17 @@ describe('mongodb', () => {
 
       test('invalid', async() => {
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertMany()
         ).rejects.toThrow()
 
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertMany(123)
         ).rejects.toThrow()
 
         await expect(
+          // @ts-expect-error
           async() => await PersonModel.insertMany({ name: 'John', age: '31' })
         ).rejects.toThrow()
       })
