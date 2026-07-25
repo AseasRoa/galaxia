@@ -4,8 +4,8 @@ import {
   model,
   Model,
   ObjectId,
-} from 'exports/db/mongo.js'
-import { docSchema } from 'exports/docschema.js'
+} from '../../exports/db/mongo.js'
+import { docSchema } from '../../exports/docschema.js'
 import { MongoServerError } from 'mongodb'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
