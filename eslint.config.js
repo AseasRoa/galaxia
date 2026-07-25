@@ -57,6 +57,7 @@ export default [
         variables: true,
         allowNamedExports: false
       }],
+      'no-useless-assignment': 'warn',
 
       // ESLint: Suggestions
       'accessor-pairs': 'error',
