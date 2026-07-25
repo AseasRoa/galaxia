@@ -1,3 +1,6 @@
+import { MongoServerError } from 'mongodb'
+import { MongoMemoryServer } from 'mongodb-memory-server'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import {
   collection,
   connect,
@@ -6,9 +9,6 @@ import {
   ObjectId,
 } from '../../exports/db/mongo.js'
 import { docSchema } from '../../exports/docschema.js'
-import { MongoServerError } from 'mongodb'
-import { MongoMemoryServer } from 'mongodb-memory-server'
-import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 describe('mongodb', () => {
   let mongoServer = null
@@ -79,17 +79,17 @@ describe('mongodb', () => {
       test('invalid', async() => {
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertOne()
+          PersonModel.insertOne()
         ).rejects.toThrow()
 
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertOne(123)
+          PersonModel.insertOne(123)
         ).rejects.toThrow()
 
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertOne({ name: 'John', age: '31' })
+          PersonModel.insertOne({ name: 'John', age: '31' })
         ).rejects.toThrow()
       })
     })
@@ -113,17 +113,17 @@ describe('mongodb', () => {
       test('invalid', async() => {
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertMany()
+          PersonModel.insertMany()
         ).rejects.toThrow()
 
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertMany(123)
+          PersonModel.insertMany(123)
         ).rejects.toThrow()
 
         await expect(
           // @ts-expect-error
-          async() => await PersonModel.insertMany({ name: 'John', age: '31' })
+          PersonModel.insertMany({ name: 'John', age: '31' })
         ).rejects.toThrow()
       })
     })
@@ -237,16 +237,16 @@ describe('mongodb', () => {
 
         const indexName = await PersonModel.ensureIndex({ name: 1 })
         result = await PersonModel.dropIndex(indexName)
-        await expect(result).toBe(true)
+        expect(result).toBe(true)
 
         await PersonModel.ensureIndex({ age: 1 })
         result = await PersonModel.dropIndex({ age: 1 })
-        await expect(result).toBe(true)
+        expect(result).toBe(true)
       })
 
       test('invalid', async() => {
         await expect(
-          async() => await PersonModel.dropIndex('doesNotExist')
+          PersonModel.dropIndex('doesNotExist')
         ).rejects.toThrow(MongoServerError)
       })
     })
