@@ -85,6 +85,7 @@
     "watcher": "^2.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",
     "@types/pug": "^2.0.10",
     "@types/stylus": "^0.48.43",
@@ -93,9 +94,10 @@
     "autocannon": "^8.0.0",
     "dependency-cruiser": "^18.1.0",
     "dpdm": "^4.2.0",
-    "eslint": "^9.29.0",
+    "eslint": "^10.8.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsdoc": "^63.2.2",
+    "globals": "^17.7.0",
     "jsdom": "^29.1.1",
     "lightningcss": "^1.33.0",
     "mongodb-memory-server": "^11.2.0",
