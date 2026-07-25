@@ -233,15 +233,11 @@ describe('mongodb', () => {
 
     describe('dropIndex', () => {
       test('valid', async() => {
-        let result = null
-
         const indexName = await PersonModel.ensureIndex({ name: 1 })
-        result = await PersonModel.dropIndex(indexName)
-        expect(result).toBe(true)
+        await expect(PersonModel.dropIndex(indexName)).resolves.toBe(true)
 
         await PersonModel.ensureIndex({ age: 1 })
-        result = await PersonModel.dropIndex({ age: 1 })
-        expect(result).toBe(true)
+        await expect(PersonModel.dropIndex({ age: 1 })).resolves.toBe(true)
       })
 
       test('invalid', async() => {
