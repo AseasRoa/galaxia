@@ -22,7 +22,6 @@
      * https://www.typescriptlang.org/docs/handbook/modules/reference.html
      */
     "allowUmdGlobalAccess": true,
-    "baseUrl": ".",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "types": ["node"],

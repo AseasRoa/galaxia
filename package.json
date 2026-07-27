@@ -101,7 +101,7 @@
     "jsdom": "^29.1.1",
     "lightningcss": "^1.33.0",
     "mongodb-memory-server": "^11.2.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.10"
   },
   "repository": {
