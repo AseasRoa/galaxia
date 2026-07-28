@@ -53,16 +53,20 @@ describe('mongodb', () => {
 
     test('wrong database and collection', () => {
       // @ts-expect-error
-      expect(() => model(123, 'test')).toThrow()
+      expect(() => model(123, 'test'))
+        .toThrow('Database name must be a string')
       // @ts-expect-error
-      expect(() => model('db', 123)).toThrow()
+      expect(() => model('db', 123))
+        .toThrow('Collection name must be a string')
     })
 
     test('wrong schema', () => {
       // @ts-expect-error
-      expect(() => model('db', 'test')).toThrow()
+      expect(() => model('db', 'test'))
+        .toThrow('must be an instance of DocSchema')
       // @ts-expect-error
-      expect(() => model('db', 'test', {})).toThrow()
+      expect(() => model('db', 'test', {}))
+        .toThrow('must be an instance of DocSchema')
     })
 
     test('count', async() => {
@@ -80,17 +84,17 @@ describe('mongodb', () => {
         await expect(
           // @ts-expect-error
           PersonModel.insertOne()
-        ).rejects.toThrow()
+        ).rejects.toThrow('The input value must be an object, or an array of objects')
 
         await expect(
           // @ts-expect-error
           PersonModel.insertOne(123)
-        ).rejects.toThrow()
+        ).rejects.toThrow('The input value must be an object, or an array of objects')
 
         await expect(
           // @ts-expect-error
           PersonModel.insertOne({ name: 'John', age: '31' })
-        ).rejects.toThrow()
+        ).rejects.toThrow('Expected "age" to be of type number, but the actual type is string')
       })
     })
 
@@ -99,7 +103,7 @@ describe('mongodb', () => {
         let result = await PersonModel.insertMany(
           { name: 'John', age: 31 }
         )
-        await expect(result.length).toBe(1)
+        expect(result.length).toBe(1)
 
         result = await PersonModel.insertMany(
           [
@@ -107,24 +111,24 @@ describe('mongodb', () => {
             { name: 'John', age: 31 }
           ]
         )
-        await expect(result.length).toBe(2)
+        expect(result.length).toBe(2)
       })
 
       test('invalid', async() => {
         await expect(
           // @ts-expect-error
           PersonModel.insertMany()
-        ).rejects.toThrow()
+        ).rejects.toThrow('The input value must be an object, or an array of objects')
 
         await expect(
           // @ts-expect-error
           PersonModel.insertMany(123)
-        ).rejects.toThrow()
+        ).rejects.toThrow('The input value must be an object, or an array of objects')
 
         await expect(
           // @ts-expect-error
           PersonModel.insertMany({ name: 'John', age: '31' })
-        ).rejects.toThrow()
+        ).rejects.toThrow('Expected "age" to be of type number, but the actual type is string')
       })
     })
 

@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 declare namespace Buffer {
   type Buffer = import('node:buffer').Buffer
 }
