@@ -24,6 +24,7 @@
     "allowUmdGlobalAccess": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "rootDir": ".",
     "types": ["node"],
     /**
      * Interop Constraints
