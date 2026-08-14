@@ -4,7 +4,6 @@ import { Condition, ObjectId, RootFilterOperators } from 'mongodb'
 export { docSchema, DocSchema, ObjectId }
 
 declare module 'galaxia/db/mongo' {
-  type MongoClient = import('mongodb').MongoClient
   type MongoServerError = import('mongodb').MongoServerError
   type Collection = import('mongodb').Collection
 
@@ -28,12 +27,25 @@ declare module 'galaxia/db/mongo' {
       : never
     )
 
+  export class Connection<
+    SCHEMA extends Record<string, any>
+  > {
+    constructor(uri: string)
+
+    connect(): Promise<void>
+
+    model<SCHEMA>(
+      databaseName: string,
+      collectionName: string,
+      docSchema: DocSchema<SCHEMA>,
+    ): Model<SCHEMA>
+  }
+
   export class Model<
     SCHEMA extends Record<string, any>
   > {
     constructor(
-      databaseName: string,
-      collectionName: string,
+      collection: Collection,
       schema: DocSchema<SCHEMA>
     )
 
@@ -154,9 +166,8 @@ declare module 'galaxia/db/mongo' {
     updateOne(data: Partial<SCHEMA>): Promise<import('mongodb').UpdateResult>
   }
 
-  export function connect(
-    uri: string
-  ): Promise<MongoClient>
+  export function connect(uri: string): Promise<Connection>
+  export function connection(uri: string): Promise<Connection>
 
   export function collection(
     databaseName: string,
