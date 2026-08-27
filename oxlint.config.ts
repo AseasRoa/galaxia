@@ -168,7 +168,7 @@ export default defineConfig({
         'jsdoc/require-property-description': 'off',
         'jsdoc/require-property-name': 'error',
         'jsdoc/require-property-type': 'error',
-        'jsdoc/require-returns': 'warn',
+        'jsdoc/require-returns': 'off',
         'jsdoc/require-returns-description': 'off',
         'jsdoc/require-returns-type': 'error',
         'jsdoc/require-throws-description': 'off',
