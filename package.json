@@ -85,6 +85,7 @@
     "watcher": "^2.3.1"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.1.2",
     "@types/pug": "^2.0.10",
     "@types/stylus": "^0.48.43",

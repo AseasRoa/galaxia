@@ -1,5 +1,12 @@
-export default  {
-  $schema: './node_modules/oxlint/configuration_schema.json',
+import { defineConfig } from 'oxlint'
+
+export default defineConfig({
+  jsPlugins: [
+    {
+      name: 'stylistic',
+      specifier: '@stylistic/eslint-plugin'
+    }
+  ],
   plugins: [
     'eslint',
     'unicorn',
@@ -231,6 +238,138 @@ export default  {
         'unicorn/throw-new-error': 'error',
         // oxc
         'oxc/branches-sharing-code': 'error',
+        // stylistic
+        'stylistic/array-bracket-newline': 'off',
+        'stylistic/array-bracket-spacing': ['error', 'never'],
+        'stylistic/array-element-newline': ['error', 'consistent'],
+        'stylistic/arrow-parens': ['error', 'always'],
+        'stylistic/arrow-spacing': ['error'],
+        'stylistic/block-spacing': ['error'],
+        'stylistic/brace-style': [
+          'error',
+          'stroustrup',
+          { allowSingleLine: true },
+        ],
+        'stylistic/comma-dangle': ['error', 'never'],
+        'stylistic/comma-spacing': ['error', { before: false, after: true }],
+        'stylistic/comma-style': ['error', 'last'],
+        'stylistic/computed-property-spacing': ['error', 'never'],
+        'stylistic/curly-newline': ['error', { consistent: true }],
+        'stylistic/dot-location': ['error', 'property'],
+        'stylistic/eol-last': ['error', 'always'],
+        'stylistic/function-call-argument-newline': ['error', 'consistent'],
+        'stylistic/function-call-spacing': ['error', 'never'],
+        'stylistic/function-paren-newline': 'off',
+        'stylistic/generator-star-spacing': 'off',
+        'stylistic/implicit-arrow-linebreak': ['error', 'beside'],
+        'stylistic/indent': ['error', 2],
+        'stylistic/indent-binary-ops': ['error', 2],
+        'stylistic/key-spacing': ['error'],
+        'stylistic/keyword-spacing': ['error'],
+        'stylistic/line-comment-position': 'off',
+        'stylistic/linebreak-style': ['error', 'unix'],
+        'stylistic/lines-around-comment': 'off',
+        'stylistic/lines-between-class-members': ['error'],
+        'stylistic/max-len': [
+          'error',
+          {
+            code: 80,
+            tabWidth: 2,
+            ignoreComments: true,
+            ignoreUrls: true,
+            ignoreStrings: true,
+            ignoreTemplateLiterals: true,
+            ignoreRegExpLiterals: true,
+          }
+        ],
+        'stylistic/max-statements-per-line': ['error', { max: 1 }],
+        'stylistic/member-delimiter-style': [
+          'error',
+          {
+            multiline: {
+              delimiter: 'comma',
+              requireLast: true
+            },
+            singleline: {
+              delimiter: 'comma',
+              requireLast: false
+            },
+            multilineDetection: 'brackets'
+          }
+        ],
+        'stylistic/multiline-comment-style': 'off',
+        'stylistic/multiline-ternary': 'off',
+        'stylistic/new-parens': ['error', 'always'],
+        'stylistic/newline-per-chained-call': 'off',
+        'stylistic/no-confusing-arrow': 'off',
+        'stylistic/no-extra-parens': 'off',
+        'stylistic/no-extra-semi': ['error'],
+        'stylistic/no-floating-decimal': ['error'],
+        'stylistic/no-mixed-operators': ['error'],
+        'stylistic/no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+        'stylistic/no-multi-spaces': ['error'],
+        'stylistic/no-multiple-empty-lines': [
+          'error',
+          { max: 1, maxEOF: 1, maxBOF: 0 },
+        ],
+        'stylistic/no-tabs': ['error'],
+        'stylistic/no-trailing-spaces': ['error'],
+        'stylistic/no-whitespace-before-property': ['error'],
+        'stylistic/nonblock-statement-body-position': 'off',
+        'stylistic/object-curly-newline': 'off',
+        'stylistic/object-curly-spacing': ['error', 'always'],
+        'stylistic/object-property-newline': [
+          'error',
+          { allowAllPropertiesOnSameLine: true },
+        ],
+        'stylistic/one-var-declaration-per-line': ['error'],
+        'stylistic/operator-linebreak': ['error', 'before'],
+        'stylistic/padded-blocks': ['error', 'never'],
+        'stylistic/padding-line-between-statements': [
+          'error',
+          { blankLine: 'always', prev: '*', next: 'return' },
+          { blankLine: 'always', prev: 'directive', next: '*' },
+        ],
+        'stylistic/quote-props': ['error', 'consistent'],
+        'stylistic/quotes': [
+          'error',
+          'single',
+          {
+            avoidEscape: true,
+            allowTemplateLiterals: 'avoidEscape',
+          },
+        ],
+        'stylistic/rest-spread-spacing': ['error', 'never'],
+        'stylistic/semi': ['error', 'never'],
+        'stylistic/semi-spacing': ['error', { before: false, after: true }],
+        'stylistic/semi-style': 'off',
+        'stylistic/space-before-blocks': ['error', 'always'],
+        'stylistic/space-before-function-paren': ['error', 'never'],
+        'stylistic/space-in-parens': ['error', 'never'],
+        'stylistic/space-infix-ops': [
+          'error',
+          { int32Hint: false, ignoreTypes: false },
+        ],
+        'stylistic/space-unary-ops': [
+          'error',
+          { words: true, nonwords: false },
+        ],
+        'stylistic/spaced-comment': ['error', 'always', { exceptions: ['-+'] }],
+        'stylistic/switch-colon-spacing': [
+          'error',
+          { before: false, after: true },
+        ],
+        'stylistic/template-curly-spacing': ['error', 'never'],
+        'stylistic/template-tag-spacing': ['error', 'never'],
+        'stylistic/type-annotation-spacing': [
+          'error',
+          { before: false, after: true },
+        ],
+        'stylistic/type-generic-spacing': ['error'],
+        'stylistic/type-named-tuple-spacing': ['error'],
+        'stylistic/wrap-iife': ['error', 'inside'],
+        'stylistic/wrap-regex': 'off',
+        'stylistic/yield-star-spacing': 'off',
       },
     },
     {
@@ -284,4 +423,4 @@ export default  {
       }
     }
   ]
-}
+})
