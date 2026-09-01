@@ -192,6 +192,7 @@ export default defineConfig({
         'unicorn/no-array-method-this-argument': 'error',
         'unicorn/no-confusing-array-with': 'error',
         'unicorn/no-console-spaces': 'warn',
+        'unicorn/no-empty-file': 'off',
         'unicorn/no-immediate-mutation': 'error',
         'unicorn/no-instanceof-array': 'error',
         'unicorn/no-negation-in-equality-check': 'error',
