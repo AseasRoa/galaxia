@@ -9,5 +9,5 @@ body {
 }
 
 .chartsContainer > div {
-  width: 33.33%;
+  inline-size: 33.33%;
 }
